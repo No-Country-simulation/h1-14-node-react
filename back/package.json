@@ -1,0 +1,32 @@
+{
+  "name": "justina.io-h1-14",
+  "version": "1.0.0",
+  "description": "AppWeb para proyecto justina.io",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --watch app.js"
+  },
+  "type": "module",
+  "author": "h1-14-node-react",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.10.2",
+    "nodemailer": "^6.9.14",
+    "path": "^0.12.7",
+    "sequelize": "^6.37.3",
+    "swagger": "^0.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "eslint": "^9.2.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}

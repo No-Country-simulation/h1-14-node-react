@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+
+# environment
+*.env
+
+# errors
+*.errors.logs
+errors.logs
+
+mails.txt
+mails.*
+*.txt
