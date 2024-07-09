@@ -9,6 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      dni: {
+        type: Sequelize.INTEGER
+      },
+      dniType: {
+        type: Sequelize.ENUM(
+          "dni", "libreta de enrolamiento", "libreta civica"
+        )
+      },
       firstName: {
         type: Sequelize.STRING
       },
@@ -16,6 +24,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
+        type: Sequelize.STRING
+      },
+      active: {
+        type: Sequelize.BOOLEAN
+      },birthday: {
+        type: Sequelize.DATE
+      },gender: {
+        type: Sequelize.STRING
+      },password: {
         type: Sequelize.STRING
       },
       createdAt: {
