@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node --watch app.js"
   },
-  "type": "module",
   "author": "h1-14-node-react",
   "license": "ISC",
   "dependencies": {
