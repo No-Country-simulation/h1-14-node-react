@@ -1,14 +1,14 @@
-import { development } from "./config.js";
+import "./config.js";
 import { Sequelize } from "sequelize";
 
 const connectMySql = new Sequelize(
-  development.database,
-  development.username,
-  development.password,
+  database,
+  username,
+  password,
   {
-    host: development.host,
-    dialect: development.dialect,
-    port: development.port
+    host: host,
+    dialect: dialect,
+    port: port
   },
 );
 
