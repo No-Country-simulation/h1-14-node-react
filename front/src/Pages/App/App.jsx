@@ -8,6 +8,7 @@ import LogIn from '../LogIn';
 import PacienteRegistry from "../PacienteRegistry/Index";
 import "./App.css";
 import FormExample from "../FormExample/FormExample";
+import PacienteEdit from "../PacienteEdit/Index";
 
 
 const AppRoutes = () => {
@@ -15,7 +16,8 @@ const AppRoutes = () => {
     { path: '/registro', element: <DoctorRegistry /> },
     { path: '/login', element: <LogIn /> },
     { path: '/form', element: <FormExample /> },
-    { path: '/paciente', element: <PacienteRegistry /> }
+    { path: '/paciente', element: <PacienteRegistry /> },
+    {path: '/edit', element: <PacienteEdit/>}
   ])
 
   return routes

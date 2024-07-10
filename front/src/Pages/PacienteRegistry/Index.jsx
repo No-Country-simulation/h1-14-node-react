@@ -16,16 +16,8 @@ function PacienteRegistry() {
                         <input type="text" placeholder='Nombre' className='inputClass' class="mt-1 block w-full border border-gray-300  p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         <label for="Apellido" class="block text-sm font-medium text-gray-700" >Apellido</label>
                         <input type="text" placeholder='Apellido' className='inputClass' class="mt-1 block w-full border border-gray-300  p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                        <label for="email" class="block text-sm font-medium text-gray-700" >email</label>
-                        <input type="text" placeholder='email' className='inputClass' class="mt-1 block w-full border border-gray-300  p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                        <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700" >Fecha de Nacimiento</label>
-                        <input type="text" placeholder='Fecha de Nacimiento' className='inputClass' class="mt-1 block w-full border border-gray-300  p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                        <label for="FactorSanguineo" class="block text-sm font-medium text-gray-700" >Factor Sanguineo</label>
-                        <input type="text" placeholder='Factor Sanguineo' className='inputClass' class="mt-1 block w-full border border-gray-300  p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-
-
-                    </form>
-                    <button className="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-300 hover:text-white">Registro</button>
+                     </form>
+                    <button className="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-300 hover:text-white">Registrar</button>
                 </div>
             </div>
         </div>
