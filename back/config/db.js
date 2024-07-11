@@ -1,5 +1,7 @@
-import "./config.js";
-import { Sequelize } from "sequelize";
+const {database,
+username,
+password,host, dialect, port} = require( "./config.js");
+const Sequelize  =  require("sequelize");
 
 const connectMySql = new Sequelize(
   database,
@@ -12,7 +14,7 @@ const connectMySql = new Sequelize(
   },
 );
 
-export async function connectDb() {
+module.exports = async function connectDb() {
   try {
     await connectMySql.authenticate();
     await connectMySql.sync();
