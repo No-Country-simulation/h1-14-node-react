@@ -1,13 +1,13 @@
-import { configDotenv } from "dotenv";
-import express from "express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import { connectDb } from "./config/db.js";
-import swaggerUi from "swagger-ui-express";
-import swaggerDocs from "./utils/swagger.js"
-import indexRouter from "./routes/index.js";
-// import usersRouter from './routes/UsersRoutes';
-// import loginRouter from './routes/LoginRoutes';
+const configDotenv = require("dotenv");
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const connectDb = require("./config/db.js");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocs = require("./utils/swagger.js")
+const indexRouter = require("./routes/index.js");
+// const usersRouter = requiere('./routes/UsersRoutes');
+// const loginRouter = requiere('./routes/LoginRoutes');
 
 configDotenv();
 
@@ -84,4 +84,4 @@ app.listen(PORT, () => {
   console.log("App running on http://localhost:" + PORT);
 });
 
-export default app;
+module.exports = {app};
