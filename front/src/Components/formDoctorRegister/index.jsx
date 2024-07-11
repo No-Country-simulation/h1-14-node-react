@@ -92,7 +92,7 @@ function formDoctorRegistry() {
                 onChange={handleChange}
                 className="w-full border py-2 rounded-lg  px-2  border-colorInputBorder"
               >
-                <option value="" style={{ fontWeight: 'bold', fontSize: '0.1rem' }} disabled selected hidden>
+                <option value="" style={{ fontWeight: 'bold', fontSize: '0.1rem' }} >
                   Selecciona tu documento
                 </option>
                 <option value="dni">DNI</option>
