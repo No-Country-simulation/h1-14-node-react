@@ -12,6 +12,10 @@ function PatientProfile() {
         factorSanguineo: '',
         fechaNacimiento: '',
         sexo: '',
+        pais: '',
+        provincia: '',
+        localidad: '',
+        direccion: '',
         password: '',
         activo: ''
     });
@@ -173,6 +177,52 @@ const [password2, setPassword2] = useState();
                                 <label htmlFor="female" className="ml-2 block text-sm text-gray-700">No binario</label>
                                 </div>
                             </div>
+
+                            <div>
+                                <label htmlFor="pais" className="block text-sm font-medium text-gray-700">Pais</label>
+                                <input
+                                    type="text"
+                                    name="pais"
+                                    placeholder='pais'
+                                    value={formData.pais}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full border border-gray-300 p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="provincia" className="block text-sm font-medium text-gray-700">Provincia</label>
+                                <input
+                                    type="text"
+                                    name="provincia"
+                                    placeholder='provincia'
+                                    value={formData.provincia}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full border border-gray-300 p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="localidad" className="block text-sm font-medium text-gray-700">Localidad</label>
+                                <input
+                                    type="text"
+                                    name="localidad"
+                                    placeholder='localidad'
+                                    value={formData.localidad}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full border border-gray-300 p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="direccion" className="block text-sm font-medium text-gray-700">Direccion</label>
+                                <input
+                                    type="text"
+                                    name="direccion"
+                                    placeholder='Calle y numero'
+                                    value={formData.direccion}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full border border-gray-300 p-3.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                            </div>
+                            
                             <div>
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                                 <input
