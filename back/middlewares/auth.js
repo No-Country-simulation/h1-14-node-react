@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { TOKEN_KEY } from '../../d_config.js';
+import { TOKEN_KEY } from '../config/config.js';
 
 // const jwt = require("jsonwebtoken");
 
