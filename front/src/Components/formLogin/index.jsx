@@ -10,8 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const formSchema = z.object({
-  document: z.string().nonempty("Seleccione un tipo de documento"),
-  documentNumber: z.string().nonempty("Número de documento es requerido"),
+  document: z.string().min(1,"Seleccione un tipo de documento"),
+  documentNumber: z.string().min(1,"Número de documento es requerido"),
   password: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
 });
 
@@ -55,9 +55,9 @@ function FormLogin() {
               <option value="" className="font-bold text-sm">
                 Selecciona tu documento
               </option>
-              <option value="dni">DNI</option>
-              <option value="pasaporte">Pasaporte</option>
-              <option value="licencia">Licencia de conducir</option>
+              <option value="dni" className="font-bold text-sm">DNI</option>
+              <option value="pasaporte" className="font-bold text-sm">Pasaporte</option>
+              <option value="licencia" className="font-bold text-sm">Licencia de conducir</option>
             </select>
             {errors.document && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.document.message}</p>}
           </div>
