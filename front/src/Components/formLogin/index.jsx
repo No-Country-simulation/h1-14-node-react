@@ -1,15 +1,38 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logopng.webp";
+import './styled.css';
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const formSchema = z.object({
+  document: z.string().nonempty("Seleccione un tipo de documento"),
+  documentNumber: z.string().nonempty("Número de documento es requerido"),
+  password: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
+});
 
 function FormLogin() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+  });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+    // Aquí puedes manejar el envío de datos, como hacer una llamada a una API
   };
 
   return (
@@ -19,52 +42,53 @@ function FormLogin() {
         <div className="w-2/4">
           <img src={Logo} alt="Logo" />
         </div>
-        <div className="flex flex-col space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-5 w-2/4">
           <div>
-            <Label className="text-sm" htmlFor="specialty">
+            <Label className="text-sm" htmlFor="document">
               Tipo de documento
             </Label>
             <select
-              id="specialty"
-              name="specialty"
+              id="document"
+              {...register("document")}
               className="w-full border py-2 rounded-lg px-2 border-colorInputBorder"
             >
-              <option value="" style={{ fontWeight: "bold", fontSize: "0.1rem" }}>
+              <option value="" className="font-bold text-sm">
                 Selecciona tu documento
               </option>
               <option value="dni">DNI</option>
               <option value="pasaporte">Pasaporte</option>
               <option value="licencia">Licencia de conducir</option>
             </select>
+            {errors.document && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.document.message}</p>}
           </div>
           <div>
-            <Label className="text-sm" htmlFor="medicalLicense">
+            <Label className="text-sm" htmlFor="documentNumber">
               Número de documento
             </Label>
             <Input
-              type="text"
+              type="number"
               placeholder="Número de documento"
-              name="medicalLicense"
-              id="medicalLicense"
+              {...register("documentNumber")}
               className="placeholder-inputPlaceholder border border-colorInputBorder placeholder-text-inputPlaceholder"
               inputMode="numeric"
+              pattern= '\d*'
             />
+            {errors.documentNumber && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.documentNumber.message}</p>}
           </div>
-          <div className="relative">
+          <div className="relative w-full">
             <Label className="text-sm" htmlFor="password">
               Contraseña
             </Label>
             <Input
               type={showPassword ? "text" : "password"}
               placeholder="Contraseña"
-              name="password"
-              id="password"
-              className="placeholder-inputPlaceholder border border-colorInputBorder placeholder-text-inputPlaceholder pr-10"
+              {...register("password")}
+              className="placeholder-inputPlaceholder border focus:border-transparent !focus:border-none border-colorInputBorder  placeholder-text-inputPlaceholder py-2 px-3 w-full"
             />
             <button
               type="button"
               onClick={toggleShowPassword}
-              className="absolute inset-y-1 right-0 top-6 flex items-center pr-3"
+              className="absolute inset-y-0 right-0 bottom-4 top-9 flex items-center pr-3"
             >
               {showPassword ? (
                 <svg
@@ -128,17 +152,17 @@ function FormLogin() {
                 </svg>
               )}
             </button>
+            <div>{errors.password && <p className="text-inputSecundary pl-1 font-medium text-xs ">{errors.password.message}</p>}</div>
+            
           </div>
+          
           <div className="flex justify-end">
             <a href="/" className="font-medium text-xs">
               ¿Olvidaste tu contraseña?
             </a>
           </div>
           <div className="mt-1 flex flex-col justify-center items-center gap-2.5">
-            <Button
-              className="rounded-3xl bg-inputPrimary w-full"
-              type="submit"
-            >
+            <Button className="rounded-3xl bg-inputPrimary w-full" type="submit">
               Ingresar
             </Button>
             <Link to="/registro" className="w-full">
@@ -151,7 +175,7 @@ function FormLogin() {
               </Button>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
