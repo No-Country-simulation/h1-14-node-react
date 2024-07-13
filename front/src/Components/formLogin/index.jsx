@@ -32,7 +32,7 @@ function FormLogin() {
 
   const onSubmit = (data) => {
     console.log(data);
-    // Aquí puedes manejar el envío de datos, como hacer una llamada a una API
+    
   };
 
   return (
