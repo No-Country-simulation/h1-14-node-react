@@ -1,15 +1,11 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import React from "react";
-
-
-import DoctorRegistry from '../DoctorRegistry';
-import LogIn from '../LogIn';
-// import FormEx from '../Form';
+import DoctorRegistry from "../DoctorRegistry";
+import LogIn from "../LogIn";
 import SignUp from "../SignUp/Index";
 import "./App.css";
 import FormExample from "../FormExample/FormExample";
 import PatientProfile from "../PatientProfile/Index";
-
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -21,15 +17,16 @@ const AppRoutes = () => {
   ])
 
   return routes
-}
-
+};
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
-  )
-};
+    <div className="bg-custom-bg bg-cover bg-center">
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </div>
+  );
+}
 
 export default App;
