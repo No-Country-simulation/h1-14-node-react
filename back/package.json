@@ -4,7 +4,11 @@
   "description": "AppWeb para proyecto justina.io",
   "main": "app.js",
   "scripts": {
-    "dev": "node --watch app.js"
+    "dev": "node --watch app.js",
+    "createdb":"npx sequelize-cli db:migrate --debug",
+    "dropdb":"npx sequelize-cli db:migrate:undo:all",
+    "chargerdata":"npx sequelize-cli db:seed:all",
+    "dropdata":"npx sequelize-cli db:seed:undo"
   },
   "author": "h1-14-node-react",
   "license": "ISC",

@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 module.exports = {
+
+    //Conexion
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
@@ -10,4 +12,16 @@ module.exports = {
 
     //Datos para el token
     TOKEN_KEY: process.env.TOKEN_KEY,
+
+    // Configuracion de Seeds
+    // seederStorage: "sequelize",
+    //seederStorageTableName: "seeds",
+
+    // Configuracion de Migaciones
+    // migrationStorage: "sequelize",
+    // migrationStorageTableName: "migrations",
+
+    define: {
+        timestamps: true
+    }
 };
