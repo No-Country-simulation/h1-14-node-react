@@ -46,7 +46,7 @@ function formDoctorRegistry() {
 
   return (
     <div className="flex items-start md:h-screen  justify-center ">
-      <div className="w-4/5 md:w-7/12   bg-white rounded-lg border h-auto md:h-full flex flex-col justify-center shadow-sm px-4 md:px-14">
+      <div className="w-4/5 md:w-7/12   bg-white rounded-lg border h-auto md:h-full flex flex-col justify-center shadow-sm px-8 md:px-14">
         <div className="text-center mt-6 w-full">
           <h1 className="text-3xl sm:text-5xl font-bold  ">Registro</h1>
           <p className="font-semibold text-base sm:text-xl font-sans mt-2 text-left mb-2">
@@ -144,7 +144,9 @@ function formDoctorRegistry() {
                 onChange={handleChange}
               />
             </div>
-            <div>
+            
+          </div>
+          <div className='mt-3'>
               <p className="font-semibold text-xs ">
                 Selecciona tu perfil de usuario:
               </p>
@@ -161,7 +163,6 @@ function formDoctorRegistry() {
                 </div>
               </div>
             </div>
-          </div>
           <div className="flex w-full mt-4 justify-start items-center ">
             <input
               type="checkbox"
@@ -169,7 +170,7 @@ function formDoctorRegistry() {
               id="termsConditions"
               value={formData.termsConditions}
               onChange={handleChange}
-              className="appearance-none border border-colorInputBorder rounded w-4 h-4 cursor-pointer mr-2"
+              className="appearance-none border border-colorInputBorder rounded w-5 h-4 sm:w-4 cursor-pointer mr-2"
             ></input>
             <div>
               <p className="text-black font-semibold text-xs">
@@ -196,7 +197,7 @@ function formDoctorRegistry() {
             </Button>
           </div>
           <div className="flex justify-center items-center mt-5">
-            <a href="/login" className="text-inputSecundary font-medium text-xs">
+            <a href="/login" className="text-inputSecundary font-medium text-xs mb-3">
               ¿Tenés una cuenta? Iniciar Sesión
             </a>
           </div>

@@ -1,6 +1,5 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import React from "react";
-
 import DoctorRegistry from "../DoctorRegistry";
 import LogIn from "../LogIn";
 import "./App.css";
