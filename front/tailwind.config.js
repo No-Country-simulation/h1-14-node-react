@@ -9,6 +9,7 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+
     container: {
       center: true,
       padding: "2rem",
@@ -19,6 +20,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         'custom-bg': "url('/src/assets/bg-pattern.png')",
+        'pattern': "url('/img/pattern.webp')",
+        // 'hero-pattern': "url('/img/hero-pattern.svg')",
+        // 'footer-texture': "url('/img/footer-texture.png')",
+        // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
         inputPrimary: '#5666bf',
@@ -78,6 +83,7 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+ 
     },
   },
   plugins: [require("tailwindcss-animate")],

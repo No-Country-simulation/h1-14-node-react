@@ -1,4 +1,4 @@
-const configDotenv = require("dotenv");
+const {configDotenv} = require("dotenv");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
