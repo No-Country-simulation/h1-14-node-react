@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logopng.webp";
-import './styled.css';
+import "./styled.css";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
@@ -10,9 +10,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const formSchema = z.object({
-  document: z.string().min(1,"Seleccione un tipo de documento"),
-  documentNumber: z.string().min(1,"Número de documento es requerido"),
-  password: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
+  document: z.string().min(1, "Seleccione un tipo de documento"),
+  documentNumber: z.string().min(1, "Número de documento es requerido"),
+  password: z
+    .string()
+    .min(10, "La contraseña debe tener al menos 6 caracteres")
+    .max(50, "La contraseña debe tener al maximo 50 caracteres"),
 });
 
 function FormLogin() {
@@ -32,7 +35,6 @@ function FormLogin() {
 
   const onSubmit = (data) => {
     console.log(data);
-    
   };
 
   return (
@@ -42,7 +44,10 @@ function FormLogin() {
         <div className="w-2/4">
           <img src={Logo} alt="Logo" />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-5 w-2/4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col space-y-5 w-2/4"
+        >
           <div>
             <Label className="text-sm" htmlFor="document">
               Tipo de documento
@@ -55,11 +60,21 @@ function FormLogin() {
               <option value="" className="font-bold text-sm">
                 Selecciona tu documento
               </option>
-              <option value="dni" className="font-bold text-sm">DNI</option>
-              <option value="pasaporte" className="font-bold text-sm">Pasaporte</option>
-              <option value="licencia" className="font-bold text-sm">Licencia de conducir</option>
+              <option value="dni" className="font-bold text-sm">
+                DNI
+              </option>
+              <option value="pasaporte" className="font-bold text-sm">
+                Pasaporte
+              </option>
+              <option value="licencia" className="font-bold text-sm">
+                Licencia de conducir
+              </option>
             </select>
-            {errors.document && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.document.message}</p>}
+            {errors.document && (
+              <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">
+                {errors.document.message}
+              </p>
+            )}
           </div>
           <div>
             <Label className="text-sm" htmlFor="documentNumber">
@@ -71,9 +86,13 @@ function FormLogin() {
               {...register("documentNumber")}
               className="placeholder-inputPlaceholder border border-colorInputBorder placeholder-text-inputPlaceholder"
               inputMode="numeric"
-              pattern= '\d*'
+              pattern="\d*"
             />
-            {errors.documentNumber && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.documentNumber.message}</p>}
+            {errors.documentNumber && (
+              <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">
+                {errors.documentNumber.message}
+              </p>
+            )}
           </div>
           <div className="relative w-full">
             <Label className="text-sm" htmlFor="password">
@@ -152,17 +171,27 @@ function FormLogin() {
                 </svg>
               )}
             </button>
-            <div>{errors.password && <p className="text-inputSecundary pl-1 font-medium text-xs ">{errors.password.message}</p>}</div>
-            
+            <div>
+              {errors.password && (
+                <p className="text-inputSecundary pl-1 font-medium text-xs ">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
           </div>
-          
-          <div className="flex justify-end">
-            <a href="/" className="font-medium text-xs">
-              ¿Olvidaste tu contraseña?
-            </a>
-          </div>
+          <Link to="/resetPassword" className="w-full">
+            <div className="flex justify-end">
+              <a href="/" className="font-medium text-xs">
+                ¿Olvidaste tu contraseña?
+              </a>
+            </div>
+          </Link>
+
           <div className="mt-1 flex flex-col justify-center items-center gap-2.5">
-            <Button className="rounded-3xl bg-inputPrimary w-full" type="submit">
+            <Button
+              className="rounded-3xl bg-inputPrimary w-full"
+              type="submit"
+            >
               Ingresar
             </Button>
             <Link to="/registro" className="w-full">
