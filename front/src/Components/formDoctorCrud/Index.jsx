@@ -20,6 +20,9 @@ const formSchema = z.object({
   sexo: z.enum(["Masculino", "Femenino", "No binario"], {
     required_error: "Seleccione una opcion",
   }),
+  especialidad: z.string().min(1, "Ingresa tu especialidad"),
+  matricula: z.string().min(1, "Ingresa tu matricula"),
+
   fechaNacimiento: z.string().date(),
 
   pais: z.string().min(1, "Ingresa el pais"),
@@ -42,7 +45,7 @@ const formSchema = z.object({
   path: ["password2"],
 });
 
-function FormPatientCrud() {
+function FormDoctorCrud() {
   const {
     register,
     handleSubmit,
@@ -175,6 +178,27 @@ function FormPatientCrud() {
                   </select>
                   {errors.sexo && <p className="text-inputSecundary pl-1 font-medium text-xs mt-1">{errors.sexo.message}</p>}
                 </div>
+                <div>
+                  <Label htmlFor="especialidad">Especialidad</Label>
+                  <Input
+                    className="py-0.1 border border-colorInputBorder"
+                    placeholder="Especialidad"
+                    type="text"
+                    {...register("especialidad")}
+                  />
+                  {errors.especialidad && <p className="text-inputSecundary pl-1 font-medium text-xs ">{errors.especialidad.message}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="matricula">Matricula</Label>
+                  <Input
+                    type="text"
+                    placeholder="Matricula"
+                    {...register("matricula")}
+                    className="border border-colorInputBorder"
+                  />
+                  {errors.matricula && <p className="text-inputSecundary pl-1 font-medium text-xs ">{errors.matricula.message}</p>}
+                </div>
+
 
                 <div>
                   <Label htmlFor="fechaNacimiento">Fecha de Nacimiento</Label>
@@ -535,4 +559,4 @@ function FormPatientCrud() {
   );
 }
 
-export default FormPatientCrud;
+export default FormDoctorCrud;
