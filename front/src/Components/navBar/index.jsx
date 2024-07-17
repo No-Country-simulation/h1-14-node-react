@@ -7,7 +7,7 @@ function navBar() {
     <nav className="flex w-full h-16 px-28 items-center justify-between bg-bgNavBar">
       <ul className="flex w-auto gap-2">
         <li>
-          <Link>
+          <Link to='/'>
             <div>
               <img class="w-32 h-auto" src={ImageLogo} />
             </div>
