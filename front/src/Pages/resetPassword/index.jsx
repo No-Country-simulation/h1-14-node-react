@@ -1,9 +1,11 @@
-import SendEmail from '../../Components/formEmailResetPassword'
+//import SendEmail from '../../Components/formEmailResetPassword';
+import FormResetPassword from '../../Components/formResetPassword'
 
 function ResetPassword() {
-    return(
+    return (
     <div>
-        <SendEmail />
+        
+        <FormResetPassword />
     </div>
 )
 }
