@@ -7,6 +7,7 @@ import "./App.css";
 import FormExample from "../FormExample/FormExample";
 import PatientProfile from "../PatientProfile/Index";
 import EmailResetPassword from '../resetPassword';
+import LandingPage from "../landing";
 
 
 const AppRoutes = () => {
@@ -16,7 +17,8 @@ const AppRoutes = () => {
     { path: '/form', element: <FormExample /> },
     { path: '/signup', element: <SignUp /> },
     { path: '/patientProfile', element: <PatientProfile/>},
-    {path: '/resetPassword', element: <EmailResetPassword />}
+    {path: '/resetPassword', element: <EmailResetPassword />},
+    {path: '/', element: <LandingPage />}
   ])
 
   return routes

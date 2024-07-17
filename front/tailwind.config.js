@@ -27,6 +27,7 @@ module.exports = {
       },
       colors: {
         inputPrimary: '#5666bf',
+        bgNavBar: '#252846',
         inputSecundary: '#535db2',
         colorInputBorder: '#CDD7F0',
         inputSecundaryColor1: '#E3E8F6',
