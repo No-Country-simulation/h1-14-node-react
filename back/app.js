@@ -6,6 +6,7 @@ const connectDb = require("./config/db.js");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require("./utils/swagger.js")
 const indexRouter = require("./routes/index.js");
+const userRouter = require('./routes/UsersRoutes.js');
 // const usersRouter = requiere('./routes/UsersRoutes');
 // const loginRouter = requiere('./routes/LoginRoutes');
 
@@ -41,6 +42,7 @@ app.use(cookieParser());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/", indexRouter);
+app.use('/users', userRouter)
 /*app.use('/api/v1/login', loginRouter);
 app.use('/api/v1/user', usersRouter); */
 
