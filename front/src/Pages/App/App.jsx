@@ -8,6 +8,8 @@ import FormExample from "../FormExample/FormExample";
 import PatientProfile from "../PatientProfile/Index";
 import PatientCrud from "../PatientCrud/Index";
 import DoctorCrud from "../DoctorCrud/Index";
+import EmailResetPassword from '../resetPassword';
+
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -18,6 +20,7 @@ const AppRoutes = () => {
     { path: '/patientProfile', element: <PatientProfile/>},
     { path: '/patientCrud', element: <PatientCrud />},
     { path: '/doctorCrud', element: <DoctorCrud />},
+    {path: '/resetPassword', element: <EmailResetPassword />}
   ])
 
   return routes
