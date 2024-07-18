@@ -1,13 +1,18 @@
 import NavBar from "../../Components/navBar";
-import Footer from '../../Components/footer'
+import Footer from '../../Components/footer';
+import Inicio from '../../Components/inicio';
+import LeyJustina from '../../Components/leyJustina'
  
 function LandingPage() {
   return (
     <div>
       <NavBar />
-      <div className='mt-40'>
-        <Footer />
-      </div>
+      <main>
+        <Inicio />
+        <LeyJustina />
+      </main>
+      <Footer />
+      
     </div>
   );
 }

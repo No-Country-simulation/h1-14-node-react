@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      rotate: {
+        '5': '5deg',
+      },
       backgroundImage: {
         'custom-bg': "url('/src/assets/bg-pattern.png')",
         'pattern': "url('/img/pattern.webp')",
