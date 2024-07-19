@@ -1,4 +1,4 @@
-const User = require('../database/models/users'); // Ajusta la ruta según la estructura real de tu proyecto
+const User = require('../database/models/users');
 
 async function getUsers(req, res) {
     const userId = req.params.id;

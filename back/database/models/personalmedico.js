@@ -1,20 +1,12 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class PersonalMedico extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  PersonalMedico.init(
-    {
+const { Sequelize, DataTypes } = require('sequelize');
+const { database, username, password, host, dialect, port } = require('../../config/config');
+
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
+  dialect: dialect,
+  port: port,
+});
+const PersonalMedico = sequelize.define('PersonalMedico', {
       id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
       especialidadesId: {type: DataTypes.INTEGER, allowNull: false},
       usuariosId: {type: DataTypes.INTEGER, allowNull: false},
@@ -27,5 +19,4 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'PersonalMedico',
   });
-  return PersonalMedico;
-};
+  module.exports = PersonalMedico;

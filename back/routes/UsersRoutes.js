@@ -9,7 +9,7 @@ const {
 
 /* GET users listing. */
 router.get('/', getUsers);
-router.get('/:id', getUsers); // 
+router.get('/:id', getUsers); // git 
 router.post('/', createUsers);
 router.put('/', updateUsers);  // :id body
 router.delete('/', deleteUsers); // :id dody
