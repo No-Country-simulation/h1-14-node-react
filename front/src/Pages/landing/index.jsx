@@ -3,6 +3,7 @@ import Footer from '../../Components/footer';
 import Inicio from '../../Components/inicio';
 import LeyJustina from '../../Components/leyJustina'
 import Funcionalidades from '../../Components/funcionalidades'
+import ContactUs from "../../Components/contactUs";
  
 function LandingPage() {
   return (
@@ -12,7 +13,7 @@ function LandingPage() {
         <Inicio />
         {/*<LeyJustina /> */}
         <Funcionalidades />
-      
+        <ContactUs />
       
       <Footer />
     </div>
