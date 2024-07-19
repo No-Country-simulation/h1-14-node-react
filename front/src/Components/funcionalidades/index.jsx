@@ -57,7 +57,7 @@ function Funcionalidades() {
           distintas partes del ecosistema de salud.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 w-4/5 h-auto lg:grid-cols-3  gap-6 px-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 w-4/5 h-auto lg:grid-cols-3  gap-4 px-2">
         {features.map((feature, index) => (
           <Card
             key={index}
