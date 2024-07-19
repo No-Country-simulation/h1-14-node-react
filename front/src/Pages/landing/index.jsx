@@ -4,6 +4,7 @@ import Inicio from '../../Components/inicio';
 import LeyJustina from '../../Components/leyJustina'
 import Funcionalidades from '../../Components/funcionalidades'
 import ContactUs from "../../Components/contactUs";
+import Aliados from "../../Components/aliados";
  
 function LandingPage() {
   return (
@@ -11,7 +12,8 @@ function LandingPage() {
       <NavBar />
       
         <Inicio />
-        {/*<LeyJustina /> */}
+        <Aliados />
+        <LeyJustina /> 
         <Funcionalidades />
         <ContactUs />
       

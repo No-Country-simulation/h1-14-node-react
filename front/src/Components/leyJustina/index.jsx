@@ -3,7 +3,7 @@ import './style.css'
 
 function LeyJustina() {
   return (
-    <div className="flex  items-center justify-end my-5  relative">
+    <div className="flex  items-center justify-end my-5 py-14  relative">
       <div className="w-1/3 flex flex-col gap-3">
         <h1 className="text-3xl font-bold">Sobre la Ley Justina</h1>
         <p className="font-bold text-xl">
@@ -32,7 +32,7 @@ function LeyJustina() {
       <div className="w-1/2 flex justify-start items-center ">
         <img
           src={leyJustina}
-          className="absolute top-0 -right-8 rotate-5 shape-image rounded-lg  object-cover"
+          className="absolute top-20 -right-8 rotate-5 shape-image rounded-lg  object-cover"
           
         />
       </div>
