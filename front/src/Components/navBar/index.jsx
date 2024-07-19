@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function navBar() {
   return (
-    <nav className="flex w-full h-16 px-28 items-center justify-between bg-bgNavBar">
+    <nav className="flex w-full h-16 px-5 lg:px-28 items-center justify-between bg-bgNavBar">
       <ul className="flex w-auto gap-2">
         <li>
           <Link to='/'>
@@ -17,7 +17,7 @@ function navBar() {
       
       <ul className="flex gap-2 items-center">
         <li>
-        <ul className="flex gap-4 items-center">
+        <ul className="hidden lg:flex gap-4 items-center">
         <li>
           <Link>
             <p className="text-white text-sm">Inicio</p>
