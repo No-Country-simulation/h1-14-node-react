@@ -5,13 +5,15 @@ const {
    createUsers,
    updateUsers,
    deleteUsers
-} = require('../controllers/UsersController');
+} = require('../controllers/UserControllers');
 
 /* GET users listing. */
 router.get('/', getUsers);
-router.get('/:id', getUsers); // 
+router.get('/:id', getUsers); // git 
 router.post('/', createUsers);
 router.put('/', updateUsers);  // :id body
 router.delete('/', deleteUsers); // :id dody
 
 module.exports = router;
+ 
+
