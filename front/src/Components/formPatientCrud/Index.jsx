@@ -1,3 +1,17 @@
+// "use client"
+
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/Components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/Components/ui/popover"
+
+
 import React, { useState } from "react";
 import Logo from "../../assets/logopng.webp";
 // import './styled.css';
@@ -11,40 +25,44 @@ import { z } from "zod";
 
 import { SquarePen } from 'lucide-react';
 
-const formSchema = z.object({
-  nombre: z.string().min(1, "Ingresa tu nombre"),
-  apellido: z.string().min(1, "Ingresa tu apellido"),
-  tipoDocumentoId: z.string().min(1, "Seleccione un tipo de documento"),
-  numeroDocumento: z.string().min(1, "Número de documento es requerido"),
-  tipoUsuario: z.enum(["Paciente", "Tutor", "Profesional de la salud"], {
-    required_error: "Seleccione un rol",
-  }),
-  sexo: z.enum(["Masculino", "Femenino", "No binario"], {
-    required_error: "Seleccione una opcion",
-  }),
-  fechaNacimiento: z.string().date(),
 
-  pais: z.string().min(1, "Ingresa el pais"),
-  provincia: z.string().min(1, "Ingresa la provincia"),
-  ciudad: z.string().min(1, "Ingresa la ciudad"),
-  direccion: z.string().min(1, "Ingresa calle y numero"),
-  factorSanguineo: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], { required_error: "Seleccione un tipo de factor sanguineo", }),
-
-  telefono: z.string().min(8, "Ingrese telefono"),
-  email: z.string().email("Correo electrónico inválido"),
-  email2: z.string().email("Correo electrónico inválido"),
-  password: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
-  password2: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
-  // activo: '',
-}).refine((data) => data.email === data.email2, {
-  message: "El correo electrónico no coincide",
-  path: ["email2"],
-}).refine((data) => data.password === data.password2, {
-  message: "La contraseña no coincide",
-  path: ["password2"],
-});
 
 function FormPatientCrud() {
+
+  const formSchema = z.object({
+    nombre: z.string().min(1, "Ingresa tu nombre"),
+    apellido: z.string().min(1, "Ingresa tu apellido"),
+    tipoDocumentoId: z.string().min(1, "Seleccione un tipo de documento"),
+    numeroDocumento: z.string().min(1, "Número de documento es requerido"),
+    tipoUsuario: z.enum(["Paciente", "Tutor", "Profesional de la salud"], {
+      required_error: "Seleccione un rol",
+    }),
+    sexo: z.enum(["Masculino", "Femenino", "No binario"], {
+      required_error: "Seleccione una opcion",
+    }),
+    fechaNacimiento: z.string().date(),
+
+    pais: z.string().min(1, "Ingresa el pais"),
+    provincia: z.string().min(1, "Ingresa la provincia"),
+    ciudad: z.string().min(1, "Ingresa la ciudad"),
+    direccion: z.string().min(1, "Ingresa calle y numero"),
+    factorSanguineo: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], { required_error: "Seleccione un tipo de factor sanguineo", }),
+
+    telefono: z.string().min(8, "Ingrese telefono"),
+    email: z.string().email("Correo electrónico inválido"),
+    email2: z.string().email("Correo electrónico inválido"),
+    password: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
+    password2: z.string().min(10, "La contraseña debe tener al menos 6 caracteres").max(50, "La contraseña debe tener al maximo 50 caracteres"),
+    // activo: '',
+  }).refine((data) => data.email === data.email2, {
+    message: "El correo electrónico no coincide",
+    path: ["email2"],
+  }).refine((data) => data.password === data.password2, {
+    message: "La contraseña no coincide",
+    path: ["password2"],
+  });
+
+
   const {
     register,
     handleSubmit,
@@ -53,6 +71,8 @@ function FormPatientCrud() {
     resolver: zodResolver(formSchema),
   });
 
+
+  const [date, setDate] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
 
@@ -87,7 +107,7 @@ function FormPatientCrud() {
           <div>
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
 
-            <div className="relative w-full">
+              <div className="relative w-full">
                 <Label htmlFor="nombre">Nombre</Label>
                 <Input
                   className="py-0.1 border border-colorInputBorder"
@@ -191,14 +211,51 @@ function FormPatientCrud() {
 
               <div className="relative w-full">
                 <Label htmlFor="fechaNacimiento">Fecha de Nacimiento</Label>
-                <Input
+                {/* <Input
                   className="py-0.1 border border-colorInputBorder"
                   placeholder="fechaNacimiento"
                   type="text"
                   {...register("fechaNacimiento")}
                   readOnly={!isEditable}
                   disabled={!isEditable}
-                />
+                /> */}
+
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "text-left font-normal mt-0 block w-full border border-gray-300  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 ",
+                        !date && "text-muted-foreground"
+                      )}
+                    >
+                      <Button
+                        type="button"
+                        className="rounded-full absolute inset-y-0 right-0 bottom-4 top-6 flex items-center "
+                        variant="ghost"
+                        size="icon"
+                      >
+                        <CalendarIcon
+                          stroke="#5666bf"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Button>
+
+                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+
                 {errors.fechaNacimiento && <p className="text-inputSecundary pl-1 font-medium text-xs ">{errors.fechaNacimiento.message}</p>}
               </div>
 
@@ -322,7 +379,7 @@ function FormPatientCrud() {
             <h4 className="text-3xl sm:text-2xl font-bold">Información de contacto</h4>
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
 
-            <div className="relative w-full">
+              <div className="relative w-full">
                 <Label htmlFor="email">Correo electrónico</Label>
                 <Input
                   type="email"
