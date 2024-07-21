@@ -6,6 +6,8 @@ import SignUp from "../SignUp/Index";
 import "./App.css";
 import FormExample from "../FormExample/FormExample";
 import PatientProfile from "../PatientProfile/Index";
+import PatientCrud from "../PatientCrud/Index";
+import DoctorCrud from "../DoctorCrud/Index";
 import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 
@@ -18,7 +20,11 @@ const AppRoutes = () => {
     { path: '/signup', element: <SignUp /> },
     { path: '/patientProfile', element: <PatientProfile/>},
     {path: '/resetPassword', element: <EmailResetPassword />},
-    {path: '/', element: <LandingPage />}
+    {path: '/', element: <LandingPage />},
+    { path: '/patientCrud', element: <PatientCrud />},
+    { path: '/doctorCrud', element: <DoctorCrud />},
+    { path: '/resetPassword', element: <EmailResetPassword />},
+    { path: '/patientCalendar', element: <PatientCalendar />}
   ])
 
   return routes
