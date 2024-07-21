@@ -5,7 +5,7 @@ function ContactUs() {
   return (
     <div className="w full flex justify-center items-center py-20 sm:py-32">
       <div className=" w-4/5 flex px-2">
-        <div className="flex flex-col w-full md:w-1/2 gap-3">
+        <div className="flex flex-col w-full lg:w-1/2 gap-3">
           <h1 className="text-left font-bold text-4xl w-full">
             Comunicate con nosotros
           </h1>
@@ -22,7 +22,7 @@ function ContactUs() {
 
           <FormContact />
         </div>
-        <div className=" md:w-1/2 h-auto hidden md:flex">
+        <div className="  h-auto hidden lg:flex">
         <img className='w-full h-full' src={DoctorImg} />
         </div>
             

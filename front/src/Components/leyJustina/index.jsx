@@ -1,11 +1,18 @@
 import leyJustina from "../../assets/leyjustina.svg";
-import './style.css'
+import "./style.css";
 
 function LeyJustina() {
   return (
-    <div className="flex  items-center justify-end my-5 py-14  relative">
-      <div className="w-1/3 flex flex-col gap-3">
-        <h1 className="text-3xl font-bold">Sobre la Ley Justina</h1>
+    <div className=" w-full my-5 py-14 relative overflow-hidden flex justify-end px-4 md:px-0">
+      <div className="content pl-12">
+        <h1 className="text-3xl font-bold mb-4">Sobre la Ley Justina</h1>
+        <div className="image-container float-right w-2/4 ml-4 mb-4">
+          <img
+            src={leyJustina}
+            className="shape-image rounded-lg rotate-5 w-full"
+            alt="Ley Justina"
+          />
+        </div>
         <p className="font-bold text-xl">
           La Ley n° 27.447 regula el Trasplante de Órganos, Tejidos y Células
           del país. Fue sancionada en 2018 a raíz del caso de Justina Lo Cane,
@@ -28,13 +35,6 @@ function LeyJustina() {
           cumplir con esta ley, instalando centros de detección, selección y
           tratamiento de donantes en diversas instituciones de salud.
         </p>
-      </div>
-      <div className="w-1/2 flex justify-start items-center ">
-        <img
-          src={leyJustina}
-          className="absolute top-20 -right-8 rotate-5 shape-image rounded-lg  object-cover"
-          
-        />
       </div>
     </div>
   );
