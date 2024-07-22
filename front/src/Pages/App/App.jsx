@@ -11,6 +11,7 @@ import DoctorCrud from "../DoctorCrud/Index";
 import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 import PatientCalendar from "../PatientCalendar/Index";
+import DoctorCalendar from "../DoctorCalendar/Index";
 
 
 const AppRoutes = () => {
@@ -25,7 +26,8 @@ const AppRoutes = () => {
     { path: '/patientCrud', element: <PatientCrud />},
     { path: '/doctorCrud', element: <DoctorCrud />},
     { path: '/resetPassword', element: <EmailResetPassword />},
-    { path: '/patientCalendar', element: <PatientCalendar />}
+    { path: '/patientCalendar', element: <PatientCalendar />},
+    { path: '/doctorCalendar', element: <DoctorCalendar />}
   ])
 
   return routes
