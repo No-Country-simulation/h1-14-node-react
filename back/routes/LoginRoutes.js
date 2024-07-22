@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/LoginController');
+const { register, login } = require('../controllers/loginController');
 
 /* GET users listing. */
 router.get('/', login);
