@@ -1,8 +1,13 @@
-'use strict';
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Patients', {
+const { Sequelize, DataTypes } = require('sequelize');
+const { database, username, password, host, dialect, port } = require('../../config/config');
+
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
+  dialect: dialect,
+  port: port,
+});
+
+const Patients = sequelize.define('Patients', {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       entidadesId: { type: DataTypes.INTEGER },
       financiadoresId: { type: DataTypes.INTEGER },
@@ -18,8 +23,5 @@ module.exports = {
       sequelize,
       modelName: 'Patients',
     });
-  },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Patients');
-  }
-};
+  
+    module.exports = Patients;
