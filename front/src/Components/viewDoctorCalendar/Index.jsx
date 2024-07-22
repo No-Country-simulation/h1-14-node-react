@@ -50,7 +50,7 @@ import {
     TableRow,
 } from "@/Components/ui/table";
 
-function ViewPatientCalendar() {
+function ViewDoctorCalendar() {
 
     //Calendar right side
     // const [date, setDate] = React.useState<Date | undefined>(new Date())
@@ -60,74 +60,73 @@ function ViewPatientCalendar() {
     const [date1, setDate1] = useState((new Date()));
 
 
-
     const events = [
         {
             event: "INV001",
             status: "Done",
             dateTime: "2024-07-19 02:50:00",
-            eventType: "Medicacion",
+            eventType: "Consulta",
         },
         {
             event: "INV002",
             status: "Pending",
             dateTime: "2024-07-19 01:50:00",
-            eventType: "Actividad Fisica",
+            eventType: "Junta medica",
         },
         {
             event: "INV003",
             status: "Undone",
             dateTime: "2024-07-19 03:50:00",
-            eventType: "Alimentacion",
+            eventType: "Junta medica",
         },
         {
             event: "INV004",
             status: "Done",
             dateTime: "2024-07-19 04:50:00",
-            eventType: "Medicacion",
+            eventType: "Consulta",
         },
         {
             event: "INV005",
             status: "Done",
             dateTime: "2024-07-19 05:50:00",
-            eventType: "Actividad Fisica",
+            eventType: "Junta medica",
         },
         {
             event: "INV006",
             status: "Pending",
             dateTime: "2024-07-19 02:00:00",
-            eventType: "Alimentacion",
+            eventType: "Junta medica",
         },
         {
             event: "INV007",
             status: "Undone",
             dateTime: "2024-07-19 03:00:00",
-            eventType: "Medicacion",
+            eventType: "Consulta",
         },
         {
             event: "INV008",
             status: "Pending",
             dateTime: "2024-07-19 02:00:00",
-            eventType: "Medico general",
+            eventType: "Sobreturno",
         },
         {
             event: "INV009",
             status: "Undone",
             dateTime: "2024-07-19 03:00:00",
-            eventType: "Psicoterapia",
+            eventType: "Consulta",
         },
         {
             event: "INV010",
             status: "Pending",
             dateTime: "2024-07-20 02:00:00",
-            eventType: "Alimentacion",
+            eventType: "Junta medica",
         },
         {
             event: "INV011",
             status: "Undone",
             dateTime: "2024-07-20 03:00:00",
-            eventType: "Medicacion",
-        },        
+            eventType: "Consulta",
+        },  
     ];
 
     const getStatusClass = (status) => {
@@ -146,16 +145,13 @@ function ViewPatientCalendar() {
 
     const getBadgeClass = (eventType) => {
         switch (eventType) {
-            case "Medicacion":
+            case "Consulta":
                 return "bg-purple-500 text-white";
-            case "Alimentacion":
+            case "Junta medica":
                 return "bg-yellow-500 text-white";
-            case "Actividad Fisica":
-                return "bg-yellow-500 text-white";
-            case "Medico general":
+            case "Sobreturno":
                 return "bg-green-400 text-white";
-            case "Psicoterapia":
-                return "bg-green-400 text-white";
+
             default:
                 return "";
         }
@@ -177,48 +173,39 @@ function ViewPatientCalendar() {
     const [searchKeyword, setSearchKeyword] = useState("");
 
     // const filteredEvents = useMemo(() => {
-    //     let filtered = events;
-
-    //     if (selectedCategories.length > 0) {
-    //         filtered = filtered.filter(event => selectedCategories.includes(event.eventType));
-    //     }
-
-    //     if (searchKeyword) {
-    //         filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
-    //     }
-
-    //     return filtered;
-    // }, [events, selectedCategories, searchKeyword]);
-
-    // const filteredEvents = useMemo(() => {
     //     if (selectedCategories.length === 0) {
     //         return events;
     //     }
     //     return events.filter(event => selectedCategories.includes(event.eventType));
     // }, [events, selectedCategories]);
 
+    // const filteredEvents = useMemo(() => {
+    //     return events.filter(event =>
+    //         (selectedCategories.length === 0 || selectedCategories.includes(event.eventType)) &&
+    //         selectedTypes.includes(event.eventType) &&
+    //         new Date(event.dateTime).toDateString() === date1.toDateString()
+    //     );
+    // }, [events, selectedCategories, selectedTypes, date1]);
+
     const filteredEvents = useMemo(() => {
 
 
-            let filtered = events.filter(event =>
-                (selectedCategories.length === 0 || selectedCategories.includes(event.eventType)) &&
-                selectedTypes.includes(event.eventType) &&
-                new Date(event.dateTime).toDateString() === date1.toDateString()
-            );
+        let filtered = events.filter(event =>
+            (selectedCategories.length === 0 || selectedCategories.includes(event.eventType)) &&
+            selectedTypes.includes(event.eventType) &&
+            new Date(event.dateTime).toDateString() === date1.toDateString()
+        );
 
-            if (selectedCategories.length > 0) {
-                filtered = filtered.filter(event => selectedCategories.includes(event.eventType));
-            }
+        if (selectedCategories.length > 0) {
+            filtered = filtered.filter(event => selectedCategories.includes(event.eventType));
+        }
 
-            if (searchKeyword) {
-                filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
-            }
+        if (searchKeyword) {
+            filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
+        }
 
-        return filtered ;
-    }, [events, selectedCategories, selectedTypes, date1, searchKeyword]);
-
-
-
+    return filtered ;
+}, [events, selectedCategories, selectedTypes, date1, searchKeyword]);
 
 
     const toggleCategory = (category) => {
@@ -288,7 +275,7 @@ function ViewPatientCalendar() {
 
                     <Table>
 
-                        <TableHeader className="bg-pink-600">
+                        <TableHeader className="bg-green-400">
                             <TableRow>
                                 <TableHead className="w-auto text-white"><Square /></TableHead>
                                 <TableHead className="w-auto text-white">Horario</TableHead>
@@ -348,7 +335,6 @@ function ViewPatientCalendar() {
                                 <Checkbox id={`eventType-${type}`}
                                     checked={selectedTypes.includes(type)}
                                     onCheckedChange={() => toggleType(type)}
-                                    
                                 />
                                 <Label htmlFor={`eventType-${type}`} className="ml-2">{type}</Label>
                             </li>
@@ -363,7 +349,7 @@ function ViewPatientCalendar() {
                             className="w-full h-auto "
                             alt="rectangle_78"
                         />
-                        <span className='absolute bottom-4 left-4 px-10 py-2 '>¡No te olvides de nada, agéndalo acá!</span>
+                        <span className='absolute bottom-4 left-4 px-10 py-2 '>¡No hagas esperar a ningún paciente!</span>
                     </div>
                     <div className='flex items-baseline space-x-4'>
                         <img
@@ -376,12 +362,11 @@ function ViewPatientCalendar() {
                         </Button>
 
                     </div>
-
                 </div>
             </div>
         </div>
     );
 }
 
-export default ViewPatientCalendar;
+export default ViewDoctorCalendar;
 
