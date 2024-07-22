@@ -10,6 +10,7 @@ import PatientCrud from "../PatientCrud/Index";
 import DoctorCrud from "../DoctorCrud/Index";
 import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
+import PatientCalendar from "../PatientCalendar/Index";
 
 
 const AppRoutes = () => {
