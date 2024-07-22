@@ -49,7 +49,7 @@ function FormDoctorRegistry() {
         </div>
 
         <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+          <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
             <div>
               <Label htmlFor="name">Nombre</Label>
               <Input
@@ -100,7 +100,7 @@ function FormDoctorRegistry() {
             </div>
           </div>
 
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 mt-4">
+          <div className="grid gap-2 grid-cols-1 md:grid-cols-2 mt-4">
             <div>
               <Label htmlFor="email">Correo electrónico</Label>
               <Input

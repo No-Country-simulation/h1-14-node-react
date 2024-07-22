@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      rotate: {
+        '5': '5deg',
+      },
       backgroundImage: {
         'custom-bg': "url('/src/assets/bg-pattern.png')",
         'pattern': "url('/img/pattern.webp')",
@@ -26,7 +29,10 @@ module.exports = {
         // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
+        borderCard:"#cdd7f0",
+        bgLanding: '#E3e8F6',
         inputPrimary: '#5666bf',
+        bgNavBar: '#252846',
         inputSecundary: '#535db2',
         colorInputBorder: '#CDD7F0',
         inputSecundaryColor1: '#E3E8F6',

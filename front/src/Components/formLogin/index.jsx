@@ -94,6 +94,9 @@ function FormLogin() {
               </p>
             )}
           </div>
+          <div>
+
+          
           <div className="relative w-full">
             <Label className="text-sm" htmlFor="password">
               Contraseña
@@ -171,13 +174,14 @@ function FormLogin() {
                 </svg>
               )}
             </button>
-            <div>
-              {errors.password && (
-                <p className="text-inputSecundary pl-1 font-medium text-xs ">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+          </div>
+          <div>
+            {errors.password && (
+              <p className="text-inputSecundary pl-1 font-medium text-xs ">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
           </div>
           <Link to="/resetPassword" className="w-full">
             <div className="flex justify-end">
