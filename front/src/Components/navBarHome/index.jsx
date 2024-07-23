@@ -8,15 +8,15 @@ import { Input } from "@/Components/ui/input";
 
  function NavBarHome() {
   return (
-    <div className='w-full h-[84px] py-6 pl-6 pr-12 bg-white flex gap-10'>
+    <div className='w-full h-[75px] py-6 pl-6 pr-12 bg-white flex gap-10'>
       <div className='w-9/12 flex justify-start items-center relative'>
         <Input 
-          className='w-full rounded-3xl h-full pl-12 pr-4 py-2 border border-inputPrimary '
+          className='w-full rounded-3xl h-full pl-12 pr-4 py-2 border border-borderCard '
           placeholder='Buscar en justina.io'
         />
         <img 
           src={search} 
-          className='absolute left-4 w-6 h-6'
+          className='absolute left-4 '
           alt="search icon"
         />
       </div>
