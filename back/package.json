@@ -4,7 +4,8 @@
   "description": "AppWeb para proyecto justina.io",
   "main": "app.js",
   "scripts": {
-    "dev": "node --watch app.js"
+    "dev": "node --watch app.js",
+    "start": "node back/app.js"
   },
   "author": "h1-14-node-react",
   "license": "ISC",
