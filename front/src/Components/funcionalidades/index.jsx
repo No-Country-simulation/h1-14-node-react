@@ -49,7 +49,7 @@ const features = [
 
 function Funcionalidades() {
   return (
-    <div className="bg-bgLanding w-full h-auto flex flex-col justify-start items-center py-40">
+    <div className="bg-bgLanding w-full h-auto flex flex-col justify-start items-center py-40 px-10 lg:p-40">
       <div className='flex flex-col justify-center items-center gap-5 mb-8'>
         <h1 className="text-4xl font-bold">Principales Funcionalidades</h1>
         <p className="text-xl font-bold text-center w-4/5">
@@ -57,7 +57,7 @@ function Funcionalidades() {
           distintas partes del ecosistema de salud.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 w-4/5 h-auto lg:grid-cols-3  gap-4 px-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-auto lg:grid-cols-3  gap-4 ">
         {features.map((feature, index) => (
           <Card
             key={index}

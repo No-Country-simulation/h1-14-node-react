@@ -3,13 +3,13 @@ import "./style.css";
 
 function LeyJustina() {
   return (
-    <div className=" w-full my-5 py-14 relative overflow-hidden flex justify-end px-4 md:px-0">
-      <div className="content pl-12">
-        <h1 className="text-3xl font-bold mb-4">Sobre la Ley Justina</h1>
-        <div className="image-container float-right w-2/4 ml-4 mb-4">
+    <div className="relative w-full my-5 py-14 flex justify-center md:justify-end overflow-hidden">
+      <div className="content px-10 lg:pl-40 ">
+        <h1 className="text-3xl font-bold text-center lg:text-left mb-4">Sobre la Ley Justina</h1>
+        <div className="image-container w-full lg:w-2/4 ml-4 mb-4 lg:float-right">
           <img
             src={leyJustina}
-            className="shape-image rounded-lg rotate-5 w-full"
+            className="shape-image rounded-lg w-full lg:w-auto"
             alt="Ley Justina"
           />
         </div>

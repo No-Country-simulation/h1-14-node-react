@@ -24,7 +24,7 @@ import { Input } from "@/Components/ui/input";
         <div className='flex justify-evenly flex-grow items-center border-l border-inputPrimary  opacity-50'>
           <img src={bell} />
           <img src={helpCircle} />
-          <div className='w-10 h-10 rounded-full bg-black'></div>
+          <div className='w-6 h-6 md:w-10 md:h-10 rounded-full bg-black'></div>
         </div>
     </div>
   )

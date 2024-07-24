@@ -6,21 +6,23 @@ import { Input } from "@/Components/ui/input";
 
 function PatientList() {
   return (
-    <div className="flex bg-bgHome h-screen">
-      <SideBar />
-      <div className="flex-grow flex flex-col">
+    <div className="flex h-screen bg-bgHome">
+      <div className="hidden lg:flex">
+        <SideBar />
+      </div>
+      <div className="flex flex-col flex-grow">
         <NavBarHome />
-        <div className="py-6 pl-6 pr-10 flex flex-col flex-grow">
-          <h1 className="font-semibold text-2xl mb-4">Mis pacientes</h1>
-          <div className="flex justify-between mb-4">
-            <div className="w-1/2 flex items-center relative">
+        <div className="flex-grow flex flex-col p-4 md:p-6">
+          <h1 className="font-semibold text-xl md:text-2xl mb-4">Mis pacientes</h1>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
+            <div className="flex-grow relative">
               <Input
-                className="w-full rounded-md pl-8 pr-4 py-2 border border-borderCard"
+                className="w-full rounded-md pl-12 pr-4 py-2 border border-borderCard"
                 placeholder="Ingrese nombre, DNI o N° de Historia clínica para iniciar una búsqueda"
               />
-              <img src={Search} className="absolute left-4" alt="search icon" />
+              <img src={Search} className="absolute left-4 top-1/2 transform -translate-y-1/2" alt="search icon" />
             </div>
-            <select className="w-auto py-2 rounded-md px-1 border border-borderCard">
+            <select className="w-full md:w-auto py-2 rounded-md px-2 border border-borderCard">
               <option value="" className="font-bold text-sm">
                 Ordenar
               </option>
@@ -35,15 +37,17 @@ function PatientList() {
               </option>
             </select>
           </div>
-          <div className="bg-white rounded-md flex-grow border border-borderCard p-6 overflow-y-auto max-h-96">
-            <div className="flex flex-col gap-4">
-              <CardPatient />
-              <CardPatient />
-              <CardPatient />
-              <CardPatient />
-              <CardPatient />
-              <CardPatient />
-              <CardPatient />
+          <div className="flex-grow overflow-hidden">
+            <div className="bg-white rounded-md h-full border border-borderCard p-4 md:p-6 overflow-y-auto max-h-[calc(100vh-290px)]">
+              <div className="flex flex-col gap-4">
+                <CardPatient />
+                <CardPatient />
+                <CardPatient />
+                <CardPatient />
+                <CardPatient />
+                <CardPatient />
+                <CardPatient />
+              </div>
             </div>
           </div>
         </div>
