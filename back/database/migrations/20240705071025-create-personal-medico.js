@@ -1,32 +1,30 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("FinanciadoresUsuarios", {
+    await queryInterface.createTable('PersonalMedico', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
+      },
+      especialidadesId: {
+        type: Sequelize.INTEGER, 
+        allowNull: false
       },
       usuariosId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key:"id"
-        }
+        type: Sequelize.INTEGER, 
+        allowNull: false
       },
-      financiadoresId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Financiadores',
-          key:"id"
-        }
+      numeroMatricula: {
+        type: Sequelize.STRING, 
+        allowNull: false
       },
       active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
+        type: Sequelize.BOOLEAN, 
+        defaultValue: true
+      }, 
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -40,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("FinanciadoresUsuarios");
-  },
+    await queryInterface.dropTable('PersonalMedico');
+  }
 };

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Financiadores.init({
-    id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
+    // id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
     personalMedicoId: {type: DataTypes.INTEGER, allowNull: false},
     name: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false}, 
@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: true,
-  }, {
     sequelize,
     modelName: 'Financiadores',
   });

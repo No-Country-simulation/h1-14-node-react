@@ -15,16 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   Entidades.init(
     {
-      id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
+      //id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
       name: {type: DataTypes.STRING, allowNull: false},
       description: {type: DataTypes.STRING, allowNull: false}, 
-      active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
+      // active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
     },
     {
-      timestamps: true,
-    }, {
     sequelize,
     modelName: 'Entidades',
+    timestamps: true,
   });
   return Entidades;
 };

@@ -14,17 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Farmacia.init({
-    id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
+    // id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
     laboratoriosId: {type: DataTypes.INTEGER},
     name: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false}, 
     active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
   },
   {
-    timestamps: true,
-  }, {
     sequelize,
     modelName: 'Farmacia',
+    timestamps: true,
   });
   return Farmacia;
 };

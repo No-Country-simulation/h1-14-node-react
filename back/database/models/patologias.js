@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Patologias.init(
     {
-      id: { type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
+      // id: { type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
       name: { type: DataTypes.STRING, allowNull: false },
       especialidadesId: { type: DataTypes.INTEGER, allowNull: false },
       description: { type: DataTypes.STRING, allowNull: false },
@@ -21,8 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
-    },
-    {
       sequelize,
       modelName: "Patologias",
     }

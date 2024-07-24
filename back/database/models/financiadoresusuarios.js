@@ -14,14 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FinanciadoresUsuarios.init({
-    id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
+   // id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
     usuariosId: {type: DataTypes.INTEGER},
     financiadoresId: {type: DataTypes.INTEGER},
     active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
   },
   {
     timestamps: true,
-  },{
     sequelize,
     modelName: 'FinanciadoresUsuarios',
   });
