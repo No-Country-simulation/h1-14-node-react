@@ -1,3 +1,4 @@
+import CardPatient from "../../Components/cardPatient";
 import NavBarHome from "../../Components/navBarHome";
 import SideBar from "../../Components/sideBar";
 import Search from "../../assets/iconHome/search.svg";
@@ -14,20 +15,36 @@ function PatientList() {
           <div className="flex justify-between mb-4">
             <div className="w-1/2 flex items-center relative">
               <Input
-                className="w-full rounded-md pl-12 pr-4 py-2 border border-borderCard"
+                className="w-full rounded-md pl-8 pr-4 py-2 border border-borderCard"
                 placeholder="Ingrese nombre, DNI o N° de Historia clínica para iniciar una búsqueda"
               />
               <img src={Search} className="absolute left-4" alt="search icon" />
             </div>
             <select className="w-auto py-2 rounded-md px-1 border border-borderCard">
-              <option value="" className="font-bold text-sm">Ordenar</option>
-              <option value="" className="font-bold text-sm">Nombre</option>
-              <option value="" className="font-bold text-sm">DNI</option>
-              <option value="" className="font-bold text-sm">Historia clínica</option>
+              <option value="" className="font-bold text-sm">
+                Ordenar
+              </option>
+              <option value="" className="font-bold text-sm">
+                Nombre
+              </option>
+              <option value="" className="font-bold text-sm">
+                DNI
+              </option>
+              <option value="" className="font-bold text-sm">
+                Historia clínica
+              </option>
             </select>
           </div>
-          <div className="bg-white  rounded-md flex-grow border border-borderCard p-6">
-            <p>hola</p>
+          <div className="bg-white rounded-md flex-grow border border-borderCard p-6 overflow-y-auto max-h-96">
+            <div className="flex flex-col gap-4">
+              <CardPatient />
+              <CardPatient />
+              <CardPatient />
+              <CardPatient />
+              <CardPatient />
+              <CardPatient />
+              <CardPatient />
+            </div>
           </div>
         </div>
       </div>
