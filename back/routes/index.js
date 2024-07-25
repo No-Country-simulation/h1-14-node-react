@@ -1,63 +1,60 @@
-const express = require( 'express');
+const express = require("express");
 const router = express.Router();
 
-
 // Routes
-// const userRouter = require('./UsersRoutes');
-const patientRouter = require('./PatientsRoutes');
+const userRouter = require("./UsersRoutes");
+const patientRouter = require("./PatientsRoutes");
 // const usersRouter = require('./UsersRoutes');
 // const loginRouter = require('./LoginRoutes');
-const entidadRouter = require('./EntidadesRoutes');
-const fianciadoresRouter = require('./FinanciadoresRoutes');
-const ubicacionRouter = require('./UbicacionRoutes');
-const farmaciasRouter = require('./FarmaciasRoutes');
-const especialidadesRouter = require('./EspecialidadesRoutes');
-const laboratoriosRouter = require('./LaboratoriosRoutes');
-const patologiasRouter = require('./PatologiasRoutes');
-const tratamientosRouter = require('./TratamientosRoutes');
-const recetasRouter = require('./RecetasRoutes');
-
+const entidadRouter = require("./EntidadesRoutes");
+const fianciadoresRouter = require("./FinanciadoresRoutes");
+const ubicacionRouter = require("./UbicacionRoutes");
+const farmaciasRouter = require("./FarmaciasRoutes");
+const especialidadesRouter = require("./EspecialidadesRoutes");
+const laboratoriosRouter = require("./LaboratoriosRoutes");
+const patologiasRouter = require("./PatologiasRoutes");
+const tratamientosRouter = require("./TratamientosRoutes");
+const recetasRouter = require("./RecetasRoutes");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-   res.send("Hola mundo...");
+router.get("/", function (req, res, next) {
+  res.send("Hola mundo...");
 });
 
 //Users
-// router.use('/api/v1/users', userRouter)
-
+router.use("/api/v1/users", userRouter);
 
 // Pacientes
-router.use('/api/v1/pacientes', patientRouter)
+router.use("/api/v1/pacientes", patientRouter);
 /*
 // Login
 router.use('/api/v1/login', loginRouter); */
 
 // Entidades
-router.use('/api/v1/entidad', entidadRouter);
+router.use("/api/v1/entidad", entidadRouter);
 
 // Finaciadores
-router.use('/api/v1/financiador', fianciadoresRouter)
+router.use("/api/v1/financiador", fianciadoresRouter);
 
 // Ubicacion
-router.use('/api/v1/ubicacion', ubicacionRouter)
+router.use("/api/v1/ubicacion", ubicacionRouter);
 
 // Farmacias
-router.use('/api/v1/farmacia', farmaciasRouter)
+router.use("/api/v1/farmacia", farmaciasRouter);
 
 // Especialidades
-router.use('/api/v1/especialidad', especialidadesRouter)
+router.use("/api/v1/especialidad", especialidadesRouter);
 
 // Especialidades
-router.use('/api/v1/laboratorio', laboratoriosRouter)
+router.use("/api/v1/laboratorio", laboratoriosRouter);
 
 // Patologias
-router.use('/api/v1/patologia', patologiasRouter)
+router.use("/api/v1/patologia", patologiasRouter);
 
 // Tratamientos
-router.use('/api/v1/tratamiento', tratamientosRouter)
+router.use("/api/v1/tratamiento", tratamientosRouter);
 
 // Recetas
-router.use('/api/v1/recetas', recetasRouter)
+router.use("/api/v1/recetas", recetasRouter);
 
 module.exports = router;
