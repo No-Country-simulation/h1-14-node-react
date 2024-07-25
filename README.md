@@ -29,14 +29,14 @@ npm run dev
 ```
 
   ### Frontend
-Similar a la API, para correr localmente la Web App del proyecto, deberás abrir la consola y ejecutar:
+Similar a la API, para correr localmente la Web App del proyecto, deberás abrir una nueva consola y ejecutar:
  ```sh
 cd front
 npm install
 npm run dev
 ```
 
-- Verás la ruta para abrir el proyecto en tu navegador, abrela y bienvenido a Guardianes del Tiempo! ⏲
+Verás la ruta del proyecto en tu navegador, al abrirla ya tendrás acceso a Justina.io 
 
 
 ## 🚀 Integrantes
