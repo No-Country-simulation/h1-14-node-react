@@ -1,14 +1,17 @@
 # Justiona.io
 ### Equipo h1-14-node-react
-[JustinaHeart](https://drive.google.com/file/d/1l-svAmhGb2ZDHQB2z_IRijSvScds_8wD/view?usp=sharing)
-![Frame 2380](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)
 
+![Frame 2380](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)
+<img src="[justinaheart.jpg](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)" alt="justinaheart" width="200" aling=right/>
 
 ## Ayudemos a todos los que podamos
 
-> En Justina.io, transformamos vidas. 
+> En Justina.io, transformamos vidas.
+> 
 > Nuestra aplicación facilita la donación de órganos y ofrece un seguimiento médico integral para el bienestar de donantes y receptores.
-> Unite a nuestra comunidad, salva vidas y mantenete informado con Justina.io. 
+> 
+> Unite a nuestra comunidad, salva vidas y mantenete informado con Justina.io.
+> 
 > **Cada latido cuenta.**
 
 ### Objetivo
@@ -20,7 +23,7 @@ Crear una solución digital que mejore la comunicación entre pacientes en esper
 
 ## 🚀 Cómo correr el proyecto localmente
 
-Requerimientos mínimos necesarios para ejecutar la App localmente
+### Requerimientos mínimos necesarios para ejecutar la App localmente
 - 
 - 
 
