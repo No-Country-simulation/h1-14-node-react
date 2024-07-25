@@ -15,6 +15,7 @@ import {
     Trash2,
     PenLine,
     Search,
+    Plus,
     ArrowUpDown,
     ChevronDown,
     MoreHorizontal,
@@ -49,6 +50,157 @@ import {
     TableHeader,
     TableRow,
 } from "@/Components/ui/table";
+import { datetimeRegex } from 'zod';
+
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/Components/ui/dialog"
+import { Textarea } from '@/Components/ui/textarea';
+
+const events = [
+    {
+        event: "INV001",
+        status: "Done",
+        dateTime: "2024-07-19 02:50:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV002",
+        status: "Pending",
+        dateTime: "2024-07-19 01:50:00",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "INV003",
+        status: "Undone",
+        dateTime: "2024-07-19 03:50:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV004",
+        status: "Done",
+        dateTime: "2024-07-19 04:50:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV005",
+        status: "Done",
+        dateTime: "2024-07-19 05:50:00",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "INV006",
+        status: "Pending",
+        dateTime: "2024-07-19 02:00:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV007",
+        status: "Undone",
+        dateTime: "2024-07-19 03:00:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV008",
+        status: "Pending",
+        dateTime: "2024-07-19 02:00:00",
+        eventType: "Medico general",
+    },
+    {
+        event: "INV009",
+        status: "Undone",
+        dateTime: "2024-07-19 03:00:00",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "INV010",
+        status: "Pending",
+        dateTime: "2024-07-20 02:00:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV011",
+        status: "Undone",
+        dateTime: "2024-07-20 03:00:00",
+        eventType: "Medicacion",
+    },
+];
+
+const initialEvents = [
+    {
+        event: "INV001",
+        status: "Done",
+        dateTime: "2024-07-19 02:50:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV002",
+        status: "Pending",
+        dateTime: "2024-07-19 01:50:00",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "INV003",
+        status: "Undone",
+        dateTime: "2024-07-19 03:50:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV004",
+        status: "Done",
+        dateTime: "2024-07-19 04:50:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV005",
+        status: "Done",
+        dateTime: "2024-07-19 05:50:00",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "INV006",
+        status: "Pending",
+        dateTime: "2024-07-19 02:00:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV007",
+        status: "Undone",
+        dateTime: "2024-07-19 03:00:00",
+        eventType: "Medicacion",
+    },
+    {
+        event: "INV008",
+        status: "Pending",
+        dateTime: "2024-07-19 02:00:00",
+        eventType: "Medico general",
+    },
+    {
+        event: "INV009",
+        status: "Undone",
+        dateTime: "2024-07-19 03:00:00",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "INV010",
+        status: "Pending",
+        dateTime: "2024-07-20 02:00:00",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "INV011",
+        status: "Undone",
+        dateTime: "2024-07-20 03:00:00",
+        eventType: "Medicacion",
+    },
+];
+
 
 function ViewPatientCalendar() {
 
@@ -59,76 +211,8 @@ function ViewPatientCalendar() {
     //calendar on the right
     const [date1, setDate1] = useState((new Date()));
 
+    const [events, setEvents] = useState(initialEvents);
 
-
-    const events = [
-        {
-            event: "INV001",
-            status: "Done",
-            dateTime: "2024-07-19 02:50:00",
-            eventType: "Medicacion",
-        },
-        {
-            event: "INV002",
-            status: "Pending",
-            dateTime: "2024-07-19 01:50:00",
-            eventType: "Actividad Fisica",
-        },
-        {
-            event: "INV003",
-            status: "Undone",
-            dateTime: "2024-07-19 03:50:00",
-            eventType: "Alimentacion",
-        },
-        {
-            event: "INV004",
-            status: "Done",
-            dateTime: "2024-07-19 04:50:00",
-            eventType: "Medicacion",
-        },
-        {
-            event: "INV005",
-            status: "Done",
-            dateTime: "2024-07-19 05:50:00",
-            eventType: "Actividad Fisica",
-        },
-        {
-            event: "INV006",
-            status: "Pending",
-            dateTime: "2024-07-19 02:00:00",
-            eventType: "Alimentacion",
-        },
-        {
-            event: "INV007",
-            status: "Undone",
-            dateTime: "2024-07-19 03:00:00",
-            eventType: "Medicacion",
-        },
-        {
-            event: "INV008",
-            status: "Pending",
-            dateTime: "2024-07-19 02:00:00",
-            eventType: "Medico general",
-        },
-        {
-            event: "INV009",
-            status: "Undone",
-            dateTime: "2024-07-19 03:00:00",
-            eventType: "Psicoterapia",
-        },
-        {
-            event: "INV010",
-            status: "Pending",
-            dateTime: "2024-07-20 02:00:00",
-            eventType: "Alimentacion",
-        },
-        {
-            event: "INV011",
-            status: "Undone",
-            dateTime: "2024-07-20 03:00:00",
-            eventType: "Medicacion",
-        },        
-    ];
 
     const getStatusClass = (status) => {
         switch (status) {
@@ -200,22 +284,22 @@ function ViewPatientCalendar() {
     const filteredEvents = useMemo(() => {
 
 
-            let filtered = events.filter(event =>
-                (selectedCategories.length === 0 || selectedCategories.includes(event.eventType)) &&
-                selectedTypes.includes(event.eventType) &&
-                new Date(event.dateTime).toDateString() === date1.toDateString()
-            );
+        let filtered = events.filter(event =>
+            (selectedCategories.length === 0 || selectedCategories.includes(event.eventType)) &&
+            selectedTypes.includes(event.eventType) &&
+            new Date(event.dateTime).toDateString() === date1.toDateString()
+        );
 
-            if (selectedCategories.length > 0) {
-                filtered = filtered.filter(event => selectedCategories.includes(event.eventType));
-            }
+        if (selectedCategories.length > 0) {
+            filtered = filtered.filter(event => selectedCategories.includes(event.eventType));
+        }
 
-            if (searchKeyword) {
-                filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
-            }
+        if (searchKeyword) {
+            filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
+        }
 
-        return filtered ;
-    }, [events, selectedCategories, selectedTypes, date1, searchKeyword]);
+        return filtered;
+    }, [events, , selectedCategories, selectedTypes, date1, searchKeyword]);
 
 
 
@@ -241,6 +325,30 @@ function ViewPatientCalendar() {
         }).format(date);
     };
 
+    // Agregar eventos    
+
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [newEvent, setNewEvent] = useState({ eventType: "", dateTime: "", event: "", status: "Undone" });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewEvent({
+            ...newEvent,
+            [name]: value
+        });
+    };
+
+    const handleAddEvent = () => {
+        setEvents([...events, { ...newEvent, dateTime: date1.toISOString() }]);
+        setIsDialogOpen(false);
+        setNewEvent({ eventType: "", dateTime: "", event: "", status: "Undone" });
+    };
+
+
+
+
+
     return (
         <div className='flex bg-white'>
             <div className='bg-secondary p-4'>
@@ -248,13 +356,13 @@ function ViewPatientCalendar() {
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
                     <div className='relative w-full'>
-                    <Input
-                        type="text"
-                        placeholder="Buscar en tabla"
-                        value={searchKeyword}
-                        onChange={(e) => setSearchKeyword(e.target.value)}
-                        className="px-12 mb-4"
-                    /> <span className='absolute bottom-4 left-4  py-2 '> <Search   /></span>
+                        <Input
+                            type="text"
+                            placeholder="Buscar en tabla"
+                            value={searchKeyword}
+                            onChange={(e) => setSearchKeyword(e.target.value)}
+                            className="px-12 mb-4"
+                        /> <span className='absolute bottom-4 left-4  py-2 '> <Search /></span>
                     </div>
 
                     <DropdownMenu>
@@ -307,8 +415,8 @@ function ViewPatientCalendar() {
                                     <TableCell><span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/20 ${getBadgeClass(event.eventType)}`}> {event.eventType} </span> </TableCell>
 
                                     <TableCell className="font-medium">{event.event}</TableCell>
-                                    <TableCell><SquarePen stroke="#5666bf"/></TableCell>
-                                    <TableCell><Trash2 stroke="#DA286D"/></TableCell>
+                                    <TableCell><SquarePen stroke="#5666bf" /></TableCell>
+                                    <TableCell><Trash2 stroke="#DA286D" /></TableCell>
 
                                 </TableRow>
                             ))}
@@ -348,7 +456,7 @@ function ViewPatientCalendar() {
                                 <Checkbox id={`eventType-${type}`}
                                     checked={selectedTypes.includes(type)}
                                     onCheckedChange={() => toggleType(type)}
-                                    
+
                                 />
                                 <Label htmlFor={`eventType-${type}`} className="ml-2">{type}</Label>
                             </li>
@@ -365,15 +473,106 @@ function ViewPatientCalendar() {
                         />
                         <span className='absolute bottom-4 left-4 px-10 py-2 '>¡No te olvides de nada, agéndalo acá!</span>
                     </div>
+
+
+
+
+
+
+
+
+
+
                     <div className='flex items-baseline space-x-4'>
                         <img
                             src={mascota}
                             className=""
                             alt="mascota"
                         />
-                        <Button className="rounded-3xl bg-inputPrimary space-x-4" type="submit">
+                        {/* <Button className="rounded-3xl bg-inputPrimary space-x-4" type="submit">
                             <PenLine />  <span >Agregar evento</span>
-                        </Button>
+                        </Button> */}
+
+
+                        {/* //agregar evento */}
+                        <div className=' items-baseline'>
+                            <div className="">
+                                <Dialog className="">
+                                    <DialogTrigger asChild>
+                                        <div>
+                                            <Button className="rounded-3xl bg-inputPrimary space-x-4 float-right " >
+                                                <PenLine />  <span >Agregar evento</span>
+                                            </Button>
+                                        </div>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[350px] md:max-w-[350px] lg:max-w-[350px] gap-2 overflow-y-auto max-h-[80vh]">
+                                        <DialogHeader>
+                                            <DialogTitle>Nuevo evento</DialogTitle>
+                                            <DialogDescription>
+                                                Selecciona la fecha y el horario del evento
+                                            </DialogDescription>
+                                        </DialogHeader>
+
+                                        <div className='py-4'>
+                                            <Calendar
+                                                mode="single"
+                                                selected={date1}
+                                                onSelect={setDate1}
+                                                className=" w-fit rounded-md border"
+                                            />
+                                        </div>
+
+
+                                        <div className=' '>
+                                            <div className=" ">
+                                                <div className='columns-2 sm:columns-2 lg:columns-2'>
+                                                    {uniqueEventTypes.map((eventType) => (
+                                                        <div className='  '>
+                                                            <Button
+                                                                className={` my-1 h-6 inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/20 ${getBadgeClass(eventType)} {${newEvent.eventType === eventType ? "bg-gray-200 text-base " : "bg-gray-200"}}`}
+                                                                onClick={() => setNewEvent({ ...newEvent, eventType: eventType })}
+                                                            >
+                                                                {eventType}
+                                                            </Button>
+                                                            {/* <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/20 ${getBadgeClass(eventType)}`}
+                                                                onClick={() => setNewEvent({ ...newEvent, eventType: eventType })}
+                                                            > {eventType} </span> */}
+                                                        </div>
+                                                    ))}
+
+
+
+
+                                                </div>
+                                                <Button variant="ghost" className="rounded-sm h-6 "><span className='text-green-700 flex underline'>Agregar etiqueta <Plus size={18} className='pt-1' /></span></Button>
+
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Label className="block text-sm font-medium mb-2">Detalle</Label>
+                                            <Textarea
+                                                name="event"
+                                                value={newEvent.event}
+                                                onChange={handleInputChange}
+                                                placeholder="Información sobre el evento"
+                                                className=" p-2 border rounded w-full"
+                                            />
+                                        </div>
+
+                                        <DialogFooter>
+                                            <Button className="rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={handleAddEvent}>
+                                                <PenLine />  <span >Agregar evento</span>
+                                            </Button>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
+                        </div>
+
+
+
+
+
 
                     </div>
 

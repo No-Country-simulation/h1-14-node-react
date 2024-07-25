@@ -10,6 +10,8 @@ import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 import PatientCalendar from "../PatientCalendar/Index";
 import DoctorCalendar from "../DoctorCalendar/Index";
+import Notas from "../Notas/Index";
+
 
 
 const AppRoutes = () => {
@@ -23,7 +25,8 @@ const AppRoutes = () => {
     { path: '/doctorCrud', element: <DoctorCrud />},
     { path: '/resetPassword', element: <EmailResetPassword />},
     { path: '/patientCalendar', element: <PatientCalendar />},
-    { path: '/doctorCalendar', element: <DoctorCalendar />}
+    { path: '/doctorCalendar', element: <DoctorCalendar />},
+    { path: '/notas', element: <Notas />}
   ])
 
   return routes
