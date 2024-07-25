@@ -1,5 +1,5 @@
 import { check, validationResult } from "express-validator";
-import { resFail } from "../utils/response.js";
+import { resFail } from "../app/utils/response.js";
 
 export const createUserValidation = [
   check("email")

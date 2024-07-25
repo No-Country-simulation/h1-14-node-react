@@ -1,4 +1,14 @@
-const Patients = require('../database/models/patients');
+const { PersonalMedico } = require("../app/database/db");
+
+module.exports = {
+  async All(req, res) {
+    let personalMedico = await PersonalMedico.findAll({
+      include: {
+      association: "Especialidad"
+  }});
+    res.json(personalMedico);
+  },
+};
 
 async function getPatients(req, res) {
     const patientId = req.params.id;
