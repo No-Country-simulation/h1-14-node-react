@@ -34,12 +34,13 @@ CREATE TABLE `Tratamientos` (
   `description` varchar(255),
   `patologiasId` integer NOT NULL,
   `pacienteId` integer NOT NULL,
+  `personalMedicoId` integer NOT NULL,
   `active` boolean,
   `createdAt` timestamp,
   `updatedAt` timestamp
 );
 
-CREATE TABLE `Receta` (
+CREATE TABLE `Recetas` (
   `id` integer PRIMARY KEY,
   `tratamientosId` integer NOT NULL,
   `medicamentosId` integer NOT NULL,
@@ -50,14 +51,22 @@ CREATE TABLE `Receta` (
   `updatedAt` timestamp
 );
 
-CREATE TABLE `calendarioMedicamentos` (
+CREATE TABLE `CalendarioMedicamentos` (
   `id` integer PRIMARY KEY,
   `time` varchar(255),
   `medicamentosId` integer NOT NULL,
+  `pacientesId` integer,
   `description` varchar(255),
   `active` boolean,
   `createdAt` timestamp,
   `updatedAt` timestamp
+);
+
+CREATE TABLE `aderenciaMedicamentos` (
+  `id` integer PRIMARY KEY,
+  `calendarioMedicamentosId` integer NOT NULL,
+  `tomoMedicamento` boolean,
+  `createdAt` timestamp
 );
 
 CREATE TABLE `Patologias` (
@@ -82,7 +91,7 @@ CREATE TABLE `Especialidades` (
 CREATE TABLE `PersonalMedico` (
   `id` integer PRIMARY KEY,
   `especialidadesId` integer,
-  `usuario` integer,
+  `usuarioId` integer,
   `numeroMatricula` varchar(255),
   `active` boolean,
   `createdAt` timestamp,
@@ -91,7 +100,7 @@ CREATE TABLE `PersonalMedico` (
 
 CREATE TABLE `Pacientes` (
   `id` integer PRIMARY KEY,
-  `entidadesId` integer,
+  `entidadesSaludId` integer,
   `financiadoresId` integer NOT NULL,
   `personalMedicoId` integer NOT NULL,
   `patologiasId` integer NOT NULL,
@@ -102,11 +111,18 @@ CREATE TABLE `Pacientes` (
   `updatedAt` timestamp
 );
 
+CREATE TABLE `PatologiasPacientes` (
+  `id` integer PRIMARY KEY,
+  `pacientesId` integer,
+  `patologiasId` integer NOT NULL,
+  `createdAt` timestamp,
+  `updatedAt` timestamp
+);
+
 CREATE TABLE `PersonalMedicoPaciente` (
   `id` integer PRIMARY KEY,
   `pacientesId` integer,
   `personalMedicoId` integer NOT NULL,
-  `Active` boolean,
   `createdAt` timestamp,
   `updatedAt` timestamp
 );
@@ -151,17 +167,25 @@ CREATE TABLE `Ubicacion` (
 
 CREATE TABLE `FinanciadoresUsuarios` (
   `id` integer PRIMARY KEY,
-  `financierasId` integer,
+  `financiadoresId` integer,
   `usuariosId` integer NOT NULL,
   `createdAt` timestamp,
   `updatedAt` timestamp
 );
 
-CREATE TABLE `Entidades` (
+CREATE TABLE `EntidadesSalud` (
   `id` integer PRIMARY KEY,
   `nombre` varchar(255),
   `descripcion` varchar(255),
   `active` boolean,
+  `createdAt` timestamp,
+  `updatedAt` timestamp
+);
+
+CREATE TABLE `EntidadesSaludUsuarios` (
+  `id` integer PRIMARY KEY,
+  `entidadesSaludId` integer,
+  `usuariosId` integer NOT NULL,
   `createdAt` timestamp,
   `updatedAt` timestamp
 );
@@ -223,48 +247,81 @@ ALTER TABLE `Pacientes_Tratamientos` ADD FOREIGN KEY (`Pacientes_id`) REFERENCES
 ALTER TABLE `Pacientes_Tratamientos` ADD FOREIGN KEY (`Tratamientos_pacienteId`) REFERENCES `Tratamientos` (`pacienteId`);
 
 
-CREATE TABLE `Tratamientos_Receta` (
-  `Tratamientos_id` integer,
-  `Receta_tratamientosId` integer,
-  PRIMARY KEY (`Tratamientos_id`, `Receta_tratamientosId`)
-);
-
-ALTER TABLE `Tratamientos_Receta` ADD FOREIGN KEY (`Tratamientos_id`) REFERENCES `Tratamientos` (`id`);
-
-ALTER TABLE `Tratamientos_Receta` ADD FOREIGN KEY (`Receta_tratamientosId`) REFERENCES `Receta` (`tratamientosId`);
-
-
-CREATE TABLE `Medicamentos_Receta` (
-  `Medicamentos_id` integer,
-  `Receta_medicamentosId` integer,
-  PRIMARY KEY (`Medicamentos_id`, `Receta_medicamentosId`)
-);
-
-ALTER TABLE `Medicamentos_Receta` ADD FOREIGN KEY (`Medicamentos_id`) REFERENCES `Medicamentos` (`id`);
-
-ALTER TABLE `Medicamentos_Receta` ADD FOREIGN KEY (`Receta_medicamentosId`) REFERENCES `Receta` (`medicamentosId`);
-
-
-CREATE TABLE `PersonalMedico_Receta` (
+CREATE TABLE `PersonalMedico_Tratamientos` (
   `PersonalMedico_id` integer,
-  `Receta_personalMedicoId` integer,
-  PRIMARY KEY (`PersonalMedico_id`, `Receta_personalMedicoId`)
+  `Tratamientos_personalMedicoId` integer,
+  PRIMARY KEY (`PersonalMedico_id`, `Tratamientos_personalMedicoId`)
 );
 
-ALTER TABLE `PersonalMedico_Receta` ADD FOREIGN KEY (`PersonalMedico_id`) REFERENCES `PersonalMedico` (`id`);
+ALTER TABLE `PersonalMedico_Tratamientos` ADD FOREIGN KEY (`PersonalMedico_id`) REFERENCES `PersonalMedico` (`id`);
 
-ALTER TABLE `PersonalMedico_Receta` ADD FOREIGN KEY (`Receta_personalMedicoId`) REFERENCES `Receta` (`personalMedicoId`);
+ALTER TABLE `PersonalMedico_Tratamientos` ADD FOREIGN KEY (`Tratamientos_personalMedicoId`) REFERENCES `Tratamientos` (`personalMedicoId`);
 
 
-CREATE TABLE `Medicamentos_calendarioMedicamentos` (
+CREATE TABLE `Tratamientos_Recetas` (
+  `Tratamientos_id` integer,
+  `Recetas_tratamientosId` integer,
+  PRIMARY KEY (`Tratamientos_id`, `Recetas_tratamientosId`)
+);
+
+ALTER TABLE `Tratamientos_Recetas` ADD FOREIGN KEY (`Tratamientos_id`) REFERENCES `Tratamientos` (`id`);
+
+ALTER TABLE `Tratamientos_Recetas` ADD FOREIGN KEY (`Recetas_tratamientosId`) REFERENCES `Recetas` (`tratamientosId`);
+
+
+CREATE TABLE `Medicamentos_Recetas` (
   `Medicamentos_id` integer,
-  `calendarioMedicamentos_medicamentosId` integer,
-  PRIMARY KEY (`Medicamentos_id`, `calendarioMedicamentos_medicamentosId`)
+  `Recetas_medicamentosId` integer,
+  PRIMARY KEY (`Medicamentos_id`, `Recetas_medicamentosId`)
 );
 
-ALTER TABLE `Medicamentos_calendarioMedicamentos` ADD FOREIGN KEY (`Medicamentos_id`) REFERENCES `Medicamentos` (`id`);
+ALTER TABLE `Medicamentos_Recetas` ADD FOREIGN KEY (`Medicamentos_id`) REFERENCES `Medicamentos` (`id`);
 
-ALTER TABLE `Medicamentos_calendarioMedicamentos` ADD FOREIGN KEY (`calendarioMedicamentos_medicamentosId`) REFERENCES `calendarioMedicamentos` (`medicamentosId`);
+ALTER TABLE `Medicamentos_Recetas` ADD FOREIGN KEY (`Recetas_medicamentosId`) REFERENCES `Recetas` (`medicamentosId`);
+
+
+CREATE TABLE `PersonalMedico_Recetas` (
+  `PersonalMedico_id` integer,
+  `Recetas_personalMedicoId` integer,
+  PRIMARY KEY (`PersonalMedico_id`, `Recetas_personalMedicoId`)
+);
+
+ALTER TABLE `PersonalMedico_Recetas` ADD FOREIGN KEY (`PersonalMedico_id`) REFERENCES `PersonalMedico` (`id`);
+
+ALTER TABLE `PersonalMedico_Recetas` ADD FOREIGN KEY (`Recetas_personalMedicoId`) REFERENCES `Recetas` (`personalMedicoId`);
+
+
+CREATE TABLE `Medicamentos_CalendarioMedicamentos` (
+  `Medicamentos_id` integer,
+  `CalendarioMedicamentos_medicamentosId` integer,
+  PRIMARY KEY (`Medicamentos_id`, `CalendarioMedicamentos_medicamentosId`)
+);
+
+ALTER TABLE `Medicamentos_CalendarioMedicamentos` ADD FOREIGN KEY (`Medicamentos_id`) REFERENCES `Medicamentos` (`id`);
+
+ALTER TABLE `Medicamentos_CalendarioMedicamentos` ADD FOREIGN KEY (`CalendarioMedicamentos_medicamentosId`) REFERENCES `CalendarioMedicamentos` (`medicamentosId`);
+
+
+CREATE TABLE `Pacientes_CalendarioMedicamentos` (
+  `Pacientes_id` integer,
+  `CalendarioMedicamentos_pacientesId` integer,
+  PRIMARY KEY (`Pacientes_id`, `CalendarioMedicamentos_pacientesId`)
+);
+
+ALTER TABLE `Pacientes_CalendarioMedicamentos` ADD FOREIGN KEY (`Pacientes_id`) REFERENCES `Pacientes` (`id`);
+
+ALTER TABLE `Pacientes_CalendarioMedicamentos` ADD FOREIGN KEY (`CalendarioMedicamentos_pacientesId`) REFERENCES `CalendarioMedicamentos` (`pacientesId`);
+
+
+CREATE TABLE `CalendarioMedicamentos_aderenciaMedicamentos` (
+  `CalendarioMedicamentos_id` integer,
+  `aderenciaMedicamentos_calendarioMedicamentosId` integer,
+  PRIMARY KEY (`CalendarioMedicamentos_id`, `aderenciaMedicamentos_calendarioMedicamentosId`)
+);
+
+ALTER TABLE `CalendarioMedicamentos_aderenciaMedicamentos` ADD FOREIGN KEY (`CalendarioMedicamentos_id`) REFERENCES `CalendarioMedicamentos` (`id`);
+
+ALTER TABLE `CalendarioMedicamentos_aderenciaMedicamentos` ADD FOREIGN KEY (`aderenciaMedicamentos_calendarioMedicamentosId`) REFERENCES `aderenciaMedicamentos` (`calendarioMedicamentosId`);
 
 
 CREATE TABLE `Especialidades_Patologias` (
@@ -289,9 +346,9 @@ ALTER TABLE `Especialidades_PersonalMedico` ADD FOREIGN KEY (`Especialidades_id`
 ALTER TABLE `Especialidades_PersonalMedico` ADD FOREIGN KEY (`PersonalMedico_especialidadesId`) REFERENCES `PersonalMedico` (`especialidadesId`);
 
 
-ALTER TABLE `PersonalMedico` ADD FOREIGN KEY (`usuario`) REFERENCES `Usuarios` (`id`);
+ALTER TABLE `PersonalMedico` ADD FOREIGN KEY (`usuarioId`) REFERENCES `Usuarios` (`id`);
 
-ALTER TABLE `Pacientes` ADD FOREIGN KEY (`entidadesId`) REFERENCES `Entidades` (`id`);
+ALTER TABLE `Pacientes` ADD FOREIGN KEY (`entidadesSaludId`) REFERENCES `EntidadesSalud` (`id`);
 
 ALTER TABLE `Financiadores` ADD FOREIGN KEY (`id`) REFERENCES `Pacientes` (`financiadoresId`);
 
@@ -319,6 +376,19 @@ ALTER TABLE `Patologias_Pacientes` ADD FOREIGN KEY (`Pacientes_patologiasId`) RE
 
 ALTER TABLE `Pacientes` ADD FOREIGN KEY (`usuariosID`) REFERENCES `Usuarios` (`id`);
 
+CREATE TABLE `Pacientes_PatologiasPacientes` (
+  `Pacientes_id` integer,
+  `PatologiasPacientes_pacientesId` integer,
+  PRIMARY KEY (`Pacientes_id`, `PatologiasPacientes_pacientesId`)
+);
+
+ALTER TABLE `Pacientes_PatologiasPacientes` ADD FOREIGN KEY (`Pacientes_id`) REFERENCES `Pacientes` (`id`);
+
+ALTER TABLE `Pacientes_PatologiasPacientes` ADD FOREIGN KEY (`PatologiasPacientes_pacientesId`) REFERENCES `PatologiasPacientes` (`pacientesId`);
+
+
+ALTER TABLE `Patologias` ADD FOREIGN KEY (`id`) REFERENCES `PatologiasPacientes` (`patologiasId`);
+
 CREATE TABLE `Pacientes_PersonalMedicoPaciente` (
   `Pacientes_id` integer,
   `PersonalMedicoPaciente_pacientesId` integer,
@@ -338,13 +408,26 @@ ALTER TABLE `Usuarios` ADD FOREIGN KEY (`id`) REFERENCES `Ubicacion` (`usuariosI
 
 CREATE TABLE `Financiadores_FinanciadoresUsuarios` (
   `Financiadores_id` integer,
-  `FinanciadoresUsuarios_financierasId` integer,
-  PRIMARY KEY (`Financiadores_id`, `FinanciadoresUsuarios_financierasId`)
+  `FinanciadoresUsuarios_financiadoresId` integer,
+  PRIMARY KEY (`Financiadores_id`, `FinanciadoresUsuarios_financiadoresId`)
 );
 
 ALTER TABLE `Financiadores_FinanciadoresUsuarios` ADD FOREIGN KEY (`Financiadores_id`) REFERENCES `Financiadores` (`id`);
 
-ALTER TABLE `Financiadores_FinanciadoresUsuarios` ADD FOREIGN KEY (`FinanciadoresUsuarios_financierasId`) REFERENCES `FinanciadoresUsuarios` (`financierasId`);
+ALTER TABLE `Financiadores_FinanciadoresUsuarios` ADD FOREIGN KEY (`FinanciadoresUsuarios_financiadoresId`) REFERENCES `FinanciadoresUsuarios` (`financiadoresId`);
 
 
 ALTER TABLE `Usuarios` ADD FOREIGN KEY (`id`) REFERENCES `FinanciadoresUsuarios` (`usuariosId`);
+
+CREATE TABLE `EntidadesSalud_EntidadesSaludUsuarios` (
+  `EntidadesSalud_id` integer,
+  `EntidadesSaludUsuarios_entidadesSaludId` integer,
+  PRIMARY KEY (`EntidadesSalud_id`, `EntidadesSaludUsuarios_entidadesSaludId`)
+);
+
+ALTER TABLE `EntidadesSalud_EntidadesSaludUsuarios` ADD FOREIGN KEY (`EntidadesSalud_id`) REFERENCES `EntidadesSalud` (`id`);
+
+ALTER TABLE `EntidadesSalud_EntidadesSaludUsuarios` ADD FOREIGN KEY (`EntidadesSaludUsuarios_entidadesSaludId`) REFERENCES `EntidadesSaludUsuarios` (`entidadesSaludId`);
+
+
+ALTER TABLE `Usuarios` ADD FOREIGN KEY (`id`) REFERENCES `EntidadesSaludUsuarios` (`usuariosId`);

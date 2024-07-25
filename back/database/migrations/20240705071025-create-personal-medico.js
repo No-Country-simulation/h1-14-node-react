@@ -2,25 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Farmacias', {
+    await queryInterface.createTable('PersonalMedico', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      laboratoriosId: {
-        type: Sequelize.INTEGER
+      especialidadesId: {
+        type: Sequelize.INTEGER, 
+        allowNull: false,
+        references: {
+          model: 'Especialidades',
+          key:"id"
+        } 
       },
-      name: {
-        type: Sequelize.STRING
+      usuariosId: {
+        type: Sequelize.INTEGER, 
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key:"id"
+        } 
       },
-      description: {
-        type: Sequelize.STRING
+      numeroMatricula: {
+        type: Sequelize.STRING, 
+        allowNull: false
       },
       active: {
-        type: Sequelize.BOOLEAN
-      },
+        type: Sequelize.BOOLEAN, 
+        defaultValue: true
+      }, 
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -34,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Farmacias');
+    await queryInterface.dropTable('PersonalMedico');
   }
 };

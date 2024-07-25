@@ -2,35 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Ubicacions', {
+    await queryInterface.createTable('Patologias', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      usuariosId: { 
-        type: Sequelize.INTEGER, 
-        allowNull: false 
+      name: {
+        type: Sequelize.STRING
       },
-      pais: { 
-        type: Sequelize.STRING, 
-        allowNull: false 
+      description: {
+        type: Sequelize.STRING
       },
-      provincias: { 
-        type: Sequelize.STRING, 
-        allowNull: false
+      especialidadesId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Especialidades',
+          key:"id"
+        }
       },
-      localidad: { 
-        type: Sequelize.STRING, 
-        allowNull: false 
-      },
-      direccion: { 
-        type: Sequelize.STRING, 
-        allowNull: false 
-      },
-      active: { 
-        type: Sequelize.BOOLEAN, 
+      active: {
+        type: Sequelize.BOOLEAN,
         defaultValue: true
       },
       createdAt: {
@@ -46,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Ubicacions');
+    await queryInterface.dropTable('Patologias');
   }
 };
