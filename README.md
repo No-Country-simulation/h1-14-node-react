@@ -12,7 +12,7 @@
 > 
 > **Cada latido cuenta.**
 
-![Accedé a Justina.io aquí](https://justinaio.netlify.app/)
+[Accedé a Justina.io aquí](https://justinaio.netlify.app/)
 
 ### Objetivo
 Crear una solución digital que mejore la comunicación entre pacientes en espera de trasplante, pacientes trasplantados y médicos, fomentando así la adherencia al tratamiento y optimizando el seguimiento médico.
