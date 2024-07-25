@@ -1,134 +1,100 @@
-const User = require("../database/models/users");
+const { Users } = require("../database/db");
 
-async function getUsers(req, res) {
-  const userId = req.params.id;
+/* module.exports = {
+  async All(req, res) {
+    let users = await Users.findAll({
+      include: {
+          association: "domicilio"
+      }
+    });
+    res.json(users);
+  },
+}; */
+
+
+const getUsers = async (req, res) => {
+  const { id } = req.params;
 
   try {
-    if (userId) {
-      const user = await User.findByPk(userId);
-      if (user) {
-        res.status(200).json(user);
+    if (id) {
+      const User = await Users.findByPk(id);
+      if (User) {
+        res.status(200).json(User);
       } else {
-        res.status(404).json({ message: "Usuario no encontrado" });
+        res.status(404).json({ message: "Users no encontrado" });
       }
     } else {
-      const users = await User.findAll();
-      res.status(200).json(users);
+      const User = await Users.findAll({
+        include: {
+          association: "domicilio",
+        },
+      });
+      res.status(200).json(User);
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error al obtener usuarios", error });
+    console.error("Error al obtener la Users", error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener las Users", error });
   }
-}
+};
 
 const createUsers = async (req, res) => {
-  const {
-    dniType,
-    dni,
-    password,
-    firstName,
-    lastName,
-    brithday,
-    role,
-    gender,
-    email,
-    phone,
-    active,
-  } = req.body;
+  const { name, description, active } = req.body;
 
   try {
-    const newUser = await User.create({
-      dniType,
-      dni,
-      password,
-      firstName,
-      lastName,
-      brithday,
-      role,
-      gender,
-      email,
-      phone,
+    const newUsers = await Users.create({
+      name,
+      description,
       active,
     });
 
-    res
-      .status(201)
-      .json({ message: "Usuario creado correctamente", user: newUser });
+    res.status(201).json({
+      message: "Users creada correctamente",
+      Entidad: newUsers,
+    });
   } catch (error) {
-    console.error("Error al crear usuario:", error);
-    res.status(500).json({ message: "Error al crear usuario", error });
+    console.error("Error al crear Users:", error);
+    res.status(500).json({ message: "Error al crear Users", error });
   }
 };
 
 const updateUsers = async (req, res) => {
-  const userId = req.params.id;
-  const {
-    dni,
-    firstName,
-    lastName,
-    eMail,
-    birthdate,
-    gender,
-    password,
-    active,
-  } = req.body;
+  const { id } = req.params;
+  const { name, description, active } = req.body;
 
   try {
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-
-    if (dni !== undefined) user.dni = dni;
-    if (firstName !== undefined) user.firstName = firstName;
-    if (lastName !== undefined) user.lastName = lastName;
-    if (eMail !== undefined) user.eMail = eMail;
-    if (birthdate !== undefined) user.birthdate = birthdate;
-    if (gender !== undefined) user.gender = gender;
-    if (password !== undefined) user.password = password;
-    if (active !== undefined) user.active = active;
-
-    await user.save();
-    const response = user.toJSON();
-    res.status(200).json({ message: "Usuario actualizado", response });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al actualizar usuario", error });
-  }
-};
-
-const logicalDeleteUsers = async (req, res) => {
-  const userId = req.params.id;
-
-  try {
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-
-    user.active = false;
-    await user.save();
-
-    res.status(200).json({ message: "Usuario eliminado lógicamente" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al eliminar usuario", error });
-  }
-};
-const physicalDeleteUsers = async (req, res) => {
-  const userId = req.params.id;
-  try {
-    const user = await User.findByPk(userId);
-    if (user) {
-      await user.destroy();
-      res.status(200).json({ message: "Usuario eliminado de la DB" });
+    const User = await Users.findByPk(id);
+    if (User) {
+      User.name = name;
+      User.description = description;
+      User.active = active;
+      await User.save();
+      res.status(200).json({ message: "Users actualizado", User });
     } else {
-      res.status(404).json({ message: "Usuario no encontrado" });
+      res.status(404).json({ message: "Users no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error al eliminar usuario", error });
+    console.error("Error al actualizar Users:", error);
+    res.status(500).json({ message: "Error al actualizar Users", error });
+  }
+};
+
+const deleteUsers = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const User = await Users.findByPk(id);
+    if (User) {
+      User.active = false;
+      await User.save();
+      res.status(200).json({ message: "Users eliminada" });
+    } else {
+      res.status(404).json({ message: "Users no encontrada" });
+    }
+  } catch (error) {
+    console.error("Error al eliminar Users:", error);
+    res.status(500).json({ message: "Error al eliminar Users", error });
   }
 };
 
@@ -136,6 +102,5 @@ module.exports = {
   getUsers,
   createUsers,
   updateUsers,
-  logicalDeleteUsers,
-  physicalDeleteUsers,
+  deleteUsers,
 };
