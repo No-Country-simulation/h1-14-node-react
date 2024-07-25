@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       //id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
       name: {type: DataTypes.STRING, allowNull: false},
       description: {type: DataTypes.STRING, allowNull: false}, 
-      // active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
+      active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
     },
     {
     sequelize,

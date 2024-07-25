@@ -1,27 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getEntidades,
-  createEntidades,
-  updateEntidades,
-  deleteEntidades,
-} = require("../controllers/EntidadesControllers");
-
+  getFinanciadores,
+  createFinanciadores,
+  updateFinanciadores,
+  deleteFinanciadores,
+} = require("../controllers/FinanciadoresControllers");
 
 /**
  * @swagger
  * tags:
- *   name: Entidades
- *   description: Entidades
+ *   name: Financiadores
+ *   description: Financiadores
  */
 
-// Ver lista de Entidades.
+// Ver lista de Financiadores.
 /**
  * @swagger
- * /api/v1/entidad/:
+ * /api/v1/financiadores/:
  *   get:
- *     summary: lista de todas las entidades.
- *     description: Se envia el id de la entidad o sin params para la lista completa.
+ *     summary: lista de todas los Financiadores.
+ *     description: sin params para la lista completa.
  *     tags: [Entidades]
  *     responses:
  *       200:
@@ -33,15 +32,15 @@ const {
  */
 
 router
-  .get("/", getEntidades)
+  .get("/", getFinanciadores)
 
-  // Informacion de las Entidades.
+  // Informacion de los Financiadores.
   /**
    * @swagger
-   * /api/v1/entidad/{id}:
+   * /api/v1/financiador/{id}:
    *   get:
-   *     summary: Informacion de una entidad.
-   *     description: Se envia el id de la entidad o sin params para la lista completa.
+   *     summary: Informacion de un Financiador.
+   *     description: Se envia el id del Financiador
    *     tags: [Entidades]
    *     parameters:
    *       - in: path
@@ -59,7 +58,7 @@ router
    *       500:
    *         description: Error interno del servidor.
    */
-  .get("/:id", getEntidades)
+  .get("/:id", getFinanciadores)
 
   // Crear Entidades.
   /**
@@ -105,7 +104,7 @@ router
    *       500:
    *         description: Error interno del servidor
    */
-  .post("/", createEntidades)
+  .post("/", createFinanciadores)
 
   /**
    * @swagger
@@ -151,8 +150,8 @@ router
    *         description: Error interno del servidor
    */
 
-  .put("/:id", updateEntidades)
-  .patch("/:id", deleteEntidades);
+  .put("/:id", updateFinanciadores)
+  .patch("/:id", deleteFinanciadores);
 // router.delete('/:id', physicalDeleteUsers);
 
 /**

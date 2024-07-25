@@ -7,4 +7,8 @@ router.get('/', function (req, res, next) {
    res.send("Hola mundo...");
 });
 
+//Users
+
+// Ubicacion
+
 module.exports = router;
