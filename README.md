@@ -2,7 +2,8 @@
 ### Equipo h1-14-node-react
 
 ![Frame 2380](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)
-<img src="[justinaheart.jpg](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)" alt="justinaheart" width="200" aling=right/>
+
+<img align="right" width="120" height="120" src="https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777">
 
 ## Ayudemos a todos los que podamos
 
@@ -66,5 +67,5 @@ Verás la ruta del proyecto en tu navegador, al abrirla ya tendrás acceso a Jus
 | Leon Asturizaga | Dev Frontend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leon-asturizaga-94a80377/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/leonasturizaga) |
 | Cristian Mondragon | Dev Frontend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)]() [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)]() |
 | Rodrigo Georgetti | Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rodrigo-georgetti/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rodrigo-georgetti) |
-| Issac Flores Vargas | Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)]() [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)]() |
+| Issac Flores Vargas | Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/isaacfloresv) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/IsaacFloresv) |
 | Melisa Yunis | QA Tester | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/melisa-yunis/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Melisayunis) |
