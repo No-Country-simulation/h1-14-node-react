@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildEnvironment": "V2"
+  },
   "scripts": {
+    
     "dev": "node --watch app.js",
     "createdb":"npx sequelize-cli db:migrate --debug",
     "dropdb":"npx sequelize-cli db:migrate:undo:all",
