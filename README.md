@@ -1,21 +1,33 @@
 # Justiona.io
 ### Equipo h1-14-node-react
-![JustinaHeart](https://drive.google.com/file/d/1l-svAmhGb2ZDHQB2z_IRijSvScds_8wD/view?usp=sharing)
+[JustinaHeart](https://drive.google.com/file/d/1l-svAmhGb2ZDHQB2z_IRijSvScds_8wD/view?usp=sharing)
+![Frame 2380](https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777)
+
 
 ## Ayudemos a todos los que podamos
 
-En Justina.io, transformamos vidas. 
-Nuestra aplicación facilita la donación de órganos y ofrece un seguimiento médico integral para el bienestar de donantes y receptores. Unite a nuestra comunidad, salva vidas y mantenete informado con Justina.io. 
-**Cada latido cuenta.**
+> En Justina.io, transformamos vidas. 
+> Nuestra aplicación facilita la donación de órganos y ofrece un seguimiento médico integral para el bienestar de donantes y receptores.
+> Unite a nuestra comunidad, salva vidas y mantenete informado con Justina.io. 
+> **Cada latido cuenta.**
 
 ### Objetivo
 Crear una solución digital que mejore la comunicación entre pacientes en espera de trasplante, pacientes trasplantados y médicos, fomentando así la adherencia al tratamiento y optimizando el seguimiento médico.
 
+## 🚀 Principales funcionalidades
+
+
+
 ## 🚀 Cómo correr el proyecto localmente
+
+Requerimientos mínimos necesarios para ejecutar la App localmente
+- 
+- 
+
 - Clonar el repositorio en el pc:
     `git clone https://github.com/No-Country-simulation/h1-14-node-react.git`
 
-- Crer un archivo .env en la ruta principal del proyecto y agregarle las siguientes variables de entorno:
+- Primero debes crear un archivo **.env** en la ruta principal del proyecto y agregarle las siguientes variables de entorno:
 ```sh
 VAR1=algo
 ```
@@ -37,6 +49,10 @@ npm run dev
 ```
 
 Verás la ruta del proyecto en tu navegador, al abrirla ya tendrás acceso a Justina.io 
+
+## 🚀 Tecnologías utilizadas
+
+
 
 
 ## 🚀 Integrantes
