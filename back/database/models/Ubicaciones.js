@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ubicaciones.init({
-    // id: { type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
+     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     usuariosId: { type: DataTypes.INTEGER, allowNull: false },
     pais: { type: DataTypes.STRING, allowNull: false },
     provincias: { type: DataTypes.STRING, allowNull: false },
