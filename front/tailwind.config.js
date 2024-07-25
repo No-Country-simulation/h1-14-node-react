@@ -29,6 +29,7 @@ module.exports = {
         // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
+        bgHome: "#F3F5FB",
         borderCard:"#cdd7f0",
         bgLanding: '#E3e8F6',
         inputPrimary: '#5666bf',

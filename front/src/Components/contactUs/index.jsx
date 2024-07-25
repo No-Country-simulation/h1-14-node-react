@@ -3,7 +3,7 @@ import DoctorImg from '../../assets/doctor.svg'
 
 function ContactUs() {
   return (
-    <div className="w full flex justify-center items-center py-20 sm:py-32">
+    <div className="w full flex justify-center lg:justify-start items-center py-20 lg:pl-40 sm:py-32">
       <div className=" w-4/5 flex px-2">
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
           <h1 className="text-left font-bold text-4xl w-full">

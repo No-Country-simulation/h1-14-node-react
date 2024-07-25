@@ -5,46 +5,45 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav className="flex w-full h-16 px-5 lg:px-28 items-center justify-between bg-bgNavBar">
-      <ul className="flex w-auto gap-2">
+    <nav className="w-full h-16 bg-bgNavBar px-10 md:px-40  flex items-center justify-between">
+      <ul className="flex gap-2 items-center">
         <li>
           <Link to='/'>
             <div>
-              <img className="w-32 h-auto" src={ImageLogo} />
+              <img className="w-32 h-auto" src={ImageLogo} alt="Logo" />
             </div>
           </Link>
         </li>
       </ul>
       
-      <ul className="flex gap-2 items-center">
+      <ul className="hidden xl:flex gap-4 items-center">
         <li>
-          <ul className="hidden lg:flex gap-4 items-center">
-            <li>
-              <ScrollLink to="inicio" smooth={true} duration={500}>
-                <p className="text-white text-sm cursor-pointer">Inicio</p>
-              </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="leyJustina" smooth={true} duration={500}>
-                <p className="text-white text-sm cursor-pointer">Sobre la Ley Justina</p>
-              </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="funcionalidades" smooth={true} duration={500}>
-                <p className="text-white text-sm cursor-pointer">Funcionalidades</p>
-              </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="contactUs" smooth={true} duration={500}>
-                <p className="text-white text-sm cursor-pointer">Contactanos</p>
-              </ScrollLink>
-            </li>
-          </ul>
+          <ScrollLink to="inicio" smooth={true} duration={500}>
+            <p className="text-white text-sm cursor-pointer">Inicio</p>
+          </ScrollLink>
         </li>
-        <li className="ml-4">
+        <li>
+          <ScrollLink to="leyJustina" smooth={true} duration={500}>
+            <p className="text-white text-sm cursor-pointer">Sobre la Ley Justina</p>
+          </ScrollLink>
+        </li>
+        <li>
+          <ScrollLink to="funcionalidades" smooth={true} duration={500}>
+            <p className="text-white text-sm cursor-pointer">Funcionalidades</p>
+          </ScrollLink>
+        </li>
+        <li>
+          <ScrollLink to="contactUs" smooth={true} duration={500}>
+            <p className="text-white text-sm cursor-pointer">Contactanos</p>
+          </ScrollLink>
+        </li>
+      </ul>
+
+      <ul className="flex gap-4 items-center">
+        <li>
           <Link to="/registro">
             <Button
-              className="rounded-3xl  h-9 bg-inputSecundaryColor1"
+              className="rounded-3xl h-9 bg-inputSecundaryColor1"
               type="button"
               variant="secondary"
             >
