@@ -4,7 +4,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Medicamentos extends Model {
-    static associate(models) {    }
+    static associate(models) {
+      Medicamentos.hasMany(models.Patologias, {as:"Patologias", foreignKey:"patologiasId"}),
+      Medicamentos.hasMany(models.Tratamientos, {as:"Tratamientos", foreignKey:"tratamientosId"}),
+      Medicamentos.hasMany(models.Farmacias, {as:"Famacias", foreignKey:"farmaciasId"})
+        }
   }
   Medicamentos.init({
       // id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},

@@ -4,8 +4,7 @@ const {
    getUsers,
    createUsers,
    updateUsers,
-   logicalDeleteUsers,
-   physicalDeleteUsers
+   deleteUsers,
 } = require('../controllers/UserControllers');
 
 /* GET users listing. */
@@ -13,8 +12,8 @@ router.get('/', getUsers);
 router.get('/:id', getUsers);
 router.post('/', createUsers);
 router.put('/:id', updateUsers); 
-router.put('/delete/:id', logicalDeleteUsers); 
-router.delete('/:id', physicalDeleteUsers); 
+router.patch('/delete/:id', deleteUsers); 
+// router.delete('/:id', physicalDeleteUsers); 
 
 module.exports = router;
  

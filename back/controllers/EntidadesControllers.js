@@ -48,11 +48,11 @@ const createEntidades = async (req, res) => {
 
 
 const updateEntidades = async (req, res) => {
-    const entidadId = req.params.id;
+    const {id} = req.params;
     const { name, description, active } = req.body;
     
     try {
-        const Entidad = await Entidades.findByPk(entidadId);
+        const Entidad = await Entidades.findByPk(id);
         if (Entidad) {
             Entidad.name = name;
             Entidad.description = description;
@@ -71,13 +71,18 @@ const updateEntidades = async (req, res) => {
 
 const deleteEntidades = async (req, res) => {
     const {id} = req.params;
+    const { active } = req.body;
     
     try {
         const entidad = await Entidades.findByPk(id);
         if (entidad) {
-            entidad.description = "Inactivo";
+            entidad.active = active;
             await entidad.save();
-            res.status(200).json({ message: 'Entidad eliminada' });
+            if ((active === true)) {
+                res.status(200).json({ message: "Entidad activada" });
+              } else {
+                res.status(200).json({ message: "Entidad eliminada" });
+              }
         } else {
             res.status(404).json({ message: 'Entidad no encontrada' });
         }

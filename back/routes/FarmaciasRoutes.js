@@ -1,30 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getFinanciadores,
-  createFinanciadores,
-  updateFinanciadores,
-  deleteFinanciadores,
-} = require("../controllers/FinanciadoresControllers");
+  getFarmacias,
+  createFarmacias,
+  updateFarmacias,
+  deleteFarmacias,
+} = require("../controllers/FarmaciasControllers");
+
 
 /**
  * @swagger
  * tags:
- *   name: Financiadores
- *   description: Financiadores
+ *   name: Farmacias
+ *   description: Farmacias
  */
 
-// Ver lista de Financiadores.
+// Ver lista de Farmacias.
 /**
  * @swagger
- * /api/v1/financiadores/:
+ * /api/v1/farmacia/:
  *   get:
- *     summary: lista de todas los Financiadores.
- *     description: sin params para la lista completa.
- *     tags: [Financiadores]
+ *     summary: lista de todas las Farmacias.
+ *     description: Se envia el id de la farmacia o sin params para la lista completa.
+ *     tags: [Farmacias]
  *     responses:
  *       200:
- *         description: Lista de Financiadores.
+ *         description: Lista de Farmacias.
  *       400:
  *         description: Error con el ID.
  *       500:
@@ -32,52 +33,52 @@ const {
  */
 
 router
-  .get("/", getFinanciadores)
+  .get("/", getFarmacias)
 
-  // Informacion de los Financiadores.
+  // Informacion de las Farmacias.
   /**
    * @swagger
-   * /api/v1/financiador/{id}:
+   * /api/v1/farmacia/{id}:
    *   get:
-   *     summary: Informacion de un Financiador.
-   *     description: Se envia el id del Financiador
-   *     tags: [Financiadores]
+   *     summary: Informacion de una farmacia.
+   *     description: Se envia el id de la farmacia o sin params para la lista completa.
+   *     tags: [Farmacias]
    *     parameters:
    *       - in: path
    *         name: id
-   *         description: El ID de la financiador para ver su informacion.
+   *         description: El ID de la farmacia para ver su informacion.
    *         schema:
    *           type: string
    *         required: false
    *         example: 1
    *     responses:
    *       200:
-   *         description: Lista de Financiadores.
+   *         description: Lista de Farmacias.
    *       400:
    *         description: Error con el ID.
    *       500:
    *         description: Error interno del servidor.
    */
-  .get("/:id", getFinanciadores)
+  .get("/:id", getFarmacias)
 
-  // Crear Financiadores.
+  // Crear Farmacias.
   /**
    * @swagger
-   * /api/v1/financiador/:
+   * /api/v1/farmacia/:
    *   post:
-   *     summary: Crear una nueva financiador
+   *     summary: Crear una nueva farmacia
    *     description: EndPoint para crear registro nuevos.
-   *     tags: [Financiadores]
+   *     tags: [Farmacias]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Financiadores'
+   *             $ref: '#/components/schemas/Farmacias'
    *       required: true
    *     parameters:
    *       - in: body
    *         name: name
-   *         description: name de la financiador.
+   *         description: name de la farmacia.
    *         schema:
    *           type: string
    *         required: true
@@ -87,7 +88,7 @@ router
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la financiador.
+   *         description: Descripción de la farmacia.
    *         example: Especialistas en el tratamiento del cancer.
    *       - in: body
    *         name: active
@@ -98,31 +99,31 @@ router
    *         example: true
    *     responses:
    *       200:
-   *         description: Nueva financiador creada.
+   *         description: Nueva farmacia creada.
    *       400:
-   *         description: Error al crear la financiador.
+   *         description: Error al crear la farmacia.
    *       500:
    *         description: Error interno del servidor
    */
-  .post("/", createFinanciadores)
+  .post("/", createFarmacias)
 
   /**
    * @swagger
-   * /api/v1/financiador/:
+   * /api/v1/farmacia/:
    *   put:
-   *     summary: Actualizar una financiador
+   *     summary: Actualizar una farmacia
    *     description: EndPoint para actualizar un registro.
-   *     tags: [Financiadores]
+   *     tags: [Farmacias]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Financiadores'
+   *             $ref: '#/components/schemas/Farmacias'
    *       required: true
    *     parameters:
    *       - in: body
    *         name: name
-   *         description: name de la financiador.
+   *         description: name de la farmacia.
    *         schema:
    *           type: string
    *         required: true
@@ -132,7 +133,7 @@ router
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la financiador.
+   *         description: Descripción de la farmacia.
    *         example: Especialistas en el tratamiento del cancer.
    *       - in: body
    *         name: active
@@ -143,34 +144,34 @@ router
    *         example: true
    *     responses:
    *       200:
-   *         description: Nueva financiador creada.
+   *         description: Nueva farmacia creada.
    *       400:
-   *         description: Error al crear la financiador.
+   *         description: Error al crear la farmacia.
    *       500:
    *         description: Error interno del servidor
    */
 
-  .put("/:id", updateFinanciadores)
-  .patch("/:id", deleteFinanciadores);
+  .put("/:id", updateFarmacias)
+  .patch("/:id", deleteFarmacias);
 // router.delete('/:id', physicalDeleteUsers);
 
 /**
  * @swagger
  * tags:
- *   name: Financiadores
- *   description: Financiadores API.
+ *   name: Farmacias
+ *   description: Farmacias API.
  *
  * components:
  *   schemas:
- *      Financiadores:
+ *      Farmacias:
  *       type: object
  *       properties:
  *         name:
  *           type: string
- *           description: nombre de la financiador
+ *           description: nombre de la farmacia
  *         descripcion:
  *            type: string
- *            description: descripcion de la financiador
+ *            description: descripcion de la farmacia
  *         active:
  *           type: boolean
  *           description: al ser false se considera eliminada
