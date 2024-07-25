@@ -15,20 +15,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      patologiasId: { 
-        type: Sequelize.INTEGER 
-      },
-      tratamientosId: { 
-        type: Sequelize.INTEGER 
-      },
-      farmaciasId: { 
-        type: Sequelize.INTEGER 
-      },
-      laboratoriosId: { 
-        type: Sequelize.INTEGER 
-      },
       active: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,

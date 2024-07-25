@@ -1,4 +1,4 @@
-const Patients = require('../database/models/patients');
+const Patients = require('../database/models/Pacientes');
 
 async function getPatients(req, res) {
     const patientId = req.params.id;

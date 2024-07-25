@@ -2,23 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Patologias', {
+    await queryInterface.createTable('AderenciaMedicamentos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      calendarioMedicamentosId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'CalendarioMedicamentos',
+          key:"id"
+        }
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      especialidadesId: {
-        type: Sequelize.INTEGER
-      },
-      active: {
+      tomoMedicamento: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
@@ -30,10 +28,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-      },
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Patologias');
+    await queryInterface.dropTable('AderenciaMedicamentos');
   }
 };

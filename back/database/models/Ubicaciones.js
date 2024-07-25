@@ -5,12 +5,12 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class ubicaciones extends Model {
+  class Ubicaciones extends Model {
     static associate(models) {
-      ubicaciones.belongsTo(models.Users, {as: "residente", foreignKey: "usuariosId"})
+      Ubicaciones.belongsTo(models.Users, {as: "residente", foreignKey: "usuariosId"})
     }
   }
-  ubicaciones.init({
+  Ubicaciones.init({
     // id: { type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
     usuariosId: { type: DataTypes.INTEGER, allowNull: false },
     pais: { type: DataTypes.STRING, allowNull: false },
@@ -23,5 +23,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Ubicaciones',
     timestamps: false,
   });
-  return ubicaciones;
+  return Ubicaciones;
 };

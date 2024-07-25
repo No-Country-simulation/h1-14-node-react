@@ -11,11 +11,19 @@ module.exports = {
       },
       especialidadesId: {
         type: Sequelize.INTEGER, 
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Especialidades',
+          key:"id"
+        } 
       },
       usuariosId: {
         type: Sequelize.INTEGER, 
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key:"id"
+        } 
       },
       numeroMatricula: {
         type: Sequelize.STRING, 

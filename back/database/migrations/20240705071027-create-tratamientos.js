@@ -29,6 +29,14 @@ module.exports = {
           key:"id"
         } 
       },
+      personalMedicoId: { 
+        type: Sequelize.INTEGER, 
+        allowNull: false,
+        references: {
+          model: 'PersonalMedico',
+          key:"id"
+        } 
+      },
       active: {
         type: Sequelize.BOOLEAN, 
         defaultValue: true

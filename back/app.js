@@ -3,19 +3,10 @@ const app = express();
 const { connection } = require("./database/db.js");
 const { configDotenv } = require("dotenv");
 const cookieParser = require("cookie-parser");
-const routes = require("./routes/index.js")
 const cors = require("cors");
 configDotenv();
 
 const PORT = process.env.PORT || 4321;
-
-// Routes
-// const userRouter = require('./routes/UsersRoutes.js');
-// const patientRouter = require('./routes/PatientsRoutes.js');
-// const usersRouter = require('./routes/UsersRoutes');
-// const loginRouter = require('./routes/LoginRoutes');
-const entidadRouter = require('./routes/EntidadRoutes');
-const fianciadoresRouter = require('./routes/FinanciadoresRoutes');
 
 /// Configuración de CORS
 console.log("Configuring CORS");
@@ -63,14 +54,7 @@ app.use((err, req, res, next) => {
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Rutas
-app.use("/", routes);
-/*app.use('/users', userRouter)
-app.use('/patients', patientRouter)
-app.use('/api/v1/login', loginRouter);
-app.use('/api/v1/user', usersRouter); */
-
-app.use('/api/v1/entidad', entidadRouter);
-app.use('/api/v1/fianciador', fianciadoresRouter)
+app.use(require("./routes/index.js"));
 
 // Arranca el servidor
 app.listen(PORT, function () {
@@ -79,6 +63,7 @@ app.listen(PORT, function () {
 
   connection
     .authenticate()
+    // .sync({ force: false })
     .then(() => {
       console.log("Nos hemos conectado a la DB");
     })

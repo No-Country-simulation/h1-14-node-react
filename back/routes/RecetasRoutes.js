@@ -1,30 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getFinanciadores,
-  createFinanciadores,
-  updateFinanciadores,
-  deleteFinanciadores,
-} = require("../controllers/FinanciadoresControllers");
+  getRecetas,
+  createRecetas,
+  updateRecetas,
+  deleteRecetas,
+} = require("../controllers/RecetasControllers");
+
 
 /**
  * @swagger
  * tags:
- *   name: Financiadores
- *   description: Financiadores
+ *   name: Recetas
+ *   description: Recetas
  */
 
-// Ver lista de Financiadores.
+// Ver lista de Recetas.
 /**
  * @swagger
- * /api/v1/financiadores/:
+ * /api/v1/receta/:
  *   get:
- *     summary: lista de todas los Financiadores.
- *     description: sin params para la lista completa.
- *     tags: [Financiadores]
+ *     summary: lista de todas las Recetas.
+ *     description: Se envia el id de la Receta o sin params para la lista completa.
+ *     tags: [Recetas]
  *     responses:
  *       200:
- *         description: Lista de Financiadores.
+ *         description: Lista de Recetas.
  *       400:
  *         description: Error con el ID.
  *       500:
@@ -32,52 +33,52 @@ const {
  */
 
 router
-  .get("/", getFinanciadores)
+  .get("/", getRecetas)
 
-  // Informacion de los Financiadores.
+  // Informacion de las Recetas.
   /**
    * @swagger
-   * /api/v1/financiador/{id}:
+   * /api/v1/receta/{id}:
    *   get:
-   *     summary: Informacion de un Financiador.
-   *     description: Se envia el id del Financiador
-   *     tags: [Financiadores]
+   *     summary: Informacion de una Receta.
+   *     description: Se envia el id de la Receta o sin params para la lista completa.
+   *     tags: [Recetas]
    *     parameters:
    *       - in: path
    *         name: id
-   *         description: El ID de la financiador para ver su informacion.
+   *         description: El ID de la Receta para ver su informacion.
    *         schema:
    *           type: string
    *         required: false
    *         example: 1
    *     responses:
    *       200:
-   *         description: Lista de Financiadores.
+   *         description: Lista de Recetas.
    *       400:
    *         description: Error con el ID.
    *       500:
    *         description: Error interno del servidor.
    */
-  .get("/:id", getFinanciadores)
+  .get("/:id", getRecetas)
 
-  // Crear Financiadores.
+  // Crear Recetas.
   /**
    * @swagger
-   * /api/v1/financiador/:
+   * /api/v1/receta/:
    *   post:
-   *     summary: Crear una nueva financiador
+   *     summary: Crear una nueva Receta
    *     description: EndPoint para crear registro nuevos.
-   *     tags: [Financiadores]
+   *     tags: [Recetas]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Financiadores'
+   *             $ref: '#/components/schemas/Recetas'
    *       required: true
    *     parameters:
    *       - in: body
    *         name: name
-   *         description: name de la financiador.
+   *         description: name de la Receta.
    *         schema:
    *           type: string
    *         required: true
@@ -87,7 +88,7 @@ router
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la financiador.
+   *         description: Descripción de la Receta.
    *         example: Especialistas en el tratamiento del cancer.
    *       - in: body
    *         name: active
@@ -98,31 +99,31 @@ router
    *         example: true
    *     responses:
    *       200:
-   *         description: Nueva financiador creada.
+   *         description: Nueva Receta creada.
    *       400:
-   *         description: Error al crear la financiador.
+   *         description: Error al crear la Receta.
    *       500:
    *         description: Error interno del servidor
    */
-  .post("/", createFinanciadores)
+  .post("/", createRecetas)
 
   /**
    * @swagger
-   * /api/v1/financiador/:
+   * /api/v1/receta/:
    *   put:
-   *     summary: Actualizar una financiador
+   *     summary: Actualizar una Receta
    *     description: EndPoint para actualizar un registro.
-   *     tags: [Financiadores]
+   *     tags: [Recetas]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Financiadores'
+   *             $ref: '#/components/schemas/Recetas'
    *       required: true
    *     parameters:
    *       - in: body
    *         name: name
-   *         description: name de la financiador.
+   *         description: name de la Receta.
    *         schema:
    *           type: string
    *         required: true
@@ -132,7 +133,7 @@ router
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la financiador.
+   *         description: Descripción de la Receta.
    *         example: Especialistas en el tratamiento del cancer.
    *       - in: body
    *         name: active
@@ -143,34 +144,34 @@ router
    *         example: true
    *     responses:
    *       200:
-   *         description: Nueva financiador creada.
+   *         description: Nueva Receta creada.
    *       400:
-   *         description: Error al crear la financiador.
+   *         description: Error al crear la Receta.
    *       500:
    *         description: Error interno del servidor
    */
 
-  .put("/:id", updateFinanciadores)
-  .patch("/:id", deleteFinanciadores);
+  .put("/:id", updateRecetas)
+  .patch("/:id", deleteRecetas);
 // router.delete('/:id', physicalDeleteUsers);
 
 /**
  * @swagger
  * tags:
- *   name: Financiadores
- *   description: Financiadores API.
+ *   name: Recetas
+ *   description: Recetas API.
  *
  * components:
  *   schemas:
- *      Financiadores:
+ *      Recetas:
  *       type: object
  *       properties:
  *         name:
  *           type: string
- *           description: nombre de la financiador
+ *           description: nombre de la Receta
  *         descripcion:
  *            type: string
- *            description: descripcion de la financiador
+ *            description: descripcion de la Receta
  *         active:
  *           type: boolean
  *           description: al ser false se considera eliminada

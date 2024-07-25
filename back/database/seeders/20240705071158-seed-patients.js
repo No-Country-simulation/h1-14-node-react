@@ -12,7 +12,7 @@ module.exports = {
           personalMedicoId: "1",
           patologiasId: "1",
           usuarioID: "3",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
         {
@@ -21,7 +21,7 @@ module.exports = {
           personalMedicoId: "2",
           patologiasId: "2",
           usuarioID: "7",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
         {
@@ -30,7 +30,7 @@ module.exports = {
           personalMedicoId: "3",
           patologiasId: "3",
           usuarioID: "5",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
         {
@@ -39,7 +39,7 @@ module.exports = {
           personalMedicoId: "1",
           patologiasId: "1",
           usuarioID: "8",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
         {
@@ -48,7 +48,7 @@ module.exports = {
           personalMedicoId: "2",
           patologiasId: "2",
           usuarioID: "9",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
         {
@@ -57,7 +57,7 @@ module.exports = {
           personalMedicoId: "3",
           patologiasId: "3",
           usuarioID: "10",
-          factorSanguineo: "B",
+          factorSanguineo: "B-",
           Activo: true,
         },
       ],
