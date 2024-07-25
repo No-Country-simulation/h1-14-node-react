@@ -302,9 +302,6 @@ function ViewPatientCalendar() {
     }, [events, , selectedCategories, selectedTypes, date1, searchKeyword]);
 
 
-
-
-
     const toggleCategory = (category) => {
         setSelectedCategories(prev =>
             prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
@@ -326,8 +323,6 @@ function ViewPatientCalendar() {
     };
 
     // Agregar eventos    
-
-
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [newEvent, setNewEvent] = useState({ eventType: "", dateTime: "", event: "", status: "Undone" });
 
