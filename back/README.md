@@ -18,13 +18,15 @@
 - Tener instalado MySQL, versión 8 o mayor. O MariaDB, versión 10 o mayor.
 
 1. Clonar el repositorio en el pc:
+   
     `git clone https://github.com/No-Country-simulation/h1-14-node-react.git`
 
-2. Configuración de la base de datos:
+3. Configuración de la base de datos:
 
    
 
 4. Configuración de variables de entorno:
+   
    Debes crear un archivo **.env** en la ruta principal del proyecto y agregarle las siguientes variables de entorno, con la información obtenida de la BD:
 ```sh
 DB_HOST: "roundhouse.proxy.rlwy.net"
@@ -37,6 +39,7 @@ TOKEN_KEY: 'N13nC1en4ñ0510s48r4S'
 ```
 
 5. Luego de haber configurado lo anterior, ya puedes correr la API del proyecto localmente.
+   
    Para ello deberás abrir la consola y ejecutar los siguientes comandos:
  ```sh
 cd back
@@ -45,10 +48,11 @@ npm run dev
 ```
 
 6. Listo!
+   
    Cuando veas en pantalla algo similar a:
 <img width="250" src="https://github.com/user-attachments/assets/fcb99781-c2dc-4444-bcf1-90bc345937ae">
 
-   Listo! Ya está corriendo el backend localmente. Ahora sigue los siguientes pasos, para ejecutar el Frontend de la Web App. [Frontend](front/README.md)
+   Ya está corriendo el backend localmente. Ahora sigue los siguientes pasos, para ejecutar el Frontend de la Web App. [Frontend](../front/README.md)
 
 ## Documentacion de los EndPoints
-- Se puede consultar en la ruta: https://url/api/v1/api-docs
+- Se puede consultar en la ruta: https://{{url-local}}/api-docs
