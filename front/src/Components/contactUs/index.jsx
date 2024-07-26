@@ -9,7 +9,7 @@ function ContactUs() {
           <h1 className="text-left font-bold text-4xl w-full">
             Comunicate con nosotros
           </h1>
-          <p className='text-left font-semibold text-xl w-full '>
+          <p className='text-left font-semibold mt-2 text-xl w-full '>
             ¿Tenés preguntas o necesitás más información? ¡Estamos aquí para
             ayudarte! En Justina.io, valoramos tu interés y estamos
             comprometidos en brindarte el mejor soporte posible. Podés

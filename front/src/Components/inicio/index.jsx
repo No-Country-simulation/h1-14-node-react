@@ -8,7 +8,7 @@ function Inicio() {
     <div className="relative flex flex-col lg:flex-row items-center justify-between px-10 lg:px-0 lg:pl-40 py-10">
       <div className="relative w-full lg:w-1/2 flex flex-col gap-5 z-10">
         <h1 className="text-3xl lg:text-5xl font-bold mb-4">Ayudemos a todos los que podamos</h1>
-        <p className="text-lg lg:text-xl font-bold mb-4">
+        <p className="text-lg lg:text-xl font-semibold mb-4">
           En Justina.io, transformamos vidas. Nuestra aplicación facilita la
           donación de órganos y ofrece un seguimiento médico integral para el
           bienestar de donantes y receptores. <br />
