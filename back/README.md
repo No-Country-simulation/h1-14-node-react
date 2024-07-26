@@ -25,18 +25,19 @@
 
 3. Configuración de la base de datos:
 
-   
+   ------> <------
 
 4. Configuración de variables de entorno:
    
    Debes crear un archivo **.env** en la ruta principal del proyecto y agregarle las siguientes variables de entorno, con la información obtenida de la BD:
 ```sh
-DB_HOST: "roundhouse.proxy.rlwy.net"
-DB_PORT: 55979
-DB_NAME: "railway"
-DB_USERNAME: "root"
-DB_PASSWORD: "nYSvCREaImVjcJeNpoHDWxkYteuMnhIR"
+DB_HOST: {Url de Host - Ejemplo: "http://localhost:{PORT}/"}
+DB_PORT: {Número del puerto - Ejemplo: "1234"}
+DB_NAME: {Nombre de la Base de Datos - Ejemplo: "justina"}
+DB_USERNAME: {Nombre de usuario - Ejemplo: "root"}
+DB_PASSWORD: {Password - Ejemplo: "password12345"}
 DB_DIALECT: 'mysql'
+
 TOKEN_KEY: 'N13nC1en4ñ0510s48r4S'
 ```
 
@@ -57,4 +58,10 @@ npm run dev
    Ya está corriendo el backend localmente. Ahora sigue los siguientes pasos, para ejecutar el Frontend de la Web App. [Frontend](../front/README.md)
 
 ## Documentacion de los EndPoints
-- Se puede consultar en la ruta: https://{{url-local}}/api-docs
+
+Puedes consultar la documentación de los Endpoints una vez corrido el poyecto, accediendo a la ruta: 
+ ```sh
+https://{{url-local}}/api-docs
+```
+
+
