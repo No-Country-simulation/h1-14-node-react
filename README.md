@@ -1,6 +1,7 @@
+<img align="right" width="250" src="https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777">
 # Justiona.io
 > ### Equipo h1-14-node-react
-<img align="right" width="250" src="https://github.com/user-attachments/assets/702f2c28-37a4-4aff-bc6f-9c4c4f05d777">
+
 
 ## Ayudemos a todos los que podamos
 
@@ -29,35 +30,10 @@ Crear una solución digital que mejore la comunicación entre pacientes en esper
 
 ## 🚀 Cómo correr el proyecto localmente
 
-### Requerimientos mínimos necesarios para ejecutar la App localmente
-- 
-- 
+Para ejecutar el proyecto localmente, te guiaremos paso a paso.
+1. Accede a la documentación del Backend y sigue los pasos allí se indican: [Documentación Backend](back/README.md)
+2. Accede a la documentación del Frontend y sigue sus pasos: [Documentación Frontend](front/README.md)
 
-Clonar el repositorio en el pc:
-    `git clone https://github.com/No-Country-simulation/h1-14-node-react.git`
-
-Primero debes crear un archivo **.env** en la ruta principal del proyecto y agregarle las siguientes variables de entorno:
-```sh
-VAR1=algo
-```
-
-  ### Backend
-Para correr localmente la API del proyecto, deberás abrir la consola y ejecutar los siguientes comandos:
- ```sh
-cd back
-npm install
-npm run dev
-```
-
-  ### Frontend
-Similar a la API, para correr localmente la Web App del proyecto, deberás abrir una nueva consola y ejecutar:
- ```sh
-cd front
-npm install
-npm run dev
-```
-
-Verás la ruta del proyecto en tu navegador, al abrirla ya tendrás acceso a Justina.io 
 
 ## 🚀 Tecnologías utilizadas
 
