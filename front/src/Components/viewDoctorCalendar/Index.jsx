@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 import { Calendar } from "@/Components/ui/calendar"
 
@@ -19,7 +19,8 @@ import {
     ArrowUpDown,
     ChevronDown,
     MoreHorizontal,
-    Badge
+    Badge,
+    SeparatorHorizontal
 } from "lucide-react"
 
 import { Button } from "@/Components/ui/button"
@@ -62,143 +63,144 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog"
 import { Textarea } from '@/Components/ui/textarea';
+import { getHours, getMinutes } from 'date-fns';
 
 const events = [
     {
         event: "INV001",
         status: "Done",
-        dateTime: "2024-07-19 02:50:00",
+        dateTime: "2024-07-19T05:50:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV002",
         status: "Pending",
-        dateTime: "2024-07-19 01:50:00",
+        dateTime: "2024-07-19T04:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV003",
         status: "Undone",
-        dateTime: "2024-07-19 03:50:00",
+        dateTime: "2024-07-19T06:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV004",
         status: "Done",
-        dateTime: "2024-07-19 04:50:00",
+        dateTime: "2024-07-19T07:50:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV005",
         status: "Done",
-        dateTime: "2024-07-19 05:50:00",
+        dateTime: "2024-07-19T08:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV006",
         status: "Pending",
-        dateTime: "2024-07-19 02:00:00",
+        dateTime: "2024-07-19T05:00:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV007",
         status: "Undone",
-        dateTime: "2024-07-19 03:00:00",
+        dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV008",
         status: "Pending",
-        dateTime: "2024-07-19 02:00:00",
+        dateTime: "2024-07-19T05:00:00Z",
         eventType: "Sobreturno",
     },
     {
         event: "INV009",
         status: "Undone",
-        dateTime: "2024-07-19 03:00:00",
+        dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV010",
         status: "Pending",
-        dateTime: "2024-07-20 02:00:00",
+        dateTime: "2024-07-20T05:00:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV011",
         status: "Undone",
-        dateTime: "2024-07-20 03:00:00",
+        dateTime: "2024-07-20T06:00:00Z",
         eventType: "Consulta",
-    },  
+    }
 ];
 
 const initialEvents = [
     {
         event: "INV001",
         status: "Done",
-        dateTime: "2024-07-19 02:50:00",
+        dateTime: "2024-07-19T05:50:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV002",
         status: "Pending",
-        dateTime: "2024-07-19 01:50:00",
+        dateTime: "2024-07-19T04:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV003",
         status: "Undone",
-        dateTime: "2024-07-19 03:50:00",
+        dateTime: "2024-07-19T06:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV004",
         status: "Done",
-        dateTime: "2024-07-19 04:50:00",
+        dateTime: "2024-07-19T07:50:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV005",
         status: "Done",
-        dateTime: "2024-07-19 05:50:00",
+        dateTime: "2024-07-19T08:50:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV006",
         status: "Pending",
-        dateTime: "2024-07-19 02:00:00",
+        dateTime: "2024-07-19T05:00:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV007",
         status: "Undone",
-        dateTime: "2024-07-19 03:00:00",
+        dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV008",
         status: "Pending",
-        dateTime: "2024-07-19 02:00:00",
+        dateTime: "2024-07-19T05:00:00Z",
         eventType: "Sobreturno",
     },
     {
         event: "INV009",
         status: "Undone",
-        dateTime: "2024-07-19 03:00:00",
+        dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
         event: "INV010",
         status: "Pending",
-        dateTime: "2024-07-20 02:00:00",
+        dateTime: "2024-07-20T05:00:00Z",
         eventType: "Junta medica",
     },
     {
         event: "INV011",
         status: "Undone",
-        dateTime: "2024-07-20 03:00:00",
+        dateTime: "2024-07-20T06:00:00Z",
         eventType: "Consulta",
-    },  
+    }
 ];
 
 
@@ -209,7 +211,19 @@ function ViewDoctorCalendar() {
     const [date, setDate] = React.useState(null);
 
     //calendar on the right
-    const [date1, setDate1] = useState((new Date()));
+    const [date1, setDate1] = useState(new Date());
+    // const [date1, setDate1] = useState(() => {
+    //     const initialDate = new Date(date1);
+    //     return initialDate && !isNaN(initialDate) ? initialDate : new Date();
+    // });
+
+    const handleDateSelect = (date) => {
+        if (!date || isNaN(new Date(date).getTime())) {
+            setDate1(new Date());
+        } else {
+            setDate1(date);
+        }
+    };
 
     const [events, setEvents] = useState(initialEvents);
 
@@ -231,11 +245,11 @@ function ViewDoctorCalendar() {
     const getBadgeClass = (eventType) => {
         switch (eventType) {
             case "Consulta":
-                return "bg-purple-500 text-white";
+                return "bg-purple500 text-blackBadgeText";
             case "Junta medica":
-                return "bg-yellow-500 text-white";
+                return "bg-yellowBadge text-blackBadgeText";
             case "Sobreturno":
-                return "bg-green-400 text-white";
+                return "bg-greenBadge text-blackBadgeText";
 
             default:
                 return "";
@@ -289,8 +303,8 @@ function ViewDoctorCalendar() {
             filtered = filtered.filter(event => event.event.toLowerCase().includes(searchKeyword.toLowerCase()));
         }
 
-    return filtered ;
-}, [events, selectedCategories, selectedTypes, date1, searchKeyword]);
+        return filtered;
+    }, [events, selectedCategories, selectedTypes, date1, searchKeyword]);
 
 
     const toggleCategory = (category) => {
@@ -305,47 +319,146 @@ function ViewDoctorCalendar() {
         );
     };
 
-    const formatDate = (date) => {
+    const formatDateToES = (date) => {
         return new Intl.DateTimeFormat('es-ES', {
+            // hour: 'numeric',
+            // minute: '2-digit',
             day: 'numeric',
             month: 'long',
             year: 'numeric'
         }).format(date);
     };
+    const formatDateTimeToHHmm = (dateTime) => {
+        const date = new Date(dateTime);
+        return new Intl.DateTimeFormat('es-ES', {
+            hour: '2-digit',
+            minute: '2-digit',
+            // day: 'numeric',
+            // month: 'numeric',
+            // year: 'numeric'
+        }).format(date);
+    };
 
-        // Agregar eventos    
-        const [isDialogOpen, setIsDialogOpen] = useState(false);
-        const [newEvent, setNewEvent] = useState({ eventType: "", dateTime: "", event: "", status: "Undone" });
-    
-        const handleInputChange = (e) => {
-            const { name, value } = e.target;
-            setNewEvent({
-                ...newEvent,
-                [name]: value
-            });
-        };
-    
-        const handleAddEvent = () => {
-            setEvents([...events, { ...newEvent, dateTime: date1.toISOString() }]);
-            setIsDialogOpen(false);
-            setNewEvent({ eventType: "", dateTime: "", event: "", status: "Undone" });
-        };
-    
-    
+
+    // Agregar eventos    
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [newEvent, setNewEvent] = useState({ eventType: "", dateTime: "", event: "", status: "Undone" });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewEvent({
+            ...newEvent,
+            [name]: value
+        });
+    };
+
+    const handleAddEvent = (currentDate) => {
+        setEvents((prevEvents) => [
+            ...prevEvents,
+            { ...newEvent, dateTime: currentDate.toISOString() }
+        ]);
+        setIsDialogOpen(false);
+        setNewEvent({ eventType: "", dateTime: "", event: "", status: "Undone" });
+    };
+
+    //Hora
+    const [time, setTime] = useState({ hour: '', minute: '' });
+    const handleTimeChange = (e) => {
+        const { name, value } = e.target;
+        setTime((prev) => ({ ...prev, [name]: value }));
+
+        // Update the date1 state to include the selected time
+        const updatedDate = new Date(date1);
+        if (name === 'hour') {
+            updatedDate.setHours(value);
+        } else if (name === 'minute') {
+            updatedDate.setMinutes(value);
+        }
+        setDate1(updatedDate);
+    };
+
+    //Repetir
+    const [repeatSettings, setRepeatSettings] = useState({ day: '', repetition: '', totalTimes: '' });
+    const handleRepeatSettingsChange = (e) => {
+        const { name, value } = e.target;
+        setRepeatSettings((prev) => ({ ...prev, [name]: value }));
+    };
+
+    // const addEvents = () => {
+    //     const { day, repetition, totalTimes } = repeatSettings;
+    //     const deltaTime = (day / repetition);
+    //     console.log(deltaTime);
+    //     const deltaTime1 = 1;
+    //     console.log(deltaTime);
+
+    //     let currentDate = new Date(date1);
+    //     console.log("CurrentDate: " + currentDate);
+
+    //     for (let i = 1; i < totalTimes; i++) {
+    //         handleAddEvent(currentDate);
+    //         const deltaTimeInMilliseconds = deltaTime * 24 * 60 * 60 * 1000;
+    //         currentDate = new Date(currentDate.getTime() + deltaTimeInMilliseconds);
+    //         // currentDate = new Date(currentDate);
+    //         console.log("deltaTime: " + deltaTime);
+    //         currentDate.setDate(currentDate.getDate() + deltaTime);
+    //         console.log("CurrentDate + deltaTime: " + currentDate);
+    //     }
+    // };
+
+    const addEvents = () => {
+        const { day, repetition, totalTimes } = repeatSettings;
+
+        if (!repeatSettings.day || repeatSettings.day === "") {
+            setRepeatSettings((prevSettings) => ({
+                ...prevSettings,
+                day: 1
+            }));
+        }
+        if (!repeatSettings.repetition || repeatSettings.repetition === "") {
+            setRepeatSettings((prevSettings) => ({
+                ...prevSettings,
+                repetition: 1
+            }));
+        }
+        if (!repeatSettings.totalTimes || repeatSettings.totalTimes === "") {
+            setRepeatSettings((prevSettings) => ({
+                ...prevSettings,
+                totalTimes: 1
+            }));
+        }
+
+        const deltaTime = day / repetition;
+        console.log(deltaTime);
+
+        let currentDate = new Date(date1);
+        console.log("CurrentDate: " + currentDate);
+
+        for (let i = 0; i < totalTimes; i++) {
+            handleAddEvent(currentDate);
+
+            // Increment currentDate by deltaTime days (converted to milliseconds)
+            const deltaTimeInMilliseconds = deltaTime * 24 * 60 * 60 * 1000;
+            currentDate = new Date(currentDate.getTime() + deltaTimeInMilliseconds);
+
+            console.log("deltaTime: " + deltaTime);
+            console.log("CurrentDate + deltaTime: " + currentDate);
+        }
+    };
+
     return (
         <div className='flex bg-white'>
             <div className='bg-secondary p-4'>
-                <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDate(date1)}</h4>
+                <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDateToES(date1)}</h4>
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
                     <div className='relative w-full'>
-                    <Input
-                        type="text"
-                        placeholder="Buscar en tabla"
-                        value={searchKeyword}
-                        onChange={(e) => setSearchKeyword(e.target.value)}
-                        className="px-12 mb-4"
-                    /> <span className='absolute bottom-4 left-4  py-2 '> <Search   /></span>
+                        <Input
+                            type="text"
+                            placeholder="Buscar en tabla"
+                            value={searchKeyword}
+                            onChange={(e) => setSearchKeyword(e.target.value)}
+                            className="px-12 mb-4"
+                        /> <span className='absolute bottom-4 left-4  py-2 '> <Search /></span>
                     </div>
 
                     <DropdownMenu>
@@ -379,7 +492,7 @@ function ViewDoctorCalendar() {
 
                     <Table>
 
-                        <TableHeader className="bg-green-400">
+                        <TableHeader className="bg-greenTableTittle">
                             <TableRow>
                                 <TableHead className="w-auto text-white"><Square /></TableHead>
                                 <TableHead className="w-auto text-white">Horario</TableHead>
@@ -394,12 +507,12 @@ function ViewDoctorCalendar() {
                             {filteredEvents.map((event) => (
                                 <TableRow key={event.event}>
                                     <TableCell> {getStatusClass(event.status)}</TableCell>
-                                    <TableCell className="">{event.dateTime}</TableCell>
+                                    <TableCell className="">{formatDateTimeToHHmm(event.dateTime)}</TableCell>
                                     <TableCell><span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/20 ${getBadgeClass(event.eventType)}`}> {event.eventType} </span> </TableCell>
 
                                     <TableCell className="font-medium">{event.event}</TableCell>
-                                    <TableCell><SquarePen stroke="#5666bf"/></TableCell>
-                                    <TableCell><Trash2 stroke="#DA286D"/></TableCell>
+                                    <TableCell><SquarePen stroke="#5666bf" /></TableCell>
+                                    <TableCell><Trash2 stroke="#DA286D" /></TableCell>
 
                                 </TableRow>
                             ))}
@@ -427,7 +540,7 @@ function ViewDoctorCalendar() {
                     <Calendar
                         mode="single"
                         selected={date1}
-                        onSelect={setDate1}
+                        onSelect={handleDateSelect}
                         className=" w-fit rounded-md border"
                     />
                 </div>
@@ -465,7 +578,7 @@ function ViewDoctorCalendar() {
 
 
 
-                
+
                     <div className='flex items-baseline space-x-4'>
                         <img
                             src={mascota}
@@ -496,14 +609,101 @@ function ViewDoctorCalendar() {
                                             </DialogDescription>
                                         </DialogHeader>
 
-                                        <div className='py-4'>
-                                            <Calendar
-                                                mode="single"
-                                                selected={date1}
-                                                onSelect={setDate1}
-                                                className=" w-fit rounded-md border"
+                                        <div className='py-4 rounded-md border  items-center'>
+                                            <div className='items-center'>
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={date1}
+                                                    onSelect={setDate1}
+                                                    className=" w-fit"
+                                                />
+                                                <div className=" px-4  ">
+                                                    <hr >
+                                                    </hr>
+
+                                                </div>
+
+                                            </div>
+                                            {/* Campos de hora  */}
+                                            <div className=' pt-2 px-4'>
+                                                <div className='flex space-x-4 align-baseline'>
+                                                    <div>
+                                                        <Label className="block text-sm font-medium mb-2 text-blue-500">Hora</Label>
+                                                        <input
+                                                            type="number"
+                                                            name="hour"
+                                                            value={time.hour}
+                                                            onChange={handleTimeChange}
+                                                            placeholder={getHours(date1)}
+                                                            className="py-2 px-1 border rounded-md w-16  text-center"
+                                                            min="0"
+                                                            max="23"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <Label className="block text-sm font-medium mb-2  text-blue-500">Minutos</Label>
+
+                                                        <div className='flex'>
+                                                            <input
+                                                                type="number"
+                                                                name="minute"
+                                                                value={time.minute}
+                                                                onChange={handleTimeChange}
+                                                                placeholder={getMinutes(date1)}
+                                                                className="py-2 px-1 border rounded w-16 text-center"
+                                                                min="0"
+                                                                max="59"
+                                                            /> <span className='bottom-4 pl-4 py-2 '> <Clock stroke="#5666bf" /></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        {/* Campos repetir evento */}
+                                        <div className='py-2'>
+                                            <Label className="block text-sm font-medium mb-2">Días</Label>
+                                            <input
+                                                type="number"
+                                                name="day"
+                                                value={repeatSettings.day}
+                                                onChange={handleRepeatSettingsChange}
+                                                placeholder="¿Cada cuantos dias?"
+                                                className="p-2 border rounded w-full"
+                                                min="1"
+                                                max="365"
                                             />
                                         </div>
+                                        <div className='py-2'>
+                                            <Label className="block text-sm font-medium mb-2">Veces por dia</Label>
+                                            <input
+                                                type="number"
+                                                name="¿Cuantas veces?"
+                                                value={repeatSettings.repetition}
+                                                onChange={handleRepeatSettingsChange}
+                                                placeholder="¿Cuantas veces por dia?"
+                                                className="p-2 border rounded w-full"
+                                                min="1"
+                                                max="99"
+                                            />
+                                        </div>
+
+                                        <div className='py-2'>
+                                            <Label className="block text-sm font-medium mb-2">Total de Veces</Label>
+                                            <input
+                                                type="number"
+                                                name="totalTimes"
+                                                value={repeatSettings.totalTimes}
+                                                onChange={handleRepeatSettingsChange}
+                                                placeholder="Numero total de veces"
+                                                className="p-2 border rounded w-full"
+                                                min="1"
+                                                max="365"
+                                            />
+                                        </div>
+
 
 
                                         <div className=' '>
@@ -543,7 +743,8 @@ function ViewDoctorCalendar() {
                                         </div>
 
                                         <DialogFooter>
-                                            <Button className="rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={handleAddEvent}>
+                                            {/* <Button className="rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={handleAddEvent}> */}
+                                            <Button className="rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={addEvents}>
                                                 <PenLine />  <span >Agregar evento</span>
                                             </Button>
                                         </DialogFooter>
