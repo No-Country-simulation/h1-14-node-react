@@ -3,17 +3,17 @@ import "./style.css";
 
 function LeyJustina() {
   return (
-    <div className=" w-full my-5 py-14 relative overflow-hidden flex justify-end px-4 md:px-0">
-      <div className="content pl-12">
-        <h1 className="text-3xl font-bold mb-4">Sobre la Ley Justina</h1>
-        <div className="image-container float-right w-2/4 ml-4 mb-4">
+    <div className="relative w-full my-5 py-14 flex justify-center md:justify-end overflow-hidden">
+      <div className="content px-10 lg:pl-40 ">
+        <h1 className="text-3xl font-bold text-center lg:text-left mb-4">Sobre la Ley Justina</h1>
+        <div className="image-container w-full lg:w-2/4 ml-4 mb-4 lg:float-right">
           <img
             src={leyJustina}
-            className="shape-image rounded-lg rotate-5 w-full"
+            className="shape-image rounded-lg w-full lg:w-auto"
             alt="Ley Justina"
           />
         </div>
-        <p className="font-bold text-xl">
+        <p className="font-semibold text-xl">
           La Ley n° 27.447 regula el Trasplante de Órganos, Tejidos y Células
           del país. Fue sancionada en 2018 a raíz del caso de Justina Lo Cane,
           una niña de 12 años que falleció en espera de un trasplante de
@@ -21,12 +21,12 @@ function LeyJustina() {
           medios de comunicación. Su familia impulsó este proyecto,
           visibilizando el sistema de donación de órganos en Argentina.
         </p>
-        <p className="font-bold text-xl">
+        <p className="font-semibold text-xl">
           La Ley Justina establece la "presunción afirmativa de consentimiento":
           todas las personas mayores de 18 años son consideradas donantes, a
           menos que expresen lo contrario.
         </p>
-        <p className="font-bold text-xl flowing-text">
+        <p className="font-semibold text-xl flowing-text">
           Este mecanismo busca satisfacer la demanda de órganos en el sistema de
           salud y salvar miles de vidas. Según el Ministerio de Salud de la
           Nación, este cambio redujo la tasa de interrupciones de donación por

@@ -24,11 +24,13 @@ module.exports = {
       backgroundImage: {
         'custom-bg': "url('/src/assets/bg-pattern.png')",
         'pattern': "url('/img/pattern.webp')",
+        'bg-login': "url('/src/assets/omgLogin/login.png')"
         // 'hero-pattern': "url('/img/hero-pattern.svg')",
         // 'footer-texture': "url('/img/footer-texture.png')",
         // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
+        bgHome: "#F3F5FB",
         borderCard:"#cdd7f0",
         bgLanding: '#E3e8F6',
         inputPrimary: '#5666bf',
