@@ -13,7 +13,7 @@ function LeyJustina() {
             alt="Ley Justina"
           />
         </div>
-        <p className="font-bold text-xl">
+        <p className="font-semibold text-xl">
           La Ley n° 27.447 regula el Trasplante de Órganos, Tejidos y Células
           del país. Fue sancionada en 2018 a raíz del caso de Justina Lo Cane,
           una niña de 12 años que falleció en espera de un trasplante de
@@ -21,12 +21,12 @@ function LeyJustina() {
           medios de comunicación. Su familia impulsó este proyecto,
           visibilizando el sistema de donación de órganos en Argentina.
         </p>
-        <p className="font-bold text-xl">
+        <p className="font-semibold text-xl">
           La Ley Justina establece la "presunción afirmativa de consentimiento":
           todas las personas mayores de 18 años son consideradas donantes, a
           menos que expresen lo contrario.
         </p>
-        <p className="font-bold text-xl flowing-text">
+        <p className="font-semibold text-xl flowing-text">
           Este mecanismo busca satisfacer la demanda de órganos en el sistema de
           salud y salvar miles de vidas. Según el Ministerio de Salud de la
           Nación, este cambio redujo la tasa de interrupciones de donación por

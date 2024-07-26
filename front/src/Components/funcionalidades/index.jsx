@@ -49,10 +49,10 @@ const features = [
 
 function Funcionalidades() {
   return (
-    <div className="bg-bgLanding w-full h-auto flex flex-col justify-start items-center py-40 px-10 lg:p-40">
+    <div className="bg-bgLanding w-full h-auto flex flex-col justify-start items-center py-40  lg:p-40">
       <div className='flex flex-col justify-center items-center gap-5 mb-8'>
-        <h1 className="text-4xl font-bold">Principales Funcionalidades</h1>
-        <p className="text-xl font-bold text-center w-4/5">
+        <h1 className="text-4xl pl-8 font-bold">Principales Funcionalidades</h1>
+        <p className="text-xl font-bold md:text-center w-4/5">
           Justina.io ofrece una interfaz omnicanal para la integración de las
           distintas partes del ecosistema de salud.
         </p>
