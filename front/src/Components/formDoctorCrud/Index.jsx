@@ -89,7 +89,8 @@ function FormDoctorCrud() {
 
   return (
 
-    <div className="h-full w-screen flex justify-center items-center bg-cover bg-center">
+    <div className=' flex  '>
+            <div className='flex-grow bg-secondary p-4 w-2/3'>
       {/* <div className="h-full w-2/4 bg-black"></div> */}
       <div className="w-4/5 md:w-9/12 lg:w-11/12 bg-white rounded-lg border h-auto md:h-full flex flex-col justify-center shadow-sm px-8 md:px-14 m-4">
         <div className=" mt-6 w-full">
@@ -668,7 +669,7 @@ function FormDoctorCrud() {
         </form>
 
       </div >
-
+      </div >
     </div >
 
   );
