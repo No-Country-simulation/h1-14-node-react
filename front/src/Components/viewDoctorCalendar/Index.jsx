@@ -1,9 +1,7 @@
 "use client"
 
 import React, { useState, useMemo, useEffect } from 'react';
-
 import { Calendar } from "@/Components/ui/calendar"
-
 import mascota from "../../assets/mascota.svg";
 import rectangle_78 from "../../assets/rectangle_78.svg";
 
@@ -64,6 +62,16 @@ import {
 } from "@/Components/ui/dialog"
 import { Textarea } from '@/Components/ui/textarea';
 import { getHours, getMinutes } from 'date-fns';
+
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/Components/ui/pagination"
 
 const events = [
     {
@@ -384,15 +392,6 @@ function ViewDoctorCalendar() {
         setRepeatSettings((prev) => ({ ...prev, [name]: value }));
     };
 
-    // const addEvents = () => {
-    //     const { day, repetition, totalTimes } = repeatSettings;
-    //     const deltaTime = (day / repetition);
-    //     console.log(deltaTime);
-    //     const deltaTime1 = 1;
-    //     console.log(deltaTime);
-
-    //     let currentDate = new Date(date1);
-    //     console.log("CurrentDate: " + currentDate);
 
     //     for (let i = 1; i < totalTimes; i++) {
     //         handleAddEvent(currentDate);
@@ -445,9 +444,23 @@ function ViewDoctorCalendar() {
         }
     };
 
+//Pagination
+const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10; // You can adjust this value
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const paginatedEvents = filteredEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+
+
     return (
-        <div className='flex bg-white'>
-            <div className='bg-secondary p-4'>
+        <div className=' flex  '>
+            <div className='flex-grow bg-secondary p-4 w-2/3'>
                 <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDateToES(date1)}</h4>
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
@@ -488,9 +501,9 @@ function ViewDoctorCalendar() {
                     </DropdownMenu>
                 </div>
 
-                <div className='rounded-lg border bg-white'>
+                <div className='w-full rounded-lg border bg-white'>
 
-                    <Table>
+                    <Table >
 
                         <TableHeader className="bg-greenTableTittle">
                             <TableRow>
@@ -502,9 +515,10 @@ function ViewDoctorCalendar() {
                                 <TableHead className="w-auto text-white"></TableHead>
                             </TableRow>
                         </TableHeader>
-                        <TableBody >
+                        <TableBody  >
                             {/* {events.map((event) => ( */}
-                            {filteredEvents.map((event) => (
+                            {/* {filteredEvents.map((event) => ( */}
+                            {paginatedEvents.map((event) => (
                                 <TableRow key={event.event}>
                                     <TableCell> {getStatusClass(event.status)}</TableCell>
                                     <TableCell className="">{formatDateTimeToHHmm(event.dateTime)}</TableCell>
@@ -529,10 +543,55 @@ function ViewDoctorCalendar() {
 
                 <div className="p-4">
                     <span className='text-sm text-blue-500 text-left'> {`${doneCount}`} evento(s) de {`${totalCount}`} registrados.</span>
-                    <Button variant="outline" className="float-right">Anterior</Button><Button variant="outline" className="float-right">Siguente</Button>
+                    <div className="float-right">
+                        <Pagination >
+                            <PaginationContent className="space-x-4">
+                                <PaginationItem>
+                                    <PaginationPrevious 
+                                    href="#"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        if (currentPage > 1) handlePageChange(currentPage - 1);
+                                    }}
+                                     className="rounded-md bg-white outline-gray-700 text-blue500"
+                                     />
+                                </PaginationItem>
+                                {Array.from({ length: totalPages }).map((_, index) => (
+                                <PaginationItem key={index}>
+                                    <PaginationLink 
+                                    href="#"onClick={(e) => {
+                                        e.preventDefault();
+                                        handlePageChange(index + 1);
+                                    }}
+                                     className="rounded-md bg-blue500 outline-gray-700 text-white"
+                                    >
+                                        {index + 1}
+                                    </PaginationLink>
+                                </PaginationItem>
+                                ))}
+                                <PaginationItem>
+                                    <PaginationEllipsis 
+                                    className="rounded-md text-blue500"/>
+                                </PaginationItem>
+                                <PaginationItem>
+                                    <PaginationNext 
+                                    href="#" 
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                                    }}
+                                    className="rounded-md bg-white outline-gray-700 text-blue500"
+                                    />
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
+
+                    </div>
+                    {/* <Button variant="outline" className="float-right">Anterior</Button><Button variant="outline" className="float-right">Siguente</Button> */}
                 </div>
             </div>
-            <div className='max-w-min p-4'>
+
+            <div className='flex-grow max-w-min  p-4  bg-white'>
 
                 <h4 className="text-3xl sm:text-2xl font-normal">Selecciona una fecha para ver los eventos del día.</h4>
 
@@ -559,6 +618,7 @@ function ViewDoctorCalendar() {
                     </ul>
 
                 </div>
+
                 <div >
                     <div className='relative px-10'>
                         <img
@@ -568,17 +628,6 @@ function ViewDoctorCalendar() {
                         />
                         <span className='absolute bottom-4 left-4 px-10 py-2 '>¡No hagas esperar a ningún paciente!</span>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
                     <div className='flex items-baseline space-x-4'>
                         <img
                             src={mascota}
@@ -680,7 +729,7 @@ function ViewDoctorCalendar() {
                                             <Label className="block text-sm font-medium mb-2">Veces por dia</Label>
                                             <input
                                                 type="number"
-                                                name="¿Cuantas veces?"
+                                                name="repetition"
                                                 value={repeatSettings.repetition}
                                                 onChange={handleRepeatSettingsChange}
                                                 placeholder="¿Cuantas veces por dia?"
@@ -754,13 +803,18 @@ function ViewDoctorCalendar() {
                         </div>
 
 
-
-
-
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
     );
 }
 

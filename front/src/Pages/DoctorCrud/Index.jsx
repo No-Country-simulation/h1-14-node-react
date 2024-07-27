@@ -1,10 +1,23 @@
 import FormDoctorCrud from '../../Components/formDoctorCrud/Index'
+import NavBarHome from "../../Components/navBarHome";
+import SideBar from "../../Components/sideBar";
 
 function DoctorCrud() {
     return (
-<div >
-     <FormDoctorCrud />
-    </div>
+        <div className="flex h-screen bg-bgHome">
+        <div className="hidden lg:flex">
+          <SideBar />
+        </div>
+        <div className="flex flex-col flex-grow">
+          <NavBarHome />
+  
+          <div className="flex flex-col flex-grow">
+          <FormDoctorCrud />
+          </div>
+  
+        </div>
+      </div>
+
     )
 }
 
