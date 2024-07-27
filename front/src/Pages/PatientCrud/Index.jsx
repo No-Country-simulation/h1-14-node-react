@@ -4,7 +4,7 @@ import SideBar from "../../Components/sideBar";
 
 function PatientCrud() {
     return (
-        <div className="flex h-screen bg-bgHome">
+        <div className="flex h-auto bg-bgHome">
         <div className="hidden lg:flex">
           <SideBar />
         </div>
