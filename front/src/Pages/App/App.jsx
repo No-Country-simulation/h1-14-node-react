@@ -12,6 +12,7 @@ import PatientCalendar from "../PatientCalendar/Index";
 import PatientList from "../patientList";
 import DoctorCalendar from "../DoctorCalendar/Index";
 import Notas from "../Notas/Index";
+import Tratamientos from './../Tratamientos/Index';
 
 
 
@@ -28,7 +29,8 @@ const AppRoutes = () => {
     { path: '/patientCalendar', element: <PatientCalendar />},
     {path: '/patientList', element: <PatientList />},
     { path: '/doctorCalendar', element: <DoctorCalendar />},
-    { path: '/notas', element: <Notas />}
+    { path: '/notas', element: <Notas />},
+    { path: '/tratamientos', element: <Tratamientos />}
   ])
 
   return routes

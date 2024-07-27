@@ -4,14 +4,14 @@ import SideBar from "../../Components/sideBar";
 
 function DoctorCalendar() {
   return (
-    <div className="flex h-screen bg-bgHome">
+    <div className="flex h-auto bg-bgHome">
       <div className="hidden lg:flex">
         <SideBar />
       </div>
       <div className="flex flex-col flex-grow">
         <NavBarHome />
 
-        <div className="flex flex-col flex-grow">
+        <div>
           <ViewDoctorCalendar />
         </div>
 

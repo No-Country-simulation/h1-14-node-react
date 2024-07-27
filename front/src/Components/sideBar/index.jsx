@@ -9,7 +9,7 @@ import logoPatient from '../../assets/iconosSidebar/iconPatient.svg';
 function SideBar() {
   return (
     <div className="bg-bgNavBar w-[243px] md:w-[200px] lg:w-[243px] h-full p-4 flex flex-col">
-      <div className="flex flex-col gap-12 flex-grow">
+      <div className="flex flex-col gap-12 flex-grow ">
         <Link to="/">
           <div className="flex justify-center md:justify-start">
             <img className="w-24 md:w-32 h-auto" src={ImageLogo} alt="Logo" />
