@@ -1,8 +1,8 @@
-import FormDoctorCrud from '../../Components/formDoctorCrud/Index'
+import ViewTratamientos from '../../Components/viewTratamientos/Index';
 import NavBarHome from "../../Components/navBarHome";
-import SideBar from "../../Components/sideBar";
+import SideBar from "../../Components/sideBar"; 
 
-function DoctorCrud() {
+function Tratamientos() {
   return (
     <div className="flex h-auto bg-bgHome">
       <div className="hidden lg:flex">
@@ -12,13 +12,13 @@ function DoctorCrud() {
         <NavBarHome />
 
         <div className="flex flex-col flex-grow">
-          <FormDoctorCrud />
+        <ViewTratamientos />
         </div>
 
       </div>
     </div>
 
-  )
+  );
 }
 
-export default DoctorCrud;
+export default Tratamientos;
