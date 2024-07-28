@@ -4,9 +4,15 @@ import logoHome from "../../assets/iconosSidebar/iconHome.svg";
 import logoConfig from "../../assets/iconosSidebar/iconConfig.svg";
 import logoCalendar from "../../assets/iconosSidebar/iconCalendar.svg";
 import logoCerrar from "../../assets/iconosSidebar/iconClose.svg";
-import logoPatient from '../../assets/iconosSidebar/iconPatient.svg';
+import logoPatient from "../../assets/iconosSidebar/iconPatient.svg";
+import { Navigate } from "react-router-dom";
 
 function SideBar() {
+  const handleLogour = () => {
+    localStorage.removeItem("token");
+    Navigate("/");
+  };
+
   return (
     <div className="bg-bgNavBar w-[243px] md:w-[200px] lg:w-[243px] h-full p-4 flex flex-col">
       <div className="flex flex-col gap-12 flex-grow">
@@ -34,7 +40,10 @@ function SideBar() {
           </button>
         </div>
       </div>
-      <button className="focus:bg-inputPrimary w-full flex justify-start items-center rounded-lg px-4 py-2">
+      <button
+        className="focus:bg-inputPrimary w-full flex justify-start items-center rounded-lg px-4 py-2"
+        onClick={handleLogour}
+      >
         <img className="w-6 h-6" src={logoCerrar} alt="Cerrar sesión" />
         <p className="text-white text-sm ml-2">Cerrar sesión</p>
       </button>
