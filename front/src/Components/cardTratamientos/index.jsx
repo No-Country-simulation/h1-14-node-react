@@ -43,12 +43,12 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu"
+import { formatDate } from "date-fns"
 
 
 
 
 const CardTratamientos = ({ noteType, date, description, status, name, }) => {
-
 
   const getBadgeClass = (noteType) => {
     switch (noteType) {
@@ -64,9 +64,21 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
     }
   };
 
+  const formatDate = (date) => {
+    const date2 = new Date(date);
+    return new Intl.DateTimeFormat('es-ES', {
+      // hour: 'numeric',
+      // minute: '2-digit',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(date2);
+  };
+
 
   return (
     <div className='flex justify-center items-center'>
+
       <div className='flex bg-white flex-col justify-center  w-full h-11/12   border border-solid border-borderCard rounded-lg py-4 px-4'>
         <div className='flex  '  >
           <div className=' w-full space-x-4'>
@@ -95,8 +107,8 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
                     <FolderArchive className="mr-2 h-4 w-4" />
                     <span>Archivar</span>
                   </DropdownMenuItem>
-                 </DropdownMenuGroup>
-                
+                </DropdownMenuGroup>
+
               </DropdownMenuContent>
             </DropdownMenu>
           </>
@@ -112,12 +124,12 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
             Instrucciones: {description}
           </p>
           <p className='text-sm font text-blackCardText'>
-            Proxima Reposicion: {date}
+            Proxima Reposicion: {(formatDate(date))}
           </p>
         </div>
       </div>
-    </div>
-  )
-}
+    </div >
+  );
+};
 
 export default CardTratamientos;
