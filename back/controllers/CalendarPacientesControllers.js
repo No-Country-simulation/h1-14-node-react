@@ -12,7 +12,7 @@ const getEventosPaciente = async (req, res) => {
     
     try {
         if (id) {
-            const Evento = await CalendarPacientes.findByPk(id);
+            const Evento = await CalendarPacientes.findAll({where: pacienteId === id});
             if (Evento) {
                 res.status(200).json(Evento);
             } else {
@@ -30,10 +30,11 @@ const getEventosPaciente = async (req, res) => {
 
 
 const createEventosPaciente = async (req, res) => {
-    const { tipoEvento, evento, dataTime, estado, dias, vecesxdia, activo } = req.body;
+    const { pacienteId, tipoEvento, evento, dataTime, estado, dias, vecesxdia, activo } = req.body;
   
     try {
         const newEvento = await CalendarPacientes.create({
+            pacienteId,
             tipoEvento,
             evento,
             dataTime,
@@ -53,11 +54,12 @@ const createEventosPaciente = async (req, res) => {
 
 const updateEventosPaciente = async (req, res) => {
     const {id} = req.params;
-    const { tipoEvento, evento, dataTime, estado, activo } = req.body;
+    const { pacienteId, tipoEvento, evento, dataTime, estado, activo } = req.body;
     
     try {
         const Evento = await CalendarPacientes.findByPk(id);
         if (Evento) {
+            Evento.pacienteId = pacienteId;
             Evento.tipoEvento = tipoEvento;
             Evento.evento = evento;
             Evento.dataTime = dataTime,
