@@ -16,6 +16,9 @@ const laboratoriosRouter = require('./LaboratoriosRoutes');
 const patologiasRouter = require('./PatologiasRoutes');
 const tratamientosRouter = require('./TratamientosRoutes');
 const recetasRouter = require('./RecetasRoutes');
+const eventosPacienteRouter = require('./CalendarioPacientesRoutes');
+const eventosDoctorRouter = require('./CalendarioDoctoresRoutes');
+const notasPacientesRouter = require('./NotasPacientesRoutes');
 
 
 /* GET home page. */
@@ -59,5 +62,14 @@ router.use('/api/v1/tratamiento', tratamientosRouter)
 
 // Recetas
 router.use('/api/v1/recetas', recetasRouter)
+
+// Eventos Pacientes
+router.use('/api/v1/eventospaciente', eventosPacienteRouter)
+
+// Eventos Doctores
+router.use('/api/v1/eventosdoctor', eventosDoctorRouter)
+
+// Eventos Pacientes
+router.use('/api/v1/notaspaciente', notasPacientesRouter)
 
 module.exports = router;
