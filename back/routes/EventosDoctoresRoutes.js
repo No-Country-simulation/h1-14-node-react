@@ -11,49 +11,33 @@ const {
 /**
  * @swagger
  * tags:
- *   name: Eventos
- *   description: Eventos
+ *   name: Calendario Doctores
+ *   description: Eventos para los doctores
  */
 
-// Ver lista de Eventos.
-/**
- * @swagger
- * /api/v1/evento/:
- *   get:
- *     summary: lista de todos los Eventos.
- *     description: Se envia el id del evento o sin params para la lista completa.
- *     tags: [Eventos]
- *     responses:
- *       200:
- *         description: Lista de Eventos.
- *       400:
- *         description: Error con el ID.
- *       500:
- *         description: Error interno del servidor.
- */
-
+// Todos los eventos de los doctores
 router
   .get("/", getEventosDoctor)
 
-  // Informacion de los Eventos.
+  // Informacion de los Eventos de un doctor.
   /**
    * @swagger
-   * /api/v1/entidad/{id}:
+   * /api/v1/eventosdoctor/{id}:
    *   get:
-   *     summary: Informacion de una entidad.
-   *     description: Se envia el id de la entidad o sin params para la lista completa.
-   *     tags: [Entidades]
+   *     summary: Informacion de los eventos de un doctor.
+   *     description: Se envia el id de un doctor y retorna la lista completa de sus eventos.
+   *     tags: [CalendarioDoctor]
    *     parameters:
    *       - in: path
    *         name: id
-   *         description: El ID de la entidad para ver su informacion.
+   *         description: El ID del Doctor para ver sus eventos.
    *         schema:
    *           type: string
    *         required: false
    *         example: 1
    *     responses:
    *       200:
-   *         description: Lista de Entidades.
+   *         description: Lista de Eventos.
    *       400:
    *         description: Error con el ID.
    *       500:
@@ -61,35 +45,56 @@ router
    */
   .get("/:id", getEventosDoctor)
 
-  // Crear Entidades.
+  // Crear Eventos.
   /**
    * @swagger
-   * /api/v1/entidad/:
+   * /api/v1/eventosdoctor/:
    *   post:
-   *     summary: Crear una nueva entidad
+   *     summary: Crear una nuevo evento
    *     description: EndPoint para crear registro nuevos.
-   *     tags: [Entidades]
+   *     tags: [CalendarioDoctor]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Entidades'
+   *             $ref: '#/components/schemas/CalendarioDoctor'
    *       required: true
    *     parameters:
    *       - in: body
-   *         name: name
-   *         description: name de la entidad.
+   *         name: personalMedicoId
+   *         description: Id del Doctor.
    *         schema:
-   *           type: string
+   *           type: Integer
    *         required: true
-   *         example: Hospital Pediatrico
+   *         example: 01
    *       - in: body
-   *         name: description
+   *         name: tipoEvento
+   *         description: tipo de evento.
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la entidad.
-   *         example: Especialistas en el tratamiento del cancer.
+   *         example: Consulta
+   *       - in: body
+   *         name: evento
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Descripción del evento.
+   *         example: Paciente con deficiencia renal.
+   *       - in: body
+   *         name: dataTime
+   *         schema:
+   *           type: date
+   *         required: true
+   *         description: Fecha y hora del evento
+   *         example: 2024-10-10:10:10
+   *       - in: body
+   *         name: estado
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Estado del evento reflejando el ciclo de vida.
+   *         example: Pending.
    *       - in: body
    *         name: active
    *         schema:
@@ -99,9 +104,9 @@ router
    *         example: true
    *     responses:
    *       200:
-   *         description: Nueva entidad creada.
+   *         description: Nueva evento creado.
    *       400:
-   *         description: Error al crear la entidad.
+   *         description: Error al crear el Evento.
    *       500:
    *         description: Error interno del servidor
    */
@@ -109,32 +114,53 @@ router
 
   /**
    * @swagger
-   * /api/v1/entidad/:
+   * /api/v1/eventodoctor/:
    *   put:
-   *     summary: Actualizar una entidad
-   *     description: EndPoint para actualizar un registro.
-   *     tags: [Entidades]
+   *     summary: Actualizar un evento
+   *     description: EndPoint para actualizar un evento.
+   *     tags: [CalendarioDoctor]
    *     requestBody:
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Entidades'
+   *             $ref: '#/components/schemas/CalendarioDoctor'
    *       required: true
    *     parameters:
    *       - in: body
-   *         name: name
-   *         description: name de la Eventos.
+   *         name: personalMedicoId
+   *         description: Id del Doctor.
    *         schema:
-   *           type: string
+   *           type: Integer
    *         required: true
-   *         example: Hospital Pediatrico
+   *         example: 01
    *       - in: body
-   *         name: description
+   *         name: tipoEvento
+   *         description: tipo de evento.
    *         schema:
    *           type: string
    *         required: true
-   *         description: Descripción de la Eventos.
-   *         example: Especialistas en el tratamiento del cancer.
+   *         example: Consulta
+   *       - in: body
+   *         name: evento
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Descripción del evento.
+   *         example: Paciente con deficiencia renal.
+   *       - in: body
+   *         name: dataTime
+   *         schema:
+   *           type: date
+   *         required: true
+   *         description: Fecha y hora del evento
+   *         example: 2024-10-10:10:10
+   *       - in: body
+   *         name: estado
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Estado del evento reflejando el ciclo de vida.
+   *         example: Pending.
    *       - in: body
    *         name: active
    *         schema:
@@ -152,36 +178,74 @@ router
    */
 
   .put("/:id", updateEventosDoctor)
+
+   /**
+   * @swagger
+   * /api/v1/eventosdoctor/{id}:
+   *   patch:
+   *     summary: Eliminar eventos de un Doctor.
+   *     description: Se envia el id del evento.
+   *     tags: [CalendarioDoctor]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         description: El ID del Doctor para ver sus eventos.
+   *         schema:
+   *           type: string
+   *         required: false
+   *         example: 1
+   *     responses:
+   *       200:
+   *         description: Lista de Eventos.
+   *       400:
+   *         description: Error con el ID.
+   *       500:
+   *         description: Error interno del servidor.
+   */
   .patch("/:id", deleteEventosDoctor);
-// router.delete('/:id', physicalDeleteUsers);
 
 /**
  * @swagger
  * tags:
- *   name: Eventos
- *   description: Eventos API.
+ *   name: CalendarioDoctor
+ *   description: Eventos para Doctores API.
  *
  * components:
  *   schemas:
- *      Eventos:
+ *      CalendarioDoctor:
  *       type: object
  *       properties:
- *         name:
+ *         personalMedicoId:
+ *           type: integer
+ *           description: 01
+ *         tipoEvento:
  *           type: string
- *           description: nombre de la Eventos
- *         descripcion:
+ *           description: Consulta
+ *         evento:
  *            type: string
  *            description: descripcion de la Eventos
+ *         dataTime:
+ *            type: data
+ *            description: fecha y hora del Eventos
+ *         estado:
+ *            type: string
+ *            description: descripe en que parte del ciclo se encuentra el evento
  *         active:
  *           type: boolean
  *           description: al ser false se considera eliminada
  *       required:
- *         - name
- *         - description
+ *         - personalMedicoId
+ *         - tipoEvento
+ *         - evento
+ *         - dataTime
+ *         - estado
  *         - activo
  *       example:
- *         name: Hospital de Oncologia
- *         description: Especialistas en cancer
+ *         personalMedicoId: 01
+ *         name: Consulta
+ *         evento: Paciente con daño epatico
+ *         dataTimem: 2024-10-10:10:10
+ *         estado: Pending
  *         active: true
  *
  */
