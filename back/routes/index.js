@@ -1,10 +1,10 @@
-const express = require( 'express');
+const express = require("express");
 const router = express.Router();
 
-
-// Routes
-// const userRouter = require('./UsersRoutes');
-const patientRouter = require('./PatientsRoutes');
+// Routes 
+const userRouter = require("./UsersRoutes");
+const personalMedicoRouter = require("./PersonalMedicoRoutes");
+const patientRouter = require("./PatientsRoutes");
 // const usersRouter = require('./UsersRoutes');
 // const loginRouter = require('./LoginRoutes');
 const entidadRouter = require('./EntidadesRoutes');
@@ -19,49 +19,52 @@ const recetasRouter = require('./RecetasRoutes');
 const eventosPacienteRouter = require('./CalendarioPacientesRoutes');
 const eventosDoctorRouter = require('./CalendarioDoctoresRoutes');
 const notasPacientesRouter = require('./NotasPacientesRoutes');
+const prescripcionRouter = require('./PrescripcionRoutes');
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-   res.send("Hola mundo...");
+router.get("/", function (req, res, next) {
+  res.send("Bienvenidos a Justina.io backend deploy...");
 });
 
 //Users
-// router.use('/api/v1/users', userRouter)
+router.use("/api/v1/users", userRouter);
 
+//PeronalMedico
+router.use("/api/v1/personalMedico", personalMedicoRouter);
 
 // Pacientes
-router.use('/api/v1/pacientes', patientRouter)
-/*
+router.use("/api/v1/pacientes", patientRouter);
+
 // Login
-router.use('/api/v1/login', loginRouter); */
+router.use('/api/v1/login', loginRouter);
 
 // Entidades
-router.use('/api/v1/entidad', entidadRouter);
+router.use("/api/v1/entidad", entidadRouter);
 
 // Finaciadores
-router.use('/api/v1/financiador', fianciadoresRouter)
+router.use("/api/v1/financiador", fianciadoresRouter);
 
 // Ubicacion
-router.use('/api/v1/ubicacion', ubicacionRouter)
+router.use("/api/v1/ubicacion", ubicacionRouter);
 
 // Farmacias
-router.use('/api/v1/farmacia', farmaciasRouter)
+router.use("/api/v1/farmacia", farmaciasRouter);
 
 // Especialidades
-router.use('/api/v1/especialidad', especialidadesRouter)
+router.use("/api/v1/especialidad", especialidadesRouter);
 
 // Especialidades
-router.use('/api/v1/laboratorio', laboratoriosRouter)
+router.use("/api/v1/laboratorio", laboratoriosRouter);
 
 // Patologias
-router.use('/api/v1/patologia', patologiasRouter)
+router.use("/api/v1/patologia", patologiasRouter);
 
 // Tratamientos
-router.use('/api/v1/tratamiento', tratamientosRouter)
+router.use("/api/v1/tratamiento", tratamientosRouter);
 
 // Recetas
-router.use('/api/v1/recetas', recetasRouter)
+router.use("/api/v1/recetas", recetasRouter);
 
 // Eventos Pacientes
 router.use('/api/v1/eventospaciente', eventosPacienteRouter)
@@ -71,5 +74,8 @@ router.use('/api/v1/eventosdoctor', eventosDoctorRouter)
 
 // Eventos Pacientes
 router.use('/api/v1/notaspaciente', notasPacientesRouter)
+
+// Prescripciones Pacientes
+router.use('/api/v1/prescripcion', prescripcionRouter)
 
 module.exports = router;

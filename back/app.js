@@ -4,6 +4,7 @@ const { connection } = require("./database/db.js");
 const { configDotenv } = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const routes = require("./routes/index.js");
 configDotenv();
 
 const PORT = process.env.PORT || 4321;
@@ -54,7 +55,7 @@ app.use((err, req, res, next) => {
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Rutas
-app.use(require("./routes/index.js"));
+app.use("/", routes);
 
 // Arranca el servidor
 app.listen(PORT, function () {
@@ -71,3 +72,4 @@ app.listen(PORT, function () {
       console.error("Se ha producido un error", error);
     });
 });
+
