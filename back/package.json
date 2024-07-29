@@ -8,7 +8,8 @@
     "createdb":"npx sequelize-cli db:migrate --debug",
     "dropdb":"npx sequelize-cli db:migrate:undo:all",
     "chargerdata":"npx sequelize-cli db:seed:all",
-    "dropdata":"npx sequelize-cli db:seed:undo"
+    "dropdata":"npx sequelize-cli db:seed:undo",
+     "start": "node app.js"
   },
   "keywords": [],
   "author": "",

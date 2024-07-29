@@ -82,7 +82,7 @@ function Aliados() {
     <div className="bg-bgLanding py-12">
       <div className='overflow-hidden w-full'>
       <div className=' flex justify-center items-center mt-4'>
-        <h2 className='font-bold text-4xl'>Nuestros valiosos aliados</h2>
+        <h2 className=' font-semibold md:font-bold text-center  text-4xl'>Nuestros valiosos aliados</h2>
       </div>
         <div className="flex whitespace-nowrap gap-16 justify-center items-center animate-scroll-left mt-6">
           {listaLogos.map((item, index) => (

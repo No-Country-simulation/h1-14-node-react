@@ -1,105 +1,169 @@
-const { PersonalMedico } = require("../app/database/db");
+const { PersonalMedico } = require("../database/db");
 
-module.exports = {
-  async All(req, res) {
-    let personalMedico = await PersonalMedico.findAll({
-      include: {
-      association: "Especialidad"
-  }});
-    res.json(personalMedico);
-  },
-};
+async function getPersonalMedico(req, res) {
+  const personalMedicoId = req.params.id;
 
-async function getPatients(req, res) {
-    const patientId = req.params.id;
-    
-    try {
-        if (patientId) {
-            const patient = await Patients.findByPk(patientId);
-            if (patient) {
-                res.status(200).json(patient);
-            } else {
-                res.status(404).json({ message: 'Paciente no encontrado' });
-            }
-        } else {
-            const patients = await Patients.findAll();
-            res.status(200).json(patients);
-        }
-    } catch (error) {
-        console.error('Error al obtener pacientes:', error);
-        res.status(500).json({ message: 'Error al obtener pacientes', error });
+  try {
+    if (personalMedicoId) {
+      const personalMedico = await PersonalMedico.findByPk(personalMedicoId, {
+        attributes: [
+          "id",
+          "especialidadesId",
+          "usuariosId",
+          "numeroMatricula",
+          "active",
+        ],
+      });
+      if (personalMedico) {
+        res.status(200).json(personalMedico);
+      } else {
+        res.status(404).json({ message: "Personal Médico no encontrado" });
+      }
+    } else {
+      const personalMedico = await PersonalMedico.findAll({
+        attributes: [
+          "id",
+          "especialidadesId",
+          "usuariosId",
+          "numeroMatricula",
+          "active",
+        ],
+      });
+      console.log(personalMedico);
+      res.status(200).json(personalMedico);
     }
+  } catch (error) {
+    console.error("Error al obtener personal médico:", error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener personal médico", error });
+  }
 }
 
+const createPersonalMedico = async (req, res) => {
+  const { especialidadesId, usuariosId, numeroMatricula, active } = req.body;
 
-const createPatients = async (req, res) => {
-    const { entidadesId, financiadoresId, personalMedicoId, patologiasId, usuarioID, factorSanguineo, Activo } = req.body;
-  
-    try {
-        const newPatient = await Patients.create({
-            entidadesId,
-            financiadoresId,
-            personalMedicoId,
-            patologiasId,
-            usuarioID,
-            factorSanguineo,
-            Activo,
-        });
+  try {
+    const newPersonalMedico = await PersonalMedico.create({
+      especialidadesId,
+      usuariosId,
+      numeroMatricula,
+      active,
+    });
 
-        res.status(201).json({ message: 'Paciente creado correctamente', patient: newPatient });
-    } catch (error) {
-        console.error('Error al crear paciente:', error);
-        res.status(500).json({ message: 'Error al crear paciente', error });
-    }
+    res.status(201).json({
+      message: "Personal Medico creado correctamente",
+      personalMedico: newPersonalMedico,
+    });
+  } catch (error) {
+    console.error("Error al crear personal médico:", error);
+    res.status(500).json({ message: "Error al crear personal médico", error });
+  }
 };
 
+const updatePersonalMedico = async (req, res) => {
+  const personalMedicoId = req.params.id;
+  const { especialidadesId, usuariosId, numeroMatricula, active } = req.body;
 
-const updatePatients = async (req, res) => {
-    const patientId = req.params.id;
-    const { entidadesId, financiadoresId, personalMedicoId, patologiasId, usuarioID, factorSanguineo, Activo } = req.body;
-    
-    try {
-        const patient = await Patients.findByPk(patientId);
-        if (patient) {
-            patient.entidadesId = entidadesId;
-            patient.financiadoresId = financiadoresId;
-            patient.personalMedicoId = personalMedicoId;
-            patient.patologiasId = patologiasId;
-            patient.usuarioID = usuarioID;
-            patient.factorSanguineo = factorSanguineo;
-            patient.Activo = Activo;
-            await patient.save();
-            res.status(200).json({ message: 'Paciente actualizado', patient });
-        } else {
-            res.status(404).json({ message: 'Paciente no encontrado' });
-        }
-    } catch (error) {
-        console.error('Error al actualizar paciente:', error);
-        res.status(500).json({ message: 'Error al actualizar paciente', error });
+  try {
+    const personalMedico = await PersonalMedico.findByPk(personalMedicoId, {
+      attributes: [
+        "id",
+        "especialidadesId",
+        "usuariosId",
+        "numeroMatricula",
+        "active",
+      ],
+    });
+
+    if (!personalMedico) {
+      return res.status(404).json({ message: "Personal Medico not found" });
     }
+
+    if (especialidadesId !== undefined)
+      personalMedico.especialidadesId = especialidadesId;
+    if (usuariosId !== undefined) personalMedico.usuariosId = usuariosId;
+    if (numeroMatricula !== undefined)
+      personalMedico.numeroMatricula = numeroMatricula;
+    if (active !== undefined) personalMedico.active = active;
+
+    await personalMedico.save();
+    res
+      .status(200)
+      .json({ message: "Parsonal Médico actualizado", personalMedico });
+  } catch (error) {
+    console.error("Error al actualizar Personal Médico:", error);
+    res.status(500).json({ message: "Error al Personal Médico", error });
+  }
 };
 
+const logicalDeletePersonalMedico = async (req, res) => {
+  const personalMedicoId = req.params.id;
+  const { active } = req.body;
+  if (typeof active !== "boolean") {
+    return res
+      .status(400)
+      .json({ message: "El campo 'active' debe ser un valor booleano" });
+  }
 
-const deletePatients = async (req, res) => {
-    const patientId = req.params.id;
-    
-    try {
-        const patient = await Patients.findByPk(patientId);
-        if (patient) {
-            await patient.destroy();
-            res.status(200).json({ message: 'Paciente eliminado' });
-        } else {
-            res.status(404).json({ message: 'Paciente no encontrado' });
-        }
-    } catch (error) {
-        console.error('Error al eliminar paciente:', error);
-        res.status(500).json({ message: 'Error al eliminar paciente', error });
+  try {
+    const personalMedico = await PersonalMedico.findByPk(personalMedicoId, {
+      attributes: [
+        "id",
+        "especialidadesId",
+        "usuariosId",
+        "numeroMatricula",
+        "active",
+      ],
+    });
+    if (!personalMedico) {
+      return res.status(404).json({ message: "Personal Médico no encontrado" });
     }
+
+    personalMedico.active = active;
+    await personalMedico.save();
+
+    const status = personalMedico.active ? "activado" : "desactivado";
+    res.status(200).json({ message: `Personal Médico ${status}` });
+  } catch (error) {
+    console.error("Error al actualizar el estado del Personal Médico:", error);
+    res.status(500).json({
+      message: "Error al actualizar el estado del Personal Médico",
+      error,
+    });
+  }
+};
+
+const physicalDeletePersonalMedico = async (req, res) => {
+  const personalMedicoId = req.params.id;
+
+  try {
+    const personalMedico = await PersonalMedico.findByPk(personalMedicoId, {
+      attributes: [
+        "id",
+        "especialidadesId",
+        "usuariosId",
+        "numeroMatricula",
+        "active",
+      ],
+    });
+    if (!personalMedico) {
+      return res.status(404).json({ message: "Personal Médico no encontrado" });
+    }
+    await personalMedico.destroy();
+    res.status(200).json({ message: "Personal Médico eliminado" });
+  } catch (error) {
+    console.error("Error al eliminar personal médico:", error);
+    res
+      .status(500)
+      .json({ message: "Error al eliminar personal médico", error });
+  }
 };
 
 module.exports = {
-    getPatients,
-    createPatients,
-    updatePatients,
-    deletePatients
+  getPersonalMedico,
+  createPersonalMedico,
+  updatePersonalMedico,
+  logicalDeletePersonalMedico,
+  physicalDeletePersonalMedico,
 };

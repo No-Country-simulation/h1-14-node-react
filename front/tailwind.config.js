@@ -24,11 +24,23 @@ module.exports = {
       backgroundImage: {
         'custom-bg': "url('/src/assets/bg-pattern.png')",
         'pattern': "url('/img/pattern.webp')",
+        'bg-login': "url('/src/assets/omgLogin/login.png')"
         // 'hero-pattern': "url('/img/hero-pattern.svg')",
         // 'footer-texture': "url('/img/footer-texture.png')",
         // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
+        blacCardTitle: "#252846",
+        blackCardText: "#5A5A60",
+        blackBadgeText: "#0D0D0D",
+        blue500: "#667CCB",
+        blue900: "#3F458E",
+        purple500: "#978CBF",
+        greenTableTittle: "#61A691",
+        greenAddBadgeText: "#4D8762",
+        greenBadge: "#9BCABA",
+        yellowBadge: "#F2CD5C",
+        bgHome: "#F3F5FB",
         borderCard:"#cdd7f0",
         bgLanding: '#E3e8F6',
         inputPrimary: '#5666bf',
