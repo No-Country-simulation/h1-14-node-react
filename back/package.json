@@ -1,12 +1,18 @@
 {
-  "name": "justina.io-h1-14",
+  "name": "prueba",
   "version": "1.0.0",
-  "description": "AppWeb para proyecto justina.io",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "node --watch app.js"
+    "dev": "node --watch app.js",
+    "createdb":"npx sequelize-cli db:migrate --debug",
+    "dropdb":"npx sequelize-cli db:migrate:undo:all",
+    "chargerdata":"npx sequelize-cli db:seed:all",
+    "dropdata":"npx sequelize-cli db:seed:undo",
+     "start": "node app.js"
   },
-  "author": "h1-14-node-react",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -14,18 +20,17 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.10.2",
     "nodemailer": "^6.9.14",
     "path": "^0.12.7",
     "sequelize": "^6.37.3",
-    "swagger": "^0.0.1",
+    "swagger": "^0.7.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.2.0",
-    "eslint": "^9.2.0",
     "sequelize-cli": "^6.6.2"
   }
 }
