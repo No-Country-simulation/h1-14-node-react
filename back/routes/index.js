@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-// Routes
+// Routes 
 const userRouter = require("./UsersRoutes");
+const personalMedicoRouter = require("./PersonalMedicoRoutes");
 const patientRouter = require("./PatientsRoutes");
 // const usersRouter = require('./UsersRoutes');
-// const loginRouter = require('./LoginRoutes');
+const loginRouter = require('./LoginRoutes');
 const entidadRouter = require("./EntidadesRoutes");
 const fianciadoresRouter = require("./FinanciadoresRoutes");
 const ubicacionRouter = require("./UbicacionRoutes");
@@ -18,17 +19,20 @@ const recetasRouter = require("./RecetasRoutes");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.send("Hola mundo...");
+  res.send("Bienvenidos a Justina.io backend deploy...");
 });
 
 //Users
 router.use("/api/v1/users", userRouter);
 
+//PeronalMedico
+router.use("/api/v1/personalMedico", personalMedicoRouter);
+
 // Pacientes
 router.use("/api/v1/pacientes", patientRouter);
-/*
+
 // Login
-router.use('/api/v1/login', loginRouter); */
+router.use('/api/v1/login', loginRouter);
 
 // Entidades
 router.use("/api/v1/entidad", entidadRouter);
