@@ -8,7 +8,7 @@ import { Input } from "@/Components/ui/input";
 
 function Footer() {
   return (
-    <div className="flex flex-col gap-7 justify-center items-center bg-bgNavBar py-5">
+    <div className="flex flex-col gap-7 justify-between items-center bg-bgNavBar py-5 px-3 lg:px-40">
       <div>
         <Link to="/">
           <div>
@@ -41,7 +41,7 @@ function Footer() {
         </ul>
       </div>
       <div className="w-full px-4 sm:px-2">
-        <ul className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+        <ul className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           <li className="text-center sm:text-left">
             <p className="text-white text-sm">© 2024, Justina.io. Todos los derechos reservados | Síguenos en:</p>
           </li>
