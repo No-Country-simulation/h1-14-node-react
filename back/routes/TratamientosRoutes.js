@@ -4,15 +4,15 @@ const {
   getTratamientos,
   createTratamientos,
   updateTratamientos,
-  deleteTratamientos,
+  logicalDeleteTratamientos,
+  physicalDeleteTratamientos,
 } = require("../controllers/TratamientosControllers");
-
 
 /**
  * @swagger
  * tags:
  *   name: Tratamientos
- *   description: Tratamientos
+ *   description: API para la gestión de tratamientos.
  */
 
 // Ver lista de Tratamientos.
@@ -20,170 +20,182 @@ const {
  * @swagger
  * /api/v1/tratamiento/:
  *   get:
- *     summary: lista de todas las Tratamientos.
- *     description: Se envia el id de la tratamiento o sin params para la lista completa.
+ *     summary: Lista de todos los tratamientos.
+ *     description: Se obtiene la lista de tratamientos, con o sin parámetros.
  *     tags: [Tratamientos]
  *     responses:
  *       200:
- *         description: Lista de Tratamientos.
+ *         description: Lista de tratamientos obtenida con éxito.
  *       400:
  *         description: Error con el ID.
  *       500:
  *         description: Error interno del servidor.
  */
+router.get("/", getTratamientos);
 
-router
-  .get("/", getTratamientos)
+// Información de un Tratamiento.
+/**
+ * @swagger
+ * /api/v1/tratamiento/{id}:
+ *   get:
+ *     summary: Información de un tratamiento.
+ *     description: Se obtiene la información de un tratamiento por ID.
+ *     tags: [Tratamientos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: El ID del tratamiento para ver su información.
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Información del tratamiento obtenida con éxito.
+ *       400:
+ *         description: Error con el ID.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+router.get("/:id", getTratamientos);
 
-  // Informacion de las Tratamientos.
-  /**
-   * @swagger
-   * /api/v1/tratamiento/{id}:
-   *   get:
-   *     summary: Informacion de una tratamiento.
-   *     description: Se envia el id de la tratamiento o sin params para la lista completa.
-   *     tags: [Tratamientos]
-   *     parameters:
-   *       - in: path
-   *         name: id
-   *         description: El ID de la tratamiento para ver su informacion.
-   *         schema:
-   *           type: string
-   *         required: false
-   *         example: 1
-   *     responses:
-   *       200:
-   *         description: Lista de Tratamientos.
-   *       400:
-   *         description: Error con el ID.
-   *       500:
-   *         description: Error interno del servidor.
-   */
-  .get("/:id", getTratamientos)
+// Crear Tratamientos.
+/**
+ * @swagger
+ * /api/v1/tratamiento/:
+ *   post:
+ *     summary: Crear un nuevo tratamiento.
+ *     description: Endpoint para crear un nuevo tratamiento.
+ *     tags: [Tratamientos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Tratamientos'
+ *     responses:
+ *       201:
+ *         description: Nuevo tratamiento creado con éxito.
+ *       400:
+ *         description: Error al crear el tratamiento.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+router.post("/", createTratamientos);
 
-  // Crear Tratamientos.
-  /**
-   * @swagger
-   * /api/v1/tratamiento/:
-   *   post:
-   *     summary: Crear una nueva tratamiento
-   *     description: EndPoint para crear registro nuevos.
-   *     tags: [Tratamientos]
-   *     requestBody:
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Tratamientos'
-   *       required: true
-   *     parameters:
-   *       - in: body
-   *         name: name
-   *         description: name de la tratamiento.
-   *         schema:
-   *           type: string
-   *         required: true
-   *         example: Hospital Pediatrico
-   *       - in: body
-   *         name: description
-   *         schema:
-   *           type: string
-   *         required: true
-   *         description: Descripción de la tratamiento.
-   *         example: Especialistas en el tratamiento del cancer.
-   *       - in: body
-   *         name: active
-   *         schema:
-   *           type: boolean
-   *         required: true
-   *         description: Estar en false significa eliminado.
-   *         example: true
-   *     responses:
-   *       200:
-   *         description: Nueva tratamiento creada.
-   *       400:
-   *         description: Error al crear la tratamiento.
-   *       500:
-   *         description: Error interno del servidor
-   */
-  .post("/", createTratamientos)
+// Actualizar un Tratamiento.
+/**
+ * @swagger
+ * /api/v1/tratamiento/{id}:
+ *   put:
+ *     summary: Actualizar un tratamiento.
+ *     description: Endpoint para actualizar un tratamiento existente.
+ *     tags: [Tratamientos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: El ID del tratamiento a actualizar.
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         example: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Tratamientos'
+ *     responses:
+ *       200:
+ *         description: Tratamiento actualizado con éxito.
+ *       400:
+ *         description: Error al actualizar el tratamiento.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+router.put("/:id", updateTratamientos);
 
-  /**
-   * @swagger
-   * /api/v1/tratamiento/:
-   *   put:
-   *     summary: Actualizar una tratamiento
-   *     description: EndPoint para actualizar un registro.
-   *     tags: [Tratamientos]
-   *     requestBody:
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Tratamientos'
-   *       required: true
-   *     parameters:
-   *       - in: body
-   *         name: name
-   *         description: name de la tratamiento.
-   *         schema:
-   *           type: string
-   *         required: true
-   *         example: Hospital Pediatrico
-   *       - in: body
-   *         name: description
-   *         schema:
-   *           type: string
-   *         required: true
-   *         description: Descripción de la tratamiento.
-   *         example: Especialistas en el tratamiento del cancer.
-   *       - in: body
-   *         name: active
-   *         schema:
-   *           type: boolean
-   *         required: true
-   *         description: Estar en false significa eliminado.
-   *         example: true
-   *     responses:
-   *       200:
-   *         description: Nueva tratamiento creada.
-   *       400:
-   *         description: Error al crear la tratamiento.
-   *       500:
-   *         description: Error interno del servidor
-   */
+// Eliminar lógicamente un Tratamiento.
+/**
+ * @swagger
+ * /api/v1/tratamiento/{id}:
+ *   patch:
+ *     summary: Eliminar lógicamente un tratamiento.
+ *     description: Endpoint para eliminar lógicamente un tratamiento existente.
+ *     tags: [Tratamientos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: El ID del tratamiento a eliminar lógicamente.
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Tratamiento eliminado lógicamente con éxito.
+ *       400:
+ *         description: Error al eliminar el tratamiento.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+router.patch("/:id", logicalDeleteTratamientos);
 
-  .put("/:id", updateTratamientos)
-  .patch("/:id", deleteTratamientos);
-// router.delete('/:id', physicalDeleteUsers);
+// Eliminar físicamente un Tratamiento.
+/**
+ * @swagger
+ * /api/v1/tratamiento/{id}:
+ *   delete:
+ *     summary: Eliminar físicamente un tratamiento.
+ *     description: Endpoint para eliminar físicamente un tratamiento existente.
+ *     tags: [Tratamientos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: El ID del tratamiento a eliminar físicamente.
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Tratamiento eliminado físicamente con éxito.
+ *       400:
+ *         description: Error al eliminar el tratamiento.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+router.delete("/:id", physicalDeleteTratamientos);
 
 /**
  * @swagger
- * tags:
- *   name: Tratamientos
- *   description: Tratamientos API.
- *
  * components:
  *   schemas:
- *      Tratamientos:
+ *     Tratamientos:
  *       type: object
  *       properties:
- *         name:
+ *         usuariosId:
+ *           type: integer
+ *           description: ID del usuario asociado.
+ *         nombre:
  *           type: string
- *           description: nombre de la tratamiento
+ *           description: Nombre del tratamiento.
  *         descripcion:
- *            type: string
- *            description: descripcion de la tratamiento
+ *           type: string
+ *           description: Descripción del tratamiento.
  *         active:
  *           type: boolean
- *           description: al ser false se considera eliminada
+ *           description: Estado del tratamiento, true si está activo, false si está eliminado.
  *       required:
- *         - name
- *         - description
- *         - activo
+ *         - usuariosId
+ *         - nombre
+ *         - descripcion
+ *         - active
  *       example:
- *         name: Hospital de Oncologia
- *         description: Especialistas en cancer
+ *         usuariosId: 1
+ *         nombre: Tratamiento de Oncología
+ *         descripcion: Especialistas en cáncer.
  *         active: true
- *
  */
 
 module.exports = router;

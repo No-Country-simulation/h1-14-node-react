@@ -4,12 +4,9 @@ import DoctorRegistry from "../DoctorRegistry";
 import LogIn from "../LogIn";
 import "./App.css";
 import PatientProfile from "../PatientProfile/Index";
-
 import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 import  Home  from "../home";
-
-
 
 
 const AppRoutes = () => {
@@ -21,8 +18,7 @@ const AppRoutes = () => {
     {path: '/', element: <LandingPage />},
     { path: '/resetPassword', element: <EmailResetPassword />},
     {path:'/home', element: <Home />},
-    
-  ])
+
 
   return routes
 };
