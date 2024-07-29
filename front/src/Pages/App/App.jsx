@@ -14,6 +14,7 @@ import DoctorCalendar from "../DoctorCalendar/Index";
 import Notas from "../Notas/Index";
 import Tratamientos from './../Tratamientos/Index';
 import PatientHistory from './../PatientHistory/Index';
+import PatientHome from './../PatientHome/Index';
 
 
 const AppRoutes = () => {
@@ -31,7 +32,8 @@ const AppRoutes = () => {
     { path: '/doctorCalendar', element: <DoctorCalendar />},
     { path: '/notas', element: <Notas />},
     { path: '/tratamientos', element: <Tratamientos />},
-    { path: '/history', element: <PatientHistory />}
+    { path: '/history', element: <PatientHistory />},
+    { path: '/patientHome', element: <PatientHome />}
   ])
 
   return routes
