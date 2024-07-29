@@ -9,24 +9,24 @@ db.connection = new Sequelize(config.database, config.username, config.password,
   });
 
   // Vinculamos nuestos modelos a DB
-  db.Users = require('./models/Users.js')(db.connection, DataTypes)
+  db.Users = require('./models/users.js')(db.connection, DataTypes)
   db.Ubicaciones = require('./models/Ubicaciones.js')(db.connection, DataTypes)
-  db.Tratamientos = require('./models/Tratamientos.js')(db.connection, DataTypes)
-  db.Recetas = require('./models/Recetas.js')(db.connection, DataTypes)
-  db.CalendarioMedicamentos = require('./models/CalendarioMedicamentos.js')(db.connection, DataTypes)
-  db.Entidades = require('./models/Entidades.js')(db.connection, DataTypes)
-  db.Especialidades = require('./models/Especialidades.js')(db.connection, DataTypes)
-  db.Farmacias = require('./models/Farmacias.js')(db.connection, DataTypes)
-  db.Financiadores = require('./models/Financiadores.js')(db.connection, DataTypes)
-  db.FinanciadoresUsuarios = require('./models/FinanciadoresUsuarios.js')(db.connection, DataTypes)
-  db.Laboratorios = require('./models/Laboratorios.js')(db.connection, DataTypes)  
-  db.Medicamentos = require('./models/Medicamentos.js')(db.connection, DataTypes)  
+  db.Tratamientos = require('./models/tratamientos.js')(db.connection, DataTypes)
+  db.Recetas = require('./models/recetas.js')(db.connection, DataTypes)
+  db.CalendarioMedicamentos = require('./models/calendariomedicamentos.js')(db.connection, DataTypes)
+  db.Entidades = require('./models/entidades.js')(db.connection, DataTypes)
+  db.Especialidades = require('./models/especialidades.js')(db.connection, DataTypes)
+  db.Farmacias = require('./models/farmacias.js')(db.connection, DataTypes)
+  db.Financiadores = require('./models/financiadores.js')(db.connection, DataTypes)
+  db.FinanciadoresUsuarios = require('./models/financiadoresusuarios.js')(db.connection, DataTypes)
+  db.Laboratorios = require('./models/laboratorios.js')(db.connection, DataTypes)  
+  db.Medicamentos = require('./models/medicamentos.js')(db.connection, DataTypes)  
   db.Pacientes = require('./models/Pacientes.js')(db.connection, DataTypes)
-  db.Patologias = require('./models/Patologias.js')(db.connection, DataTypes)
-  db.PersonalMedico = require('./models/PersonalMedico.js')(db.connection, DataTypes)
-  db.PersonalMedicoPaciente = require('./models/PersonalMedico.js')(db.connection, DataTypes)
+  db.Patologias = require('./models/patologias.js')(db.connection, DataTypes)
+  db.PersonalMedico = require('./models/personalmedico.js')(db.connection, DataTypes)
+  db.PersonalMedicoPaciente = require('./models/personalmedicopaciente.js')(db.connection, DataTypes)
 
-  // Asociar los modelos
+  // Asociar los modelos **
  db.Users.associate(db)
  db.Ubicaciones.associate(db)
  db.Tratamientos.associate(db)
@@ -42,5 +42,5 @@ db.connection = new Sequelize(config.database, config.username, config.password,
  db.Patologias.associate(db) 
  db.PersonalMedico.associate(db)
  db.PersonalMedicoPaciente.associate(db)
-
+  
   module.exports = db
