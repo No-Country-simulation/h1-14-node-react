@@ -74,31 +74,31 @@ import {
 
 const events = [
     {
-        event: "INV001",
+        event: "Tacrolimus 1mg",
         status: "Done",
         dateTime: "2024-07-19T05:50:00Z",
         eventType: "Medicacion",
     },
     {
-        event: "INV002",
+        event: "Prednisona 10mg",
         status: "Pending",
         dateTime: "2024-07-19T04:50:00Z",
         eventType: "Actividad Fisica",
     },
     {
-        event: "INV003",
+        event: "Proteínas y verduras",
         status: "Undone",
         dateTime: "2024-07-19T06:50:00Z",
         eventType: "Alimentacion",
     },
     {
-        event: "INV004",
+        event: "Valganciclovir 450mg",
         status: "Done",
         dateTime: "2024-07-19T07:50:00Z",
         eventType: "Medicacion",
     },
     {
-        event: "INV005",
+        event: "Natación",
         status: "Done",
         dateTime: "2024-07-19T08:50:00Z",
         eventType: "Actividad Fisica",
@@ -116,7 +116,7 @@ const events = [
         eventType: "Medicacion",
     },
     {
-        event: "INV008",
+        event: "Dr. Alberto García",
         status: "Pending",
         dateTime: "2024-07-19T05:00:00Z",
         eventType: "Medico general",
@@ -143,31 +143,31 @@ const events = [
 
 const initialEvents = [
     {
-        event: "INV001",
+        event: "Tacrolimus 1mg",
         status: "Done",
         dateTime: "2024-07-19T05:50:00Z",
         eventType: "Medicacion",
     },
     {
-        event: "INV002",
+        event: "Prednisona 10mg",
         status: "Pending",
         dateTime: "2024-07-19T04:50:00Z",
         eventType: "Actividad Fisica",
     },
     {
-        event: "INV003",
+        event: "Proteínas y verduras",
         status: "Undone",
         dateTime: "2024-07-19T06:50:00Z",
         eventType: "Alimentacion",
     },
     {
-        event: "INV004",
+        event: "Valganciclovir 450mg",
         status: "Done",
         dateTime: "2024-07-19T07:50:00Z",
         eventType: "Medicacion",
     },
     {
-        event: "INV005",
+        event: "Natación",
         status: "Done",
         dateTime: "2024-07-19T08:50:00Z",
         eventType: "Actividad Fisica",
@@ -185,7 +185,7 @@ const initialEvents = [
         eventType: "Medicacion",
     },
     {
-        event: "INV008",
+        event: "Dr. Alberto García",
         status: "Pending",
         dateTime: "2024-07-19T05:00:00Z",
         eventType: "Medico general",
