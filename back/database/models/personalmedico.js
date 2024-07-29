@@ -1,22 +1,32 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const { database, username, password, host, dialect, port } = require('../../config/config');
-
-const sequelize = new Sequelize(database, username, password, {
-  host: host,
-  dialect: dialect,
-  port: port,
-});
-const PersonalMedico = sequelize.define('PersonalMedico', {
-      id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
-      especialidadesId: {type: DataTypes.INTEGER, allowNull: false},
-      usuariosId: {type: DataTypes.INTEGER, allowNull: false},
-      numeroMatricula: {type: DataTypes.STRING, allowNull: false},
-      active: {type: DataTypes.BOOLEAN, defaultValue: true}, 
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class PersonalMedico extends Model {
+    static associate(models) {
+      PersonalMedico.hasOne(models.Users, {
+        as: "Datos Personales",
+        foreignKey: "usuariosId",
+      });
+      PersonalMedico.belongsTo(models.Especialidades, {
+        foreignKey: "especialidadesId",
+        as: "especialidad",
+      });
+    }
+  }
+  PersonalMedico.init(
+    {
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+      especialidadesId: { type: DataTypes.INTEGER, allowNull: false },
+      usuariosId: { type: DataTypes.INTEGER, allowNull: false },
+      numeroMatricula: { type: DataTypes.STRING, allowNull: false },
+      active: { type: DataTypes.BOOLEAN, defaultValue: true },
     },
     {
       timestamps: true,
-    }, {
-    sequelize,
-    modelName: 'PersonalMedico',
-  });
-  module.exports = PersonalMedico;
+      sequelize,
+      modelName: "PersonalMedico",
+      tableName: "PersonalMedico",
+    }
+  );
+  return PersonalMedico;
+};
