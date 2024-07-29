@@ -11,7 +11,6 @@ import  Home  from "../home";
 
 
 
-
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/registro', element: <DoctorRegistry /> },
@@ -21,8 +20,7 @@ const AppRoutes = () => {
     {path: '/', element: <LandingPage />},
     { path: '/resetPassword', element: <EmailResetPassword />},
     {path:'/home', element: <Home />},
-    
-  ])
+
 
   return routes
 };

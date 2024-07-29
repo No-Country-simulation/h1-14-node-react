@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Especialidades.init(
     {
-      // id: { type: DataTypes.INTEGER, primarykey: true, autoIncrement: true },
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: DataTypes.STRING, allowNull: false },
       description: { type: DataTypes.STRING, allowNull: false },
       active: { type: DataTypes.BOOLEAN, defaultValue: true },
@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Especialidades",
+      tableName: "Especialidades",
       timestamps: true,
     }
   );

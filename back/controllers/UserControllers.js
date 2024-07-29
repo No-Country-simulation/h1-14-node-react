@@ -185,9 +185,8 @@ const updateUsers = async (req, res) => {
     if (email !== undefined) User.email = email;
     if (phone !== undefined) User.phone = phone;
     if (active !== undefined) User.active = active;
-      await User.save();
-      res.status(200).json({ message: "User actualizado", User });
-    
+    await User.save();
+    res.status(200).json({ message: "User actualizado", User });
   } catch (error) {
     console.error("Error al actualizar User:", error);
     res.status(500).json({ message: "Error al actualizar User", error });
@@ -198,12 +197,13 @@ const logicalDeleteUsers = async (req, res) => {
   const userId = req.params.id;
   const { active } = req.body;
 
-  if (typeof active !== 'boolean') {
-    return res.status(400).json({ message: "El campo 'active' debe ser un valor booleano" });
+  if (typeof active !== "boolean") {
+    return res
+      .status(400)
+      .json({ message: "El campo 'active' debe ser un valor booleano" });
   }
 
   try {
-    
     const user = await Users.findByPk(userId, {
       attributes: [
         "id",
@@ -236,7 +236,6 @@ const logicalDeleteUsers = async (req, res) => {
       ],
     });
 
-  
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
@@ -247,13 +246,12 @@ const logicalDeleteUsers = async (req, res) => {
     const status = user.active ? "activado" : "desactivado";
     res.status(200).json({ message: `Usuario ${status}` });
   } catch (error) {
-    
     console.error(error);
-    res.status(500).json({ message: "Error al actualizar el estado del usuario", error });
+    res
+      .status(500)
+      .json({ message: "Error al actualizar el estado del usuario", error });
   }
 };
-
-
 
 const physicalDeleteUsers = async (req, res) => {
   const { id } = req.params;
@@ -294,8 +292,7 @@ const physicalDeleteUsers = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
     await User.destroy();
-      res.status(200).json({ message: "Users eliminada" });
-    
+    res.status(200).json({ message: "Users eliminada" });
   } catch (error) {
     console.error("Error al eliminar Users:", error);
     res.status(500).json({ message: "Error al eliminar Users", error });

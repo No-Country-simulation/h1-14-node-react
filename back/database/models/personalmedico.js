@@ -7,11 +7,15 @@ module.exports = (sequelize, DataTypes) => {
         as: "Datos Personales",
         foreignKey: "usuariosId",
       });
+      PersonalMedico.belongsTo(models.Especialidades, {
+        foreignKey: "especialidadesId",
+        as: "especialidad",
+      });
     }
   }
   PersonalMedico.init(
     {
-      // id: {type: DataTypes.INTEGER, primarykey: true, autoIncrement:true},
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       especialidadesId: { type: DataTypes.INTEGER, allowNull: false },
       usuariosId: { type: DataTypes.INTEGER, allowNull: false },
       numeroMatricula: { type: DataTypes.STRING, allowNull: false },
@@ -21,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
       sequelize,
       modelName: "PersonalMedico",
+      tableName: "PersonalMedico",
     }
   );
   return PersonalMedico;
