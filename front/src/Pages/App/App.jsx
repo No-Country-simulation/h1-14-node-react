@@ -13,6 +13,7 @@ import PatientList from "../patientList";
 import DoctorCalendar from "../DoctorCalendar/Index";
 import Notas from "../Notas/Index";
 import  Home  from "../home";
+import Tratamientos from './../Tratamientos/Index';
 
 
 
@@ -30,7 +31,8 @@ const AppRoutes = () => {
     {path: '/patientList', element: <PatientList />},
     { path: '/doctorCalendar', element: <DoctorCalendar />},
     { path: '/notas', element: <Notas />},
-    {path:'/home', element: <Home />}
+    {path:'/home', element: <Home />},
+    { path: '/tratamientos', element: <Tratamientos />}
   ])
 
   return routes
