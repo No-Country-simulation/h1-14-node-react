@@ -7,7 +7,7 @@ import ViewTratamiento from '../../Components/viewTratamientos/Index';
 import FormDoctorCrud from '../../Components/formDoctorCrud/Index'
 import SideBar from "../../Components/sideBar";
 import ViewPatient from "../../Components/viewPatient"
-import ViewNotas from "../../Components/viewNotas";
+import ViewNotas from "../../Components/viewNotas/Index";
 function Home() {
     const [view, setView] = useState("inicio")
     const [rol, setRol] = useState("paciente");
