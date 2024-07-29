@@ -30,7 +30,7 @@ module.exports = {
       lastName: { 
         type: Sequelize.STRING 
       },
-      brithday: { 
+      birthday: { 
         type: Sequelize.DATE 
       },
       role: {
@@ -51,7 +51,8 @@ module.exports = {
         allowNull: true 
       },
       active: { 
-        type: Sequelize.BOOLEAN 
+        type: Sequelize.BOOLEAN,
+        defaultValue: true 
       },
       createdAt: {
         allowNull: false,
