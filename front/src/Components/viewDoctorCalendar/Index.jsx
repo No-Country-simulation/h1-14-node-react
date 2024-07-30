@@ -75,31 +75,31 @@ import {
 
 const events = [
     {
-        event: "INV001",
+        event: "Juan Pérez",
         status: "Done",
         dateTime: "2024-07-19T05:50:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV002",
+        event: "Cristina López",
         status: "Pending",
         dateTime: "2024-07-19T04:50:00Z",
-        eventType: "Junta medica",
-    },
-    {
-        event: "INV003",
-        status: "Undone",
-        dateTime: "2024-07-19T06:50:00Z",
-        eventType: "Junta medica",
-    },
-    {
-        event: "INV004",
-        status: "Done",
-        dateTime: "2024-07-19T07:50:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV005",
+        event: "Lic. Maristella González",
+        status: "Undone",
+        dateTime: "2024-07-19T06:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Done",
+        dateTime: "2024-07-19T07:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Tacrolimus 1 mg",
         status: "Done",
         dateTime: "2024-07-19T08:50:00Z",
         eventType: "Junta medica",
@@ -111,19 +111,19 @@ const events = [
         eventType: "Junta medica",
     },
     {
-        event: "INV007",
+        event: "Amilcar Ramírez",
         status: "Undone",
         dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV008",
+        event: "Amelia Ferreyra",
         status: "Pending",
         dateTime: "2024-07-19T05:00:00Z",
         eventType: "Sobreturno",
     },
     {
-        event: "INV009",
+        event: "Valganciclovir 450mg",
         status: "Undone",
         dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
@@ -144,31 +144,31 @@ const events = [
 
 const initialEvents = [
     {
-        event: "INV001",
+        event: "Juan Pérez",
         status: "Done",
         dateTime: "2024-07-19T05:50:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV002",
+        event: "Cristina López",
         status: "Pending",
         dateTime: "2024-07-19T04:50:00Z",
-        eventType: "Junta medica",
-    },
-    {
-        event: "INV003",
-        status: "Undone",
-        dateTime: "2024-07-19T06:50:00Z",
-        eventType: "Junta medica",
-    },
-    {
-        event: "INV004",
-        status: "Done",
-        dateTime: "2024-07-19T07:50:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV005",
+        event: "Lic. Maristella González",
+        status: "Undone",
+        dateTime: "2024-07-19T06:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Done",
+        dateTime: "2024-07-19T07:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Tacrolimus 1 mg",
         status: "Done",
         dateTime: "2024-07-19T08:50:00Z",
         eventType: "Junta medica",
@@ -180,19 +180,19 @@ const initialEvents = [
         eventType: "Junta medica",
     },
     {
-        event: "INV007",
+        event: "Amilcar Ramírez",
         status: "Undone",
         dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
     },
     {
-        event: "INV008",
+        event: "Amelia Ferreyra",
         status: "Pending",
         dateTime: "2024-07-19T05:00:00Z",
         eventType: "Sobreturno",
     },
     {
-        event: "INV009",
+        event: "Valganciclovir 450mg",
         status: "Undone",
         dateTime: "2024-07-19T06:00:00Z",
         eventType: "Consulta",
@@ -510,7 +510,7 @@ const [currentPage, setCurrentPage] = useState(1);
                                 <TableHead className="w-auto text-white"><Square /></TableHead>
                                 <TableHead className="w-auto text-white">Horario</TableHead>
                                 <TableHead className="w-auto text-white" >Categoria</TableHead>
-                                <TableHead className="w-auto text-white">Detalle</TableHead>
+                                <TableHead className="w-auto text-white">Paciente</TableHead>
                                 <TableHead className="w-auto text-white"></TableHead>
                                 <TableHead className="w-auto text-white"></TableHead>
                             </TableRow>
