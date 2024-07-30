@@ -6,16 +6,21 @@ const userRouter = require("./UsersRoutes");
 const personalMedicoRouter = require("./PersonalMedicoRoutes");
 const patientRouter = require("./PatientsRoutes");
 // const usersRouter = require('./UsersRoutes');
-const loginRouter = require('./LoginRoutes');
-const entidadRouter = require("./EntidadesRoutes");
-const fianciadoresRouter = require("./FinanciadoresRoutes");
-const ubicacionRouter = require("./UbicacionRoutes");
-const farmaciasRouter = require("./FarmaciasRoutes");
-const especialidadesRouter = require("./EspecialidadesRoutes");
-const laboratoriosRouter = require("./LaboratoriosRoutes");
-const patologiasRouter = require("./PatologiasRoutes");
-const tratamientosRouter = require("./TratamientosRoutes");
-const recetasRouter = require("./RecetasRoutes");
+// const loginRouter = require('./LoginRoutes');
+const entidadRouter = require('./EntidadesRoutes');
+const fianciadoresRouter = require('./FinanciadoresRoutes');
+const ubicacionRouter = require('./UbicacionRoutes');
+const farmaciasRouter = require('./FarmaciasRoutes');
+const especialidadesRouter = require('./EspecialidadesRoutes');
+const laboratoriosRouter = require('./LaboratoriosRoutes');
+const patologiasRouter = require('./PatologiasRoutes');
+const tratamientosRouter = require('./TratamientosRoutes');
+const recetasRouter = require('./RecetasRoutes');
+const eventosPacienteRouter = require('./CalendarioPacientesRoutes');
+const eventosDoctorRouter = require('./CalendarioDoctoresRoutes');
+const notasPacientesRouter = require('./NotasPacientesRoutes');
+const prescripcionRouter = require('./PrescripcionRoutes');
+
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -60,5 +65,17 @@ router.use("/api/v1/tratamiento", tratamientosRouter);
 
 // Recetas
 router.use("/api/v1/recetas", recetasRouter);
+
+// Eventos Pacientes
+router.use('/api/v1/eventospaciente', eventosPacienteRouter)
+
+// Eventos Doctores
+router.use('/api/v1/eventosdoctor', eventosDoctorRouter)
+
+// Eventos Pacientes
+router.use('/api/v1/notaspaciente', notasPacientesRouter)
+
+// Prescripciones Pacientes
+router.use('/api/v1/prescripcion', prescripcionRouter)
 
 module.exports = router;

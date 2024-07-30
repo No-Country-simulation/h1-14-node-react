@@ -1,0 +1,7 @@
+DB_HOST: "monorail.proxy.rlwy.net"
+DB_PORT: 47206
+DB_NAME: "DB_justinaio"
+DB_USERNAME: "root"
+DB_PASSWORD: "ElIEeKDnAwRBCotWihfIyqnTJPysiPMk"
+DB_DIALECT: 'mysql'
+TOKEN_KEY: 'N13nC1en4ñ0510s48r4S'
