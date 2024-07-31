@@ -26,9 +26,9 @@ function SideBar({setView, rol}) {
   }
 
   return (
-    <div className="bg-bgNavBar w-[243px] md:w-[200px] lg:w-[243px] h-full p-4 flex flex-col">
+    <div className="bg-bgNavBar w-full h-full p-4 flex flex-col">
       <div className="flex flex-col gap-12 flex-grow">
-        <Link to="/">
+        <Link to="/home">
           <div className="flex justify-center md:justify-start">
             <img className="w-24 md:w-32 h-auto" src={ImageLogo} alt="Logo" />
           </div>
