@@ -39,17 +39,20 @@ function FormLogin() {
   };
 
   return (
-    <div 
+    <div
       className="h-screen w-screen flex justify-end items-center bg-bg-login bg-cover bg-end md:bg-cover md:bg-end"
-      style={{ 
-        backgroundSize: '80% 100%', 
-        backgroundPosition: 'left top', 
-        backgroundRepeat: 'no-repeat' 
+      style={{
+        backgroundSize: "80% 100%",
+        backgroundPosition: "left top",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="h-full w-full md:w-2/4 flex flex-col justify-center items-center bg-custom-bg md:bg-cover md:bg-center md:bg-opacity-50">
         <div className="w-3/4 md:w-2/4 flex flex-col items-center">
-          <img src={Logo} alt="Logo" className="mb-4" />
+          <Link to={"/"}>
+            <img src={Logo} alt="Logo" className="mb-4" />
+          </Link>
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col space-y-5 w-full"
