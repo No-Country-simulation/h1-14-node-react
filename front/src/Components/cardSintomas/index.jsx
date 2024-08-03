@@ -48,7 +48,7 @@ import { formatDate } from "date-fns"
 
 
 
-const CardTratamientos = ({ noteType, date, description, status, name, }) => {
+const CardSintomas = ({ noteType, date, description, status, name, }) => {
 
   const getBadgeClass = (noteType) => {
     switch (noteType) {
@@ -68,11 +68,11 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
   const formatDate = (date) => {
     const date2 = new Date(date);
     return new Intl.DateTimeFormat('es-ES', {
-      // hour: 'numeric',
-      // minute: '2-digit',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
     }).format(date2);
   };
 
@@ -116,16 +116,16 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
 
         </div>
         <div className=' flex-col'>
-          {/* <Button size="sm" className={`rounded-sm  h-6 ${getBadgeClass(noteType)}`} Type="submit">{noteType}</Button> */}
-          <p className='flex ' >  {noteType}</p>
-          <p className='text-sm font text-blackCardText'>
+          {/* <Button size="sm" className={`rounded-sm  h-6 ${getBadgeClass(noteType)}`} Type="submit">{noteType}</Button>
+          <p className='flex ' >  {noteType}</p> */}
+          {/* <p className='text-sm font text-blackCardText'>
             Dosis: {status}
-          </p>
+          </p> */}
           <p className='text-sm font text-blackCardText'>
             Instrucciones: {description}
           </p>
-          <p className='text-sm font text-blackCardText'>
-            Proxima Reposicion: {(formatDate(date))}
+          <p className='text-xs font text-blackCardText text-right'>
+            <span>{(formatDate(date))}</span>
           </p>
         </div>
       </div>
@@ -133,4 +133,4 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
   );
 };
 
-export default CardTratamientos;
+export default CardSintomas;
