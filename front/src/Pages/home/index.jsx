@@ -11,13 +11,19 @@ import ViewNotas from "../../Components/viewNotas/Index";
 import ViewPatientHome from "../../Components/viewPatientHome/Index";
 import ViewPatientHistory from "../../Components/viewPatientHistory/Index";
 import ViewDoctorHome from "../../Components/viewDoctorHome/Index";
+import { useAuth } from "../../context/authContext";
 
 function Home() {
+  const { auth, patients } = useAuth();
   const [view, setView] = useState("inicio");
-  const [rol, setRol] = useState("paciente");
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const sidebarRef = useRef(null);
+  const rol = auth.user.role
+  const name = auth.user.firstName
 
+
+  console.log(rol)
+  console.log(name)
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
@@ -62,16 +68,16 @@ function Home() {
           isSidebarVisible={isSidebarVisible}
         />
         <div className="flex-grow p-4 overflow-y-auto">
-          {view === "patient" && <ViewPatient />}
+          {view === "patient" && <ViewPatient patients={patients} />}
           {view === "not" && <ViewNotas />}
           {view === "treatment" && <ViewTratamiento />}
-          {view === "calendar" && rol === "paciente" && <PatientCalendar />}
-          {view === "calendar" && rol === "medico" && <ViewDoctorCalendar />}
-          {view === "confi" && rol === "medico" && <FormDoctorCrud />}
-          {view === "config" && rol === "paciente" && <FormPatientCrud />}
-          {view === "inicio" && rol === "paciente" && <ViewPatientHome />}
-          {view === "inicio" && rol === "medico" && <ViewDoctorHome />}
-          {view === "history" && rol === "paciente" && <ViewPatientHistory />}
+          {view === "calendar" && rol === "PACIENTE" && <PatientCalendar />}
+          {view === "calendar" && rol === "MEDICO" && <ViewDoctorCalendar />}
+          {view === "config" && rol === "MEDICO" && <FormDoctorCrud />}
+          {view === "config" && rol === "PACIENTE" && <FormPatientCrud />}
+          {view === "inicio" && rol === "PACIENTE" && <ViewPatientHome name={name}/>}
+          {view === "inicio" && rol === "MEDICO" && <ViewDoctorHome name={name} />}
+          {view === "history" && rol === "PACIENTE" && <ViewPatientHistory />}
         </div>
       </div>
     </div>
