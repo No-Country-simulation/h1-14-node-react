@@ -48,12 +48,11 @@ import { formatDate } from "date-fns"
 
 
 
-const CardTratamientos = ({ noteType, date, instructions, status, name, dose, via, frequency, duration }) => {
-
+const CardSintomas = ({ noteType, date, description, status, name, }) => {
 
   const getBadgeClass = (noteType) => {
     switch (noteType) {
-      case "Medicacion Esencial":
+      case "Medicacion Escencial":
         return " bg-greenBadge text-blackCardTitle";
       case "Tratamiento complementario":
         return "bg-yellowBadge text-blackCardTitle";
@@ -69,11 +68,11 @@ const CardTratamientos = ({ noteType, date, instructions, status, name, dose, vi
   const formatDate = (date) => {
     const date2 = new Date(date);
     return new Intl.DateTimeFormat('es-ES', {
-      // hour: 'numeric',
-      // minute: '2-digit',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
     }).format(date2);
   };
 
@@ -117,18 +116,16 @@ const CardTratamientos = ({ noteType, date, instructions, status, name, dose, vi
 
         </div>
         <div className=' flex-col'>
-          {/* <Button size="sm" className={`rounded-sm  h-6 ${getBadgeClass(noteType)}`} Type="submit">{noteType}</Button> */}
-          <p className='flex ' >  {noteType}</p>
+          {/* <Button size="sm" className={`rounded-sm  h-6 ${getBadgeClass(noteType)}`} Type="submit">{noteType}</Button>
+          <p className='flex ' >  {noteType}</p> */}
+          {/* <p className='text-sm font text-blackCardText'>
+            Dosis: {status}
+          </p> */}
           <p className='text-sm font text-blackCardText'>
-            Dosis: {`${ dose + " via " + via + " cada " + frequency + " hrs," + " por " + duration + " dias."}`}
-            {/* Dosis: {dose} */}
+            Instrucciones: {description}
           </p>
-          <p className='text-sm font text-blackCardText'>
-            {/* Instrucciones: {instructions} */}
-            Instrucciones: {instructions}
-          </p>
-          <p className='text-sm font text-blackCardText'>
-            Proxima Reposicion: {(formatDate(date))}
+          <p className='text-xs font text-blackCardText text-right'>
+            <span>{(formatDate(date))}</span>
           </p>
         </div>
       </div>
@@ -136,4 +133,4 @@ const CardTratamientos = ({ noteType, date, instructions, status, name, dose, vi
   );
 };
 
-export default CardTratamientos;
+export default CardSintomas;

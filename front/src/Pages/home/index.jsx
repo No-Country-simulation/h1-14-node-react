@@ -13,6 +13,9 @@ import ViewPatientHistory from "../../Components/viewPatientHistory/Index";
 import ViewDoctorHome from "../../Components/viewDoctorHome/Index";
 import { useAuth } from "../../context/authContext";
 
+import ViewTratamientoDoctor from "../../Components/viewTratamientosDoctor/Index";
+import SpeechTestSP from "../../Components/speechText/Index";
+
 function Home() {
   const { auth, patients } = useAuth();
   const [view, setView] = useState("inicio");
@@ -70,7 +73,7 @@ function Home() {
         <div className="flex-grow p-4 overflow-y-auto">
           {view === "patient" && <ViewPatient patients={patients} />}
           {view === "not" && <ViewNotas />}
-          {view === "treatment" && <ViewTratamiento />}
+          {view === "treatment" && rol === 'PACIENTE' && <ViewTratamiento />}
           {view === "calendar" && rol === "PACIENTE" && <PatientCalendar />}
           {view === "calendar" && rol === "MEDICO" && <ViewDoctorCalendar />}
           {view === "config" && rol === "MEDICO" && <FormDoctorCrud />}
@@ -78,6 +81,9 @@ function Home() {
           {view === "inicio" && rol === "PACIENTE" && <ViewPatientHome name={name}/>}
           {view === "inicio" && rol === "MEDICO" && <ViewDoctorHome name={name} />}
           {view === "history" && rol === "PACIENTE" && <ViewPatientHistory />}
+          {view === "treatmentDoctor" && rol === 'MEDICO' && <ViewTratamientoDoctor />}
+          {view === "speechText" && <SpeechTestSP />}
+
         </div>
       </div>
     </div>
