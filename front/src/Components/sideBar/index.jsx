@@ -70,6 +70,24 @@ function SideBar({setView, rol}) {
                 <img className="w-6 h-6" src={logoTratamiento} alt="Tratamientos" />
                 <p className="text-white text-sm ml-2">Tratamientos</p>
               </button>
+
+              <button 
+              className={`${active === "treatment" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+              onClick={() => handleSelect("treatmentDoctor")}
+              >
+                <img className="w-6 h-6" src={logoTratamiento} alt="Tratamientos" />
+                <p className="text-white text-sm ml-2">Tratamientos Doctor</p>
+              </button>
+              <button 
+              className={`${active === "speechText" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+              onClick={() => handleSelect("speechText")}
+              >
+                <img className="w-6 h-6" src={logoTratamiento} alt="speechTExt" />
+                <p className="text-white text-sm ml-2">SpeechText</p>
+              </button>
+
+
+
               <button 
               className={`${active === "not" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
               onClick={() => handleSelect("not")}

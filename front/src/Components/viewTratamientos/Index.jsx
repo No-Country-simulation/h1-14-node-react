@@ -5,7 +5,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import CardTratamientos from "../cardTratamientos"
 import CardSintomas from "../cardSintomas"
 import { Button } from "@/Components/ui/button"
-import { PenLine, Plus, Clock } from "lucide-react";
+import { PenLine, Plus, Clock, PlusCircle, Mic, Save, CircleStop } from "lucide-react";
 import { getHours, getMinutes } from 'date-fns';
 
 import {
@@ -46,6 +46,8 @@ import {
     SelectValue,
 
 } from "@/Components/ui/select"
+
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const listaSintomas = [
     {
@@ -528,17 +530,17 @@ const sintomas = [
         date: "2024-07-20T06:00:00Z",
         status: "",
     },
-{
-    name: "Dolor ocular",
-    noteType: "Sintomas",
-    status: "",
-    description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
-    date: "2024-07-23T09:00:00Z",
-    dose: "60 mg",
-    via: "oral",
-    frequency: "12",
-    duration: "1",
-},
+    {
+        name: "Dolor ocular",
+        noteType: "Sintomas",
+        status: "",
+        description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+        date: "2024-07-23T09:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
+    },
 ];
 
 
@@ -564,17 +566,17 @@ const initialSintomas = [
         date: "2024-07-20T06:00:00Z",
         status: "",
     },
-{
-    name: "Dolor ocular",
-    noteType: "Sintomas",
-    status: "",
-    description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
-    date: "2024-07-23T09:00:00Z",
-    dose: "60 mg",
-    via: "oral",
-    frequency: "12",
-    duration: "1",
-},
+    {
+        name: "Dolor ocular",
+        noteType: "Sintomas",
+        status: "",
+        description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+        date: "2024-07-23T09:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
+    },
 ];
 
 const tratamientos = [
@@ -765,6 +767,7 @@ function ViewTratamientos() {
     //calendar on the right
     const [date1, setDate1] = useState((new Date()));
 
+    const [tratamientos, setTratamientos] = useState(initialTratamientos);
     const [sintomas, setSintomas] = useState(initialSintomas);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [newNote, setNewNote] = useState({ name: "", date: "", description: "", noteType: "", status: "" });
@@ -776,37 +779,43 @@ function ViewTratamientos() {
     const otrosSintomas = sintomas.filter(sintoma => sintoma.noteType === "Sintomas");
 
 
-
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewNote({
-            ...newNote,
-            [name]: value
-        });
-    };
-
-    const handleAddNote = () => {
-        setTratamientos([...tratamientos, { ...newNote, date: new Date().toISOString() }]);
-        setIsDialogOpen(false);
-        setNewNote({ name: "", date: "", description: "", noteType: "", status: "" });
-    };
-
-    const uniqueNoteTypes = [...new Set(tratamientos.map(tratamientos => tratamientos.noteType))];
-    const getBadgeClass = (noteType) => {
-        switch (noteType) {
-            case "Medicacion Esencial":
-                return " bg-greenBadge text-blackCardTitle";
-            case "Tratamiento complementario":
-                return "bg-yellowBadge text-blackCardTitle";
-            case "Otras indicaciones":
-                return "bg-purple-500 text-blackCardTitle";
-            case "Sintomas":
-                return "bg-pink600 text-blackCardTitle";
-            default:
-                return "";
+    const handleDateSelect = (date) => {
+        if (!date || isNaN(new Date(date).getTime())) {
+            setDate1(new Date());
+        } else {
+            setDate1(date);
         }
     };
+
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setNewNote({
+    //         ...newNote,
+    //         [name]: value
+    //     });
+    // };
+
+    // const handleAddNote = () => {
+    //     setTratamientos([...tratamientos, { ...newNote, date: new Date().toISOString() }]);
+    //     setIsDialogOpen(false);
+    //     setNewNote({ name: "", date: "", description: "", noteType: "", status: "" });
+    // };
+
+    // const uniqueNoteTypes = [...new Set(tratamientos.map(tratamientos => tratamientos.noteType))];
+    // const getBadgeClass = (noteType) => {
+    //     switch (noteType) {
+    //         case "Medicacion Esencial":
+    //             return " bg-greenBadge text-blackCardTitle";
+    //         case "Tratamiento complementario":
+    //             return "bg-yellowBadge text-blackCardTitle";
+    //         case "Otras indicaciones":
+    //             return "bg-purple-500 text-blackCardTitle";
+    //         case "Sintomas":
+    //             return "bg-pink600 text-blackCardTitle";
+    //         default:
+    //             return "";
+    //     }
+    // };
 
     // sintomas
     const [searchKeyword, setSearchKeyword] = useState('');
@@ -815,7 +824,7 @@ function ViewTratamientos() {
         return listaSintomas.filter(sintoma =>
             sintoma.name.toLowerCase().includes(searchKeyword.toLowerCase())
         );
-    }, [searchKeyword]);
+    }, []);
 
     const handleInputSintomaChange = (e) => {
         const { name, value } = e.target;
@@ -828,45 +837,50 @@ function ViewTratamientos() {
         setSintomas([...sintomas, { ...newSintoma, date: date1 }]);
         setIsDialogOpen(false);
         setNewSintoma({ name: "", date: "", description: "", noteType: "Sintomas", status: "" });
-    }; 
-    
-        //Hora
-        const [time, setTime] = useState({ hour: '', minute: '' });
-        const handleTimeChange = (e) => {
-            const { name, value } = e.target;
-            setTime((prev) => ({ ...prev, [name]: value }));
-    
-            // Update the date1 state to include the selected time
-            const updatedDate = new Date(date1);
-            if (name === 'hour') {
-                updatedDate.setHours(value);
-            } else if (name === 'minute') {
-                updatedDate.setMinutes(value);
-            }
-            setDate1(updatedDate);
-        };
+    };
+
+    //Hora
+    const [time, setTime] = useState({ hour: '', minute: '' });
+    const handleTimeChange = (e) => {
+        const { name, value } = e.target;
+        setTime((prev) => ({ ...prev, [name]: value }));
+
+        // Update the date1 state to include the selected time
+        const updatedDate = new Date(date1);
+        if (name === 'hour') {
+            updatedDate.setHours(value);
+        } else if (name === 'minute') {
+            updatedDate.setMinutes(value);
+        }
+        setDate1(updatedDate);
+    };
+
+    //record
+    const { transcript, listening, resetTranscript } = useSpeechRecognition();
+    const [isRecording, setIsRecording] = useState(false);
+
+    const startListening = () => {
+        setIsRecording(true);
+        // SpeechRecognition.startListening({ continuous: true });
+        SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+    };
+
+    const stopListening = () => {
+        setIsRecording(false);
+        SpeechRecognition.stopListening();
+    };
+
+    const saveTranscription = () => {
+        handleInputSintomaChange({ target: { name: 'description', value: transcript } });
+        resetTranscript();
+    };
 
 
     return (
         <div className='flex bg-white'>
 
             <div className='bg-secondary p-4'>
-                {/* <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 px-2">
-                    {tratamientos.map((tratamiento, index) => (
 
-                        <div key={index} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
-                            <CardTratamientos
-                                key={index}
-                                noteType={tratamiento.noteType}
-                                date={tratamiento.date}
-                                description={tratamiento.description}
-                                name={tratamiento.name}
-                                status={tratamiento.status}
-                            />
-                        </div>
-                    ))}
-
-                </div> */}
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div >
@@ -875,16 +889,16 @@ function ViewTratamientos() {
                         {medicacionEsencial.map(tratamiento => (
                             <div key={tratamiento.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
                                 <CardTratamientos
-                                        key={tratamiento.name}
-                                        noteType={tratamiento.noteType}
-                                        date={tratamiento.date}
-                                        instructions={tratamiento.instructions}
-                                        status={tratamiento.status}
-                                        name={tratamiento.name}
-                                        dose={tratamiento.dose}
-                                        via={tratamiento.via}
-                                        frequency={tratamiento.frequency}
-                                        duration={tratamiento.duration}
+                                    key={tratamiento.name}
+                                    noteType={tratamiento.noteType}
+                                    date={tratamiento.date}
+                                    instructions={tratamiento.instructions}
+                                    status={tratamiento.status}
+                                    name={tratamiento.name}
+                                    dose={tratamiento.dose}
+                                    via={tratamiento.via}
+                                    frequency={tratamiento.frequency}
+                                    duration={tratamiento.duration}
                                 />
                             </div>
                         ))}
@@ -896,16 +910,16 @@ function ViewTratamientos() {
                             <div key={tratamiento.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
 
                                 <CardTratamientos
-                                        key={tratamiento.name}
-                                        noteType={tratamiento.noteType}
-                                        date={tratamiento.date}
-                                        instructions={tratamiento.instructions}
-                                        status={tratamiento.status}
-                                        name={tratamiento.name}
-                                        dose={tratamiento.dose}
-                                        via={tratamiento.via}
-                                        frequency={tratamiento.frequency}
-                                        duration={tratamiento.duration}
+                                    key={tratamiento.name}
+                                    noteType={tratamiento.noteType}
+                                    date={tratamiento.date}
+                                    instructions={tratamiento.instructions}
+                                    status={tratamiento.status}
+                                    name={tratamiento.name}
+                                    dose={tratamiento.dose}
+                                    via={tratamiento.via}
+                                    frequency={tratamiento.frequency}
+                                    duration={tratamiento.duration}
                                 />
                             </div>
                         ))}
@@ -951,7 +965,7 @@ function ViewTratamientos() {
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div >
-                                    <Select name="name" value={newSintoma.name} onValueChange={(value) => setNewSintoma({ ...newSintoma, name: value })}>
+                                    <Select name="name" onValueChange={(value) => setNewSintoma({ ...newSintoma, name: value })} value={newSintoma.name}>
                                         <SelectTrigger className="w-full">
                                             <SelectValue
                                                 placeholder={`${"Seleccione sintoma"}`} />
@@ -968,129 +982,100 @@ function ViewTratamientos() {
                                         </SelectContent>
                                     </Select>
                                 </div>
+
+
+
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant={"outline"}
+                                            className={cn(
+                                                "w-[280px] justify-start text-left font-normal",
+                                                !date1 && "text-muted-foreground"
+                                            )}
+                                        >
+                                            <CalendarIcon className="mr-2 h-4 w-4" />
+                                            {date1 ? format(date1, "PPP") : <span>Seleccione fecha</span>}
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0">
+                                        <Calendar
+                                            mode="single"
+                                            selected={date1}
+                                            onSelect={handleDateSelect}
+                                            onChange={handleInputSintomaChange}
+                                            initialFocus
+                                        />
+                                    </PopoverContent>
+                                </Popover>
+
+
+
+
                                 <div>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-[280px] justify-start text-left font-normal",
-                                                    !date1 && "text-muted-foreground"
-                                                )}
-                                            >
-                                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                                {date1 ? format(date1, "PPP") : <span>Fecha y hora</span>}
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="flex w-auto flex-col space-y-2 p-2">
-                                            <Select
-                                                onValueChange={(value) =>
-                                                    setDate1(addDays(new Date(), parseInt(value)))
-                                                }
-                                            >
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Selecciene fecha" />
-                                                </SelectTrigger>
-                                                <SelectContent position="popper">
-                                                    {/* <SelectItem value="0">Ahora</SelectItem> */}
-                                                    <SelectItem value="0">Hoy</SelectItem>
-                                                    <SelectItem value="-1">Ayer</SelectItem>
-                                                    <SelectItem value="-2">Hace 2 dias</SelectItem>
-                                                    <SelectItem value="-7">Hace 1 semana </SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                            <div className="rounded-md border">
-                                                <Calendar mode="single" selected={date1} onSelect={setDate1} />
-                                            </div>
 
-
-
-                                        </PopoverContent>
-                                            {/* Campos de hora  */}
-                                            <div className=' pt-2 px-4'>
-                                                <div className='flex space-x-4 align-baseline'>
-                                                    <div>
-                                                        <Label className="block text-sm font-medium mb-2 text-blue-500">Hora</Label>
-                                                        <input
-                                                            type="number"
-                                                            name="hour"
-                                                            value={time.hour}
-                                                            onChange={handleTimeChange}
-                                                            placeholder={getHours(date1)}
-                                                            className="py-2 px-1 border rounded-md w-16  text-center"
-                                                            min="0"
-                                                            max="23"
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <Label className="block text-sm font-medium mb-2  text-blue-500">Minutos</Label>
-
-                                                        <div className='flex'>
-                                                            <input
-                                                                type="number"
-                                                                name="minute"
-                                                                value={time.minute}
-                                                                onChange={handleTimeChange}
-                                                                placeholder={getMinutes(date1)}
-                                                                className="py-2 px-1 border rounded w-16 text-center"
-                                                                min="0"
-                                                                max="59"
-                                                            /> <span className='bottom-4 pl-4 py-2 '> <Clock stroke="#5666bf" /></span>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                    </Popover>
 
                                 </div>
 
 
-                                <div>
-    <Label className="block text-sm font-medium mb-2">Status</Label>
-    <div className="flex flex-col space-y-2">
-        <label className="inline-flex items-center">
-            <input
-                type="radio"
-                name="status"
-                value="Better than yesterday"
-                checked={newSintoma.status === "Better than yesterday"}
-                onChange={handleInputSintomaChange}
-                className="form-radio"
-            />
-            <span className="ml-2">Better than yesterday</span>
-        </label>
-        <label className="inline-flex items-center">
-            <input
-                type="radio"
-                name="status"
-                value="Same as yesterday"
-                checked={newSintoma.status === "Same as yesterday"}
-                onChange={handleInputSintomaChange}
-                className="form-radio"
-            />
-            <span className="ml-2">Same as yesterday</span>
-        </label>
-        <label className="inline-flex items-center">
-            <input
-                type="radio"
-                name="status"
-                value="Worse than yesterday"
-                checked={newSintoma.status === "Worse than yesterday"}
-                onChange={handleInputSintomaChange}
-                className="form-radio"
-            />
-            <span className="ml-2">Worse than yesterday</span>
-        </label>
-    </div>
-</div>
+                                {/* <div>
+                                    <Label className="block text-sm font-medium mb-2">Status</Label>
+                                    <div className="flex flex-col space-y-2">
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="Better than yesterday"
+                                                checked={newSintoma.status === "Better than yesterday"}
+                                                onChange={handleInputSintomaChange}
+                                                className="form-radio"
+                                            />
+                                            <span className="ml-2">Better than yesterday</span>
+                                        </label>
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="Same as yesterday"
+                                                checked={newSintoma.status === "Same as yesterday"}
+                                                onChange={handleInputSintomaChange}
+                                                className="form-radio"
+                                            />
+                                            <span className="ml-2">Same as yesterday</span>
+                                        </label>
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="Worse than yesterday"
+                                                checked={newSintoma.status === "Worse than yesterday"}
+                                                onChange={handleInputSintomaChange}
+                                                className="form-radio"
+                                            />
+                                            <span className="ml-2">Worse than yesterday</span>
+                                        </label>
+                                    </div>
+                                </div> */}
 
 
                                 <div>
-                                    <Label className="block text-sm font-medium mb-2">Detalle</Label>
+                                    <div className=''>
+                                        <Label className="block text-sm font-medium mb-2">Detalle
+                                            <span className=' flex float-right text-mic space-x-2'>
+                                                {/* <CircleStop stroke='#D92626' /><Mic /><Save /> */}
+                                                {isRecording ? (
+                                                    <Button variant="ghost" ><CircleStop stroke='#D92626' onClick={stopListening} /></Button>
+                                                ) : (
+                                                    <Button variant="ghost" ><Mic onClick={startListening} /></Button>
+                                                )}
+                                                <Button variant="ghost" ><Save onClick={saveTranscription} /></Button>
+                                            </span>
+                                        </Label>
+                                        <p className='text-xs text-circleStop'>{listening ? 'Escuchando...' : ''}</p>
+                                    </div>
                                     <Textarea
                                         name="description"
-                                        value={newSintoma.description}
+                                        value={newSintoma.description || transcript}
                                         onChange={handleInputSintomaChange}
                                         placeholder="Información sobre el sintoma"
                                         className=" p-2 border rounded w-full"

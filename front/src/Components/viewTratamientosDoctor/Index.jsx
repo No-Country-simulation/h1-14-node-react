@@ -14,8 +14,8 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-  } from "@/Components/ui/popover"
-  import { format } from "date-fns"
+} from "@/Components/ui/popover"
+import { format } from "date-fns"
 import {
     Dialog,
     DialogContent,
@@ -28,6 +28,9 @@ import {
 import { Input } from '@/Components/ui/input';
 import { Label } from "@/Components/ui/label"
 import { Textarea } from '@/Components/ui/textarea';
+
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 
 const sintomas = [
     {
@@ -297,6 +300,27 @@ function ViewTratamientosDoctor() {
         }
     };
 
+    //record
+    const { transcript, listening, resetTranscript } = useSpeechRecognition();
+    const [isRecording, setIsRecording] = useState(false);
+
+    const startListening = () => {
+        setIsRecording(true);
+        // SpeechRecognition.startListening({ continuous: true });
+        SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+    };
+
+    const stopListening = () => {
+        setIsRecording(false);
+        SpeechRecognition.stopListening();
+    };
+
+    const saveTranscription = () => {
+        handleInputChange({ target: { name: 'instructions', value: transcript } });
+        resetTranscript();
+    };
+
+
     return (
         <div className='flex bg-white'>
 
@@ -466,44 +490,53 @@ function ViewTratamientosDoctor() {
                                     <div>
                                         <div className=''>
                                             <Label className=" block text-sm font-medium mb-2">Instrucciones
-                                                <span className=' flex float-right text-mic space-x-2'><CircleStop stroke='#D92626' /><Mic /><Save /></span></Label>
-
+                                                <span className=' flex float-right text-mic space-x-2'>
+                                                    {/* <CircleStop stroke='#D92626' /><Mic /><Save /> */}
+                                                    {isRecording ? (
+                                                        <Button variant="ghost" ><CircleStop stroke='#D92626' onClick={stopListening} /></Button>
+                                                    ) : (
+                                                        <Button variant="ghost" ><Mic onClick={startListening} /></Button>
+                                                    )}
+                                                    <Button variant="ghost" ><Save onClick={saveTranscription} /></Button>
+                                                </span>
+                                            </Label>
+                                            <p className='text-xs text-circleStop'>{listening ? 'Escuchando...' : ''}</p>
                                         </div>
                                         <Textarea
                                             name="instructions"
-                                            value={newNote.instructions}
+                                            value={newNote.instructions || transcript}
                                             onChange={handleInputChange}
                                             placeholder="Instrucciones"
                                             className="p-2 border rounded w-full"
                                         />
                                     </div>
-<div>
+                                    <div>
 
 
-      <Label className="block text-sm font-medium mb-2">Fecha de reposicion</Label>
-                                    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date1 && "text-muted-foreground"
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date1 ? format(date1, "PPP") : <span>Seleccione fecha</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date1}
-          onSelect={handleDateSelect}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
-    </div>
+                                        <Label className="block text-sm font-medium mb-2">Fecha de reposicion</Label>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                    variant={"outline"}
+                                                    className={cn(
+                                                        "w-[280px] justify-start text-left font-normal",
+                                                        !date1 && "text-muted-foreground"
+                                                    )}
+                                                >
+                                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                                    {date1 ? format(date1, "PPP") : <span>Seleccione fecha</span>}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0">
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={date1}
+                                                    onSelect={handleDateSelect}
+                                                    initialFocus
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div>
                                     <div  >
                                         <a href='#'><Button size="sm" className="rounded-sm h-6 bg-greenButtonBg text-greenButtonText space-x-2" Type="link" ><PlusCircle size={16} /><span >  Agregar medicamento</span></Button></a>
 
