@@ -461,8 +461,8 @@ function ViewPatientCalendar() {
 
 
     return (
-        <div className=' flex  '>
-            <div className='flex-grow bg-secondary p-4 w-2/3'>
+        <div className=' flex flex-col  w-11/12'>
+            <div className='flex-grow bg-secondary p-4 w-full md:2/3'>
                 <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDateToES(date1)}</h4>
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
@@ -593,16 +593,16 @@ function ViewPatientCalendar() {
                 </div>
             </div>
 
-            <div className='flex-grow max-w-min  p-4  bg-white'>
+            <div className='flex-grow md:max-w-min w-full p-4  bg-white'>
 
                 <h4 className="text-3xl sm:text-2xl font-normal">Selecciona una fecha para ver los eventos del día.</h4>
 
-                <div className='py-4'>
+                <div className='py-4 w-full'>
                     <Calendar
                         mode="single"
                         selected={date1}
                         onSelect={handleDateSelect}
-                        className=" w-fit rounded-md border"
+                        className="  rounded-md border w-full "
                     />
                 </div>
                 <div >

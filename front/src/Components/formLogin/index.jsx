@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logopng.webp";
-
+import axios from "axios";
 import "./styled.css";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,7 +15,7 @@ const formSchema = z.object({
   documentNumber: z.string().min(1, "Número de documento es requerido"),
   password: z
     .string()
-    .min(10, "La contraseña debe tener al menos 6 caracteres")
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
     .max(50, "La contraseña debe tener al maximo 50 caracteres"),
 });
 
@@ -29,13 +29,41 @@ function FormLogin() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("https://justinaio-production.up.railway.app/api/v1/login", {
+        dniType: data.document,
+        dni: data.documentNumber,
+        password: data.password,
+      });
+
+      console.log("Response data:", response.data);
+
+      const token = response.data.token;
+      console.log("Token:", token);
+
+      if (token) {
+        // Guarda el token en el localStorage o en otro lugar seguro
+        localStorage.setItem("token", token);
+        console.log("Token stored in localStorage:", localStorage.getItem("token"));
+
+        // Redirige a la página de inicio o dashboard
+        navigate("/home");
+      } else {
+        console.error("Token is undefined");
+        setError("No se recibió un token válido.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Credenciales incorrectas. Por favor, inténtelo de nuevo.");
+    }
   };
 
   return (
@@ -69,14 +97,23 @@ function FormLogin() {
                 <option value="" className="font-bold text-sm">
                   Selecciona tu documento
                 </option>
-                <option value="dni" className="font-bold text-sm">
+                <option value="DNI" className="font-bold text-sm">
                   DNI
                 </option>
-                <option value="pasaporte" className="font-bold text-sm">
+                <option value="Pasaporte" className="font-bold text-sm">
                   Pasaporte
                 </option>
-                <option value="licencia" className="font-bold text-sm">
-                  Licencia de conducir
+                <option value="Libreta civica" className="font-bold text-sm">
+                Libreta cívica
+                </option>
+                <option value="Libreta de enrolamiento" className="font-bold text-sm">
+                Libreta de enrolamiento
+                </option>
+                <option value=" CUIL" className="font-bold text-sm">
+                CUIL
+                </option>
+                <option value="Cedula" className="font-bold text-sm">
+                Cédula
                 </option>
               </select>
               {errors.document && (
@@ -190,31 +227,14 @@ function FormLogin() {
                 )}
               </div>
             </div>
-            <Link to="/resetPassword" className="w-full">
-              <div className="flex justify-end">
-                <a href="/" className="font-medium text-xs">
-                  ¿Olvidaste tu contraseña?
-                </a>
-              </div>
-            </Link>
-
-            <div className="mt-1 flex flex-col justify-center items-center gap-2.5">
-              <Button
-                className="rounded-3xl bg-inputPrimary w-full"
-                type="submit"
-              >
-                Ingresar
-              </Button>
-              <Link to="/registro" className="w-full">
-                <Button
-                  className="rounded-3xl bg-inputSecundaryColor1 mt-3 w-full"
-                  type="button"
-                  variant="secondary"
-                >
-                  Registrarme
-                </Button>
-              </Link>
-            </div>
+            {error && (
+              <p className="text-red-500 pl-1 font-medium text-xs">
+                {error}
+              </p>
+            )}
+            <Button type="submit" className="w-full py-3">
+              Ingresar
+            </Button>
           </form>
         </div>
       </div>

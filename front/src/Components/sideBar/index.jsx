@@ -17,7 +17,7 @@ function SideBar({setView, rol}) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
   };
 
   const handleSelect = (option) => {
