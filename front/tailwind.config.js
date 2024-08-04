@@ -30,6 +30,8 @@ module.exports = {
         // 'form-pattern': "url('/img/hero-pattern.svg')",
       },
       colors: {
+        mic: "#5666BF",
+        circleStop: "#D92626",
         blacCardTitle: "#252846",
         blackCardText: "#5A5A60",
         blackBadgeText: "#0D0D0D",

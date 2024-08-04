@@ -12,6 +12,9 @@ import ViewPatientHome from "../../Components/viewPatientHome/Index";
 import ViewPatientHistory from "../../Components/viewPatientHistory/Index";
 import ViewDoctorHome from "../../Components/viewDoctorHome/Index";
 
+import ViewTratamientoDoctor from "../../Components/viewTratamientosDoctor/Index";
+import SpeechTestSP from "../../Components/speechText/Index";
+
 function Home() {
   const [view, setView] = useState("inicio");
   const [rol, setRol] = useState("paciente");
@@ -72,6 +75,10 @@ function Home() {
           {view === "inicio" && rol === "paciente" && <ViewPatientHome />}
           {view === "inicio" && rol === "medico" && <ViewDoctorHome />}
           {view === "history" && rol === "paciente" && <ViewPatientHistory />}
+
+          {view === "treatmentDoctor" && <ViewTratamientoDoctor />}
+          {view === "speechText" && <SpeechTestSP />}
+
         </div>
       </div>
     </div>
