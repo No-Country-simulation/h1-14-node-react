@@ -47,7 +47,7 @@ import {
 
 } from "@/Components/ui/select"
 
-const sintomas = [
+const listaSintomas = [
     {
         name: "Acidez estomacal (pirosis)",
         noteType: "Sintomas",
@@ -506,122 +506,256 @@ const sintomas = [
 ];
 
 
+const sintomas = [
+    {
+        name: "Tos persistente",
+        noteType: "Sintomas",
+        description: "Tos continua o recurrente que no desaparece.",
+        date: "2024-07-20T06:00:00Z",
+        status: "",
+    },
+    {
+        name: "Úlceras en la boca",
+        noteType: "Sintomas",
+        description: "Lesiones abiertas y dolorosas en el interior de la boca.",
+        date: "2024-07-23T09:00:00Z",
+        status: "",
+    },
+    {
+        name: "Ansiedad",
+        noteType: "Sintomas",
+        description: "Sentimientos de preocupación, nerviosismo o inquietud, típicamente sobre un evento inminente o algo con un resultado incierto.",
+        date: "2024-07-20T06:00:00Z",
+        status: "",
+    },
+{
+    name: "Dolor ocular",
+    noteType: "Sintomas",
+    status: "",
+    description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+    date: "2024-07-23T09:00:00Z",
+    dose: "60 mg",
+    via: "oral",
+    frequency: "12",
+    duration: "1",
+},
+];
+
+
+const initialSintomas = [
+    {
+        name: "Tos persistente",
+        noteType: "Sintomas",
+        description: "Tos continua o recurrente que no desaparece.",
+        date: "2024-07-20T06:00:00Z",
+        status: "",
+    },
+    {
+        name: "Úlceras en la boca",
+        noteType: "Sintomas",
+        description: "Lesiones abiertas y dolorosas en el interior de la boca.",
+        date: "2024-07-23T09:00:00Z",
+        status: "",
+    },
+    {
+        name: "Ansiedad",
+        noteType: "Sintomas",
+        description: "Sentimientos de preocupación, nerviosismo o inquietud, típicamente sobre un evento inminente o algo con un resultado incierto.",
+        date: "2024-07-20T06:00:00Z",
+        status: "",
+    },
+{
+    name: "Dolor ocular",
+    noteType: "Sintomas",
+    status: "",
+    description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+    date: "2024-07-23T09:00:00Z",
+    dose: "60 mg",
+    via: "oral",
+    frequency: "12",
+    duration: "1",
+},
+];
 
 const tratamientos = [
     {
         name: "Tacrolimus",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "2 mg dos veces al dia",
-        description: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
+        instructions: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
         date: "2024-07-19T05:50:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
     {
         name: "Prednisona",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "5 mg una vez al dia",
-        description: "Tomar con alimentos para evitar molestias estomacales",
+        instructions: "Tomar con alimentos para evitar molestias estomacales",
         date: "2024-07-20T06:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "30",
     },
     {
         name: "Aspirina",
         noteType: "Tratamiento complementario",
         status: "100 mg una vez al dia",
-        description: "Tomar con un vaso completo de agua",
+        instructions: "Tomar con un vaso completo de agua",
         date: "2024-07-21T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
     },
     {
         name: "Vitamina D",
         noteType: "Tratamiento complementario",
         status: "1000 UI una vez al dia",
-        description: "Tomar con el desayuno",
+        instructions: "Tomar con el desayuno",
         date: "2024-07-27T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "1",
     },
     {
         name: "Atorvastatina",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "20 mg una vez al dia por la noche",
-        description: "Tomar con o sin alimentos",
+        instructions: "Tomar con o sin alimentos",
         date: "2024-07-22T08:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
     {
         name: "Dolor ocular",
         noteType: "Sintomas",
         status: "",
-        description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+        instructions: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
         date: "2024-07-23T09:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
     },
     {
         name: "Hidratacion",
         noteType: "Otras indicaciones",
         status: "3 litros por dia",
-        description: "Mantener una ingesta adecuada de liquidos",
+        instructions: "Mantener una ingesta adecuada de liquidos",
         date: "2024-07-20T06:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "48",
+        duration: "30",
     },
     {
-        name: "Alimentacion",
-        noteType: "Otras indicaciones",
+        name: "Atorvastatina",
+        noteType: "Medicacion Esencial",
         status: "2 veces al dia",
-        description: "Seguir una dieta baja en sal y rica en proteinas segun indicaciones del nutricionista",
+        instructions: "Seguir una dieta baja en sal y rica en proteinas segun indicaciones del nutricionista",
         date: "2024-07-21T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
 ];
 
 const initialTratamientos = [
     {
         name: "Tacrolimus",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "2 mg dos veces al dia",
-        description: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
+        instructions: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
         date: "2024-07-19T05:50:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
     {
         name: "Prednisona",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "5 mg una vez al dia",
-        description: "Tomar con alimentos para evitar molestias estomacales",
+        instructions: "Tomar con alimentos para evitar molestias estomacales",
         date: "2024-07-20T06:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "30",
     },
     {
         name: "Aspirina",
         noteType: "Tratamiento complementario",
         status: "100 mg una vez al dia",
-        description: "Tomar con un vaso completo de agua",
+        instructions: "Tomar con un vaso completo de agua",
         date: "2024-07-21T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
     },
     {
         name: "Vitamina D",
         noteType: "Tratamiento complementario",
         status: "1000 UI una vez al dia",
-        description: "Tomar con el desayuno",
+        instructions: "Tomar con el desayuno",
         date: "2024-07-27T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "1",
     },
     {
         name: "Atorvastatina",
-        noteType: "Medicacion Escencial",
+        noteType: "Medicacion Esencial",
         status: "20 mg una vez al dia por la noche",
-        description: "Tomar con o sin alimentos",
+        instructions: "Tomar con o sin alimentos",
         date: "2024-07-22T08:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
     {
         name: "Dolor ocular",
         noteType: "Sintomas",
         status: "",
-        description: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
+        instructions: "Dolor o incomodidad en el ojo, que puede deberse a varias causas, incluyendo infección, lesión o fatiga ocular.",
         date: "2024-07-23T09:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "12",
+        duration: "1",
     },
     {
         name: "Hidratacion",
         noteType: "Otras indicaciones",
         status: "3 litros por dia",
-        description: "Mantener una ingesta adecuada de liquidos",
+        instructions: "Mantener una ingesta adecuada de liquidos",
         date: "2024-07-20T06:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "48",
+        duration: "30",
     },
     {
-        name: "Alimentacion",
-        noteType: "Otras indicaciones",
+        name: "Atorvastatina",
+        noteType: "Medicacion Esencial",
         status: "2 veces al dia",
-        description: "Seguir una dieta baja en sal y rica en proteinas segun indicaciones del nutricionista",
+        instructions: "Seguir una dieta baja en sal y rica en proteinas segun indicaciones del nutricionista",
         date: "2024-07-21T07:00:00Z",
+        dose: "60 mg",
+        via: "oral",
+        frequency: "8",
+        duration: "30",
     },
 ];
 
@@ -631,15 +765,17 @@ function ViewTratamientos() {
     //calendar on the right
     const [date1, setDate1] = useState((new Date()));
 
-    const [tratamientos, setTratamientos] = useState(initialTratamientos);
+    const [sintomas, setSintomas] = useState(initialSintomas);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [newNote, setNewNote] = useState({ name: "", date: "", description: "", noteType: "", status: "" });
     const [newSintoma, setNewSintoma] = useState({ name: "", date: "", description: "", noteType: "", status: "" });
 
-    const medicacionEscencial = tratamientos.filter(tratamiento => tratamiento.noteType === "Medicacion Escencial");
+    const medicacionEsencial = tratamientos.filter(tratamiento => tratamiento.noteType === "Medicacion Esencial");
     const tratamientoComplementario = tratamientos.filter(tratamiento => tratamiento.noteType === "Tratamiento complementario");
-    const otrasIndicaciones = tratamientos.filter(tratamiento => tratamiento.noteType !== "Medicacion Escencial" && tratamiento.noteType !== "Tratamiento complementario");
-    const otrosSintomas = tratamientos.filter(tratamiento => tratamiento.noteType === "Sintomas");
+    const otrasIndicaciones = tratamientos.filter(tratamiento => tratamiento.noteType !== "Medicacion Esencial" && tratamiento.noteType !== "Tratamiento complementario");
+    const otrosSintomas = sintomas.filter(sintoma => sintoma.noteType === "Sintomas");
+
+
 
 
     const handleInputChange = (e) => {
@@ -659,7 +795,7 @@ function ViewTratamientos() {
     const uniqueNoteTypes = [...new Set(tratamientos.map(tratamientos => tratamientos.noteType))];
     const getBadgeClass = (noteType) => {
         switch (noteType) {
-            case "Medicacion Escencial":
+            case "Medicacion Esencial":
                 return " bg-greenBadge text-blackCardTitle";
             case "Tratamiento complementario":
                 return "bg-yellowBadge text-blackCardTitle";
@@ -676,7 +812,7 @@ function ViewTratamientos() {
     const [searchKeyword, setSearchKeyword] = useState('');
 
     const filteredSintomas = useMemo(() => {
-        return sintomas.filter(sintoma =>
+        return listaSintomas.filter(sintoma =>
             sintoma.name.toLowerCase().includes(searchKeyword.toLowerCase())
         );
     }, [searchKeyword]);
@@ -689,7 +825,7 @@ function ViewTratamientos() {
         });
     };
     const handleAddSintoma = () => {
-        setTratamientos([...tratamientos, { ...newSintoma, date: date1 }]);
+        setSintomas([...sintomas, { ...newSintoma, date: date1 }]);
         setIsDialogOpen(false);
         setNewSintoma({ name: "", date: "", description: "", noteType: "Sintomas", status: "" });
     }; 
@@ -734,17 +870,21 @@ function ViewTratamientos() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div >
-                        <h2 className="text-xl font-bold mb-4">Medicacion Escencial</h2>
+                        <h2 className="text-xl font-bold mb-4">Medicacion Esencial</h2>
 
-                        {medicacionEscencial.map(tratamiento => (
+                        {medicacionEsencial.map(tratamiento => (
                             <div key={tratamiento.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
                                 <CardTratamientos
-                                    key={tratamiento.name}
-                                    noteType={tratamiento.noteType}
-                                    date={tratamiento.date}
-                                    description={tratamiento.description}
-                                    status={tratamiento.status}
-                                    name={tratamiento.name}
+                                        key={tratamiento.name}
+                                        noteType={tratamiento.noteType}
+                                        date={tratamiento.date}
+                                        instructions={tratamiento.instructions}
+                                        status={tratamiento.status}
+                                        name={tratamiento.name}
+                                        dose={tratamiento.dose}
+                                        via={tratamiento.via}
+                                        frequency={tratamiento.frequency}
+                                        duration={tratamiento.duration}
                                 />
                             </div>
                         ))}
@@ -756,12 +896,16 @@ function ViewTratamientos() {
                             <div key={tratamiento.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
 
                                 <CardTratamientos
-                                    key={tratamiento.name}
-                                    noteType={tratamiento.noteType}
-                                    date={tratamiento.date}
-                                    description={tratamiento.description}
-                                    status={tratamiento.status}
-                                    name={tratamiento.name}
+                                        key={tratamiento.name}
+                                        noteType={tratamiento.noteType}
+                                        date={tratamiento.date}
+                                        instructions={tratamiento.instructions}
+                                        status={tratamiento.status}
+                                        name={tratamiento.name}
+                                        dose={tratamiento.dose}
+                                        via={tratamiento.via}
+                                        frequency={tratamiento.frequency}
+                                        duration={tratamiento.duration}
                                 />
                             </div>
                         ))}
@@ -770,15 +914,15 @@ function ViewTratamientos() {
                     <div className='flex'>
                         <div >
                             <h2 className="text-xl font-bold mb-4">Sintomas</h2>
-                            {otrosSintomas.map(tratamiento => (
-                                <div key={tratamiento.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
+                            {otrosSintomas.map(sintoma => (
+                                <div key={sintoma.name} className="mb-4 break-inside-avoid shadow-md rounded-lg ">
                                     <CardSintomas
-                                        key={tratamiento.name}
-                                        noteType={tratamiento.noteType}
-                                        date={tratamiento.date}
-                                        description={tratamiento.description}
-                                        status={tratamiento.status}
-                                        name={tratamiento.name}
+                                        key={sintoma.name}
+                                        noteType={sintoma.noteType}
+                                        date={sintoma.date}
+                                        description={sintoma.description}
+                                        status={sintoma.status}
+                                        name={sintoma.name}
                                     />
                                 </div>
                             ))}

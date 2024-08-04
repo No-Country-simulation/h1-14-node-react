@@ -48,11 +48,12 @@ import { formatDate } from "date-fns"
 
 
 
-const CardTratamientos = ({ noteType, date, description, status, name, }) => {
+const CardTratamientos = ({ noteType, date, instructions, status, name, dose, via, frequency, duration }) => {
+
 
   const getBadgeClass = (noteType) => {
     switch (noteType) {
-      case "Medicacion Escencial":
+      case "Medicacion Esencial":
         return " bg-greenBadge text-blackCardTitle";
       case "Tratamiento complementario":
         return "bg-yellowBadge text-blackCardTitle";
@@ -119,10 +120,12 @@ const CardTratamientos = ({ noteType, date, description, status, name, }) => {
           {/* <Button size="sm" className={`rounded-sm  h-6 ${getBadgeClass(noteType)}`} Type="submit">{noteType}</Button> */}
           <p className='flex ' >  {noteType}</p>
           <p className='text-sm font text-blackCardText'>
-            Dosis: {status}
+            Dosis: {`${ dose + " via " + via + " cada " + frequency + " hrs," + " por " + duration + " dias."}`}
+            {/* Dosis: {dose} */}
           </p>
           <p className='text-sm font text-blackCardText'>
-            Instrucciones: {description}
+            {/* Instrucciones: {instructions} */}
+            Instrucciones: {instructions}
           </p>
           <p className='text-sm font text-blackCardText'>
             Proxima Reposicion: {(formatDate(date))}
