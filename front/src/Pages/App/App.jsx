@@ -8,6 +8,8 @@ import ProtetedRoute from "../../Components/protectedRoute.jsx";
 import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 import  Home  from "../home";
+import AuthRoute from "../../Components/authRoute/index.jsx";
+
 
 
 
@@ -15,7 +17,7 @@ import  Home  from "../home";
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/registro', element: <DoctorRegistry /> },
-    { path: '/login', element: <LogIn /> },
+    { path: '/login', element: (<AuthRoute><LogIn /></AuthRoute>)},
     { path: '/patientProfile', element: <PatientProfile/>},
     {path: '/resetPassword', element: <EmailResetPassword />},
     {path: '/', element: <LandingPage />},

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ImageLogo from "../../assets/logoNav.svg";
+import { useAuth } from "../../context/authContext";
 import logoHome from "../../assets/iconosSidebar/iconHome.svg";
 import logoConfig from "../../assets/iconosSidebar/iconConfig.svg";
 import logoCalendar from "../../assets/iconosSidebar/iconCalendar.svg";
@@ -13,10 +14,13 @@ import logoHistorial from "../../assets/iconosSidebar/historial.svg";
 function SideBar({setView, rol}) {
   
   const [active, setActive] = useState("inicio")
+  const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
     navigate("/login");
   };
 
@@ -46,7 +50,7 @@ function SideBar({setView, rol}) {
             <img className="w-6 h-6" src={logoCalendar} alt="Calendario" />
             <p className="text-white text-sm ml-2">Calendario</p>
           </button>
-          {rol === "medico" ? (
+          {rol === "medico" || rol === "MEDICO" ? (
             <button 
             className={`${active === "patient" ? "bg-inputPrimary" : 'bg-bgNavBar'} w-full flex justify-start items-center rounded-lg px-4 py-2`}
             onClick={() => handleSelect("patient")}
@@ -54,7 +58,7 @@ function SideBar({setView, rol}) {
               <img className="w-6 h-6" src={logoPatient} alt="Mis pacientes" />
               <p className="text-white text-sm ml-2">Mis pacientes</p>
             </button>
-          ) : rol === "paciente" ? (
+          ) : rol === "paciente" || rol === "PACIENTE" ? (
             <>
               <button 
               className={`${active === "history" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}

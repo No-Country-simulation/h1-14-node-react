@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useAuth } from "../../context/authContext"; // Asegúrate de que la ruta sea correcta
 
 const formSchema = z.object({
   document: z.string().min(1, "Seleccione un tipo de documento"),
@@ -16,21 +17,18 @@ const formSchema = z.object({
   password: z
     .string()
     .min(6, "La contraseña debe tener al menos 6 caracteres")
-    .max(50, "La contraseña debe tener al maximo 50 caracteres"),
+    .max(50, "La contraseña debe tener al máximo 50 caracteres"),
 });
 
 function FormLogin() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(formSchema),
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth(); // Usa el contexto para el inicio de sesión
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -38,28 +36,13 @@ function FormLogin() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://justinaio-production.up.railway.app/api/v1/login", {
+      const { token, user } = await login({
         dniType: data.document,
         dni: data.documentNumber,
         password: data.password,
       });
 
-      console.log("Response data:", response.data);
-
-      const token = response.data.token;
-      console.log("Token:", token);
-
-      if (token) {
-        // Guarda el token en el localStorage o en otro lugar seguro
-        localStorage.setItem("token", token);
-        console.log("Token stored in localStorage:", localStorage.getItem("token"));
-
-        // Redirige a la página de inicio o dashboard
-        navigate("/home");
-      } else {
-        console.error("Token is undefined");
-        setError("No se recibió un token válido.");
-      }
+      navigate("/home");
     } catch (err) {
       console.error("Error:", err);
       setError("Credenciales incorrectas. Por favor, inténtelo de nuevo.");

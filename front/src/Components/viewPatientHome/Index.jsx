@@ -24,7 +24,7 @@ import MultiplicateX7 from "../../assets/MultiplicateX7.svg";
 
 
 
-function viewPatientHome() {
+function viewPatientHome({name}) {
 
     function Card({ title, description, linkText, linkHref, icon: Icon, iconClass }) {
         return (
@@ -45,7 +45,7 @@ function viewPatientHome() {
         <div className='flex bg-white'>
 
             <div className="p-6 bg-bgHome">
-                <h1 className="text-3xl font-bold mb-4">Bienvenido/a (USER)</h1>
+                <h1 className="text-3xl font-bold mb-4">Bienvenido/a {name}</h1>
                 <p className="text-lg mb-4">Mirá todo lo que tenemos para vos hoy</p>
 
                 <div className="flex cols-1 gap-4">
