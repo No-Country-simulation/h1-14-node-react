@@ -35,11 +35,9 @@ Crear una solución digital que mejore la comunicación entre pacientes en esper
 Para ejecutar el proyecto localmente, te guiaremos paso a paso.
 1. Accede a la documentación del Backend y sigue los pasos allí se indican: [Documentación Backend](back/README.md)
 2. Accede a la documentación del Frontend y sigue sus pasos: [Documentación Frontend](front/README.md)
+3. Accede a la documentación de Testing y ejecuta las pruebas: [Documentación Testing](testing/README.md)
 
-
-## 🚀 Tecnologías utilizadas
-
-
+Así mismo, puedes acceder a la documentación de UX-UI y ver el proceso de desarrollo del diseño de la app: [Documentación UX-UI](uxui/README.md)
 
 
 ## 🚀 Integrantes
