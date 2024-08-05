@@ -17,8 +17,8 @@ import {
     ArrowUpDown,
     ChevronDown,
     MoreHorizontal,
-    Badge,
-    SeparatorHorizontal
+    SeparatorHorizontal,
+    Badge, PlusCircle, Mic, Save, CircleStop
 } from "lucide-react"
 
 import { Button } from "@/Components/ui/button"
@@ -73,6 +73,8 @@ import {
     PaginationPrevious,
 } from "@/Components/ui/pagination"
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 const events = [
     {
         event: "Juan Pérez",
@@ -105,9 +107,9 @@ const events = [
         eventType: "Junta medica",
     },
     {
-        event: "INV006",
+        event: "Paciente consulado",
         status: "Pending",
-        dateTime: "2024-07-19T05:00:00Z",
+        dateTime: "2024-07-22T05:00:00Z",
         eventType: "Junta medica",
     },
     {
@@ -129,17 +131,83 @@ const events = [
         eventType: "Consulta",
     },
     {
-        event: "INV010",
+        event: "Decidir horas extra",
         status: "Pending",
         dateTime: "2024-07-20T05:00:00Z",
         eventType: "Junta medica",
     },
     {
-        event: "INV011",
+        event: "Paciente consular",
         status: "Undone",
         dateTime: "2024-07-20T06:00:00Z",
         eventType: "Consulta",
-    }
+    },
+    {
+        event: "Juan Pérez",
+        status: "Done",
+        dateTime: "2024-07-21T05:50:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Cristina López",
+        status: "Pending",
+        dateTime: "2024-07-21T04:50:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Lic. Maristella González",
+        status: "Undone",
+        dateTime: "2024-07-23T06:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Done",
+        dateTime: "2024-07-23T07:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Tacrolimus 1 mg",
+        status: "Done",
+        dateTime: "2024-07-24T08:50:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Paciente consulado",
+        status: "Pending",
+        dateTime: "2024-07-22T05:00:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Amilcar Ramírez",
+        status: "Undone",
+        dateTime: "2024-07-24T06:00:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Pending",
+        dateTime: "2024-07-24T05:00:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Valganciclovir 450mg",
+        status: "Undone",
+        dateTime: "2024-07-25T06:00:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Decidir horas extra",
+        status: "Pending",
+        dateTime: "2024-07-26T05:00:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Paciente consular",
+        status: "Undone",
+        dateTime: "2024-07-26T06:00:00Z",
+        eventType: "Consulta",
+    },    
 ];
 
 const initialEvents = [
@@ -174,9 +242,9 @@ const initialEvents = [
         eventType: "Junta medica",
     },
     {
-        event: "INV006",
+        event: "Paciente consulado",
         status: "Pending",
-        dateTime: "2024-07-19T05:00:00Z",
+        dateTime: "2024-07-22T05:00:00Z",
         eventType: "Junta medica",
     },
     {
@@ -198,17 +266,83 @@ const initialEvents = [
         eventType: "Consulta",
     },
     {
-        event: "INV010",
+        event: "Decidir horas extra",
         status: "Pending",
         dateTime: "2024-07-20T05:00:00Z",
         eventType: "Junta medica",
     },
     {
-        event: "INV011",
+        event: "Paciente consular",
         status: "Undone",
         dateTime: "2024-07-20T06:00:00Z",
         eventType: "Consulta",
-    }
+    },
+    {
+        event: "Juan Pérez",
+        status: "Done",
+        dateTime: "2024-07-21T05:50:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Cristina López",
+        status: "Pending",
+        dateTime: "2024-07-21T04:50:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Lic. Maristella González",
+        status: "Undone",
+        dateTime: "2024-07-23T06:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Done",
+        dateTime: "2024-07-23T07:50:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Tacrolimus 1 mg",
+        status: "Done",
+        dateTime: "2024-07-24T08:50:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Paciente consulado",
+        status: "Pending",
+        dateTime: "2024-07-22T05:00:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Amilcar Ramírez",
+        status: "Undone",
+        dateTime: "2024-07-24T06:00:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Amelia Ferreyra",
+        status: "Pending",
+        dateTime: "2024-07-24T05:00:00Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Valganciclovir 450mg",
+        status: "Undone",
+        dateTime: "2024-07-25T06:00:00Z",
+        eventType: "Consulta",
+    },
+    {
+        event: "Decidir horas extra",
+        status: "Pending",
+        dateTime: "2024-07-26T05:00:00Z",
+        eventType: "Junta medica",
+    },
+    {
+        event: "Paciente consular",
+        status: "Undone",
+        dateTime: "2024-07-26T06:00:00Z",
+        eventType: "Consulta",
+    },
 ];
 
 
@@ -456,11 +590,29 @@ const [currentPage, setCurrentPage] = useState(1);
 
     const paginatedEvents = filteredEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-
+        //record
+        const { transcript, listening, resetTranscript } = useSpeechRecognition();
+        const [isRecording, setIsRecording] = useState(false);
+    
+        const startListening = () => {
+            setIsRecording(true);
+            // SpeechRecognition.startListening({ continuous: true });
+            SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+        };
+    
+        const stopListening = () => {
+            setIsRecording(false);
+            SpeechRecognition.stopListening();
+        };
+    
+        const saveTranscription = () => {
+            handleInputChange({ target: { name: 'event', value: transcript } });
+            resetTranscript();
+        };
 
     return (
-        <div className=' flex  '>
-            <div className='flex-grow bg-secondary p-4 w-2/3'>
+        <div className='lg:flex '>
+            <div className='flex-grow bg-secondary p-4 '>
                 <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDateToES(date1)}</h4>
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
@@ -781,10 +933,22 @@ const [currentPage, setCurrentPage] = useState(1);
                                             </div>
                                         </div>
                                         <div>
-                                            <Label className="block text-sm font-medium mb-2">Detalle</Label>
+                                            <Label className="block text-sm font-medium mb-2">Detalle
+                                            <span className=' flex float-right text-mic space-x-2'>
+                                                    {/* <CircleStop stroke='#D92626' /><Mic /><Save /> */}
+                                                    {isRecording ? (
+                                                        <Button variant="ghost" ><CircleStop stroke='#D92626' onClick={stopListening} /></Button>
+                                                    ) : (
+                                                        <Button variant="ghost" ><Mic onClick={startListening} /></Button>
+                                                    )}
+                                                    <Button variant="ghost" ><Save onClick={saveTranscription} /></Button>
+                                                </span>
+                                            </Label>
+                                            <p className='text-xs text-circleStop'>{listening ? 'Escuchando...' : ''}</p>
+
                                             <Textarea
                                                 name="event"
-                                                value={newEvent.event}
+                                                value={newEvent.event || transcript}
                                                 onChange={handleInputChange}
                                                 placeholder="Información sobre el evento"
                                                 className=" p-2 border rounded w-full"

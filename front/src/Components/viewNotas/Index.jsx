@@ -4,7 +4,7 @@ import { BookMarked } from 'lucide-react';
 import React, { useState, useMemo } from 'react';
 import CardNotas from "../cardNotas"
 import { Button } from "@/Components/ui/button"
-import { PenLine, Plus } from "lucide-react";
+import { PenLine, Plus, PlusCircle, Mic, Save, CircleStop } from "lucide-react";
 
 import {
     Dialog,
@@ -19,27 +19,9 @@ import { Input } from '@/Components/ui/input';
 import { Label } from "@/Components/ui/label"
 import { Textarea } from '@/Components/ui/textarea';
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 const notas = [
-    {
-        noteType: "Sintomas",
-        date: "2024-07-19 02:50:00",
-        description: "Dolor leve en la zona de la punsión durante la noche. No es constante, pero ocurre varias veces al día. También noté algo de hinchazón. Intensidad: 4/10",
-        mark: "Marcada",
-    },
-    {
-        noteType: "Sintomas",
-        date: "2024-07-19 01:50:00",
-        description: "Hoy tuve fiebre baja durante la tarde, acompañada de escalofríos. La fiebre llegó a 37.8°C.",
-        mark: "Marcada"
-
-    },
-    {
-        noteType: "Sintomas",
-        date: "2024-07-19 03:50:00",
-        description: "Tuve dolores de cabeza frecuentes, especialmente por las mañanas. No parecen ser muy intensos, pero son persistentes.",
-        mark: "Marcada"
-
-    },
     {
         noteType: "Preguntas",
         date: "2024-07-19 04:50:00",
@@ -48,7 +30,7 @@ const notas = [
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-19 05:50:00",
+        date: "2024-07-20 05:50:00",
         description: "¿Qué puedo hacer para reducir la hinchazón en las piernas? ¿Es normal tener mareos ocasionales después de tomar mis medicamentos?",
         mark: "Marcada"
 
@@ -62,7 +44,7 @@ const notas = [
     },
     {
         noteType: "Emociones",
-        date: "2024-07-19 03:00:00",
+        date: "2024-07-21 03:00:00",
         description: "¿Me sentí un poco deprimido hoy. Tal vez debería considerar ajustar mi rutina para incluir más actividades agradables.",
         mark: "Marcada"
 
@@ -78,24 +60,6 @@ const notas = [
 
 const initialNotas = [
     {
-        noteType: "Sintomas",
-        date: "2024-07-19 02:50:00",
-        description: "Dolor leve en la zona de la punsión durante la noche. No es constante, pero ocurre varias veces al día. También noté algo de hinchazón. Intensidad: 4/10",
-        mark: "Marcada",
-    },
-    {
-        noteType: "Sintomas",
-        date: "2024-07-19 01:50:00",
-        description: "Hoy tuve fiebre baja durante la tarde, acompañada de escalofríos. La fiebre llegó a 37.8°C.",
-        mark: "Marcada"
-    },
-    {
-        noteType: "Sintomas",
-        date: "2024-07-19 03:50:00",
-        description: "Tuve dolores de cabeza frecuentes, especialmente por las mañanas. No parecen ser muy intensos, pero son persistentes.",
-        mark: "Marcada"
-    },
-    {
         noteType: "Preguntas",
         date: "2024-07-19 04:50:00",
         description: "¿Cuáles son los efectos secundarios a la larga de mi medicación?",
@@ -103,27 +67,31 @@ const initialNotas = [
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-19 05:50:00",
+        date: "2024-07-20 05:50:00",
         description: "¿Qué puedo hacer para reducir la hinchazón en las piernas? ¿Es normal tener mareos ocasionales después de tomar mis medicamentos?",
         mark: "Marcada"
+
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-19 02:00:00",
+        date: "2024-07-21 02:00:00",
         description: "¿Qué alternativas tengo si los efectos secundarios del medicamento son muy molestos? ¿Es seguro hacer ejercicio intenso en mi estado actual? ¿Debería preocuparme por la pérdida de cabello desde que comencé el nuevo tratamiento? ¿Hay alguna vacuna que necesite evitar debido a mi trasplante? ¿Cómo puedo mejorar mi sistema inmunológico de manera segura? ¿Qué debo hacer si olvido una dosis de mi medicamento?",
         mark: "Marcada"
+
     },
     {
         noteType: "Emociones",
-        date: "2024-07-19 03:00:00",
+        date: "2024-07-21 03:00:00",
         description: "¿Me sentí un poco deprimido hoy. Tal vez debería considerar ajustar mi rutina para incluir más actividades agradables.",
         mark: "Marcada"
+
     },
     {
         noteType: "Emociones",
         date: "2024-07-20 02:00:00",
         description: "Experimenté un episodio de ansiedad ayer. Utilicé técnicas de respiración profunda para calmarme y funcionaron bien.",
         mark: "Marcada"
+
     },
 ];
 
@@ -162,6 +130,28 @@ function ViewNotas() {
                 return "";
         }
     };
+
+    //record
+    const { transcript, listening, resetTranscript } = useSpeechRecognition();
+    const [isRecording, setIsRecording] = useState(false);
+
+    const startListening = () => {
+        setIsRecording(true);
+        // SpeechRecognition.startListening({ continuous: true });
+        SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+    };
+
+    const stopListening = () => {
+        setIsRecording(false);
+        SpeechRecognition.stopListening();
+    };
+
+    const saveTranscription = () => {
+        handleInputChange({ target: { name: 'description', value: transcript } });
+        resetTranscript();
+    };
+
+
 
     return (
         <div className='flex bg-white'>
@@ -225,10 +215,21 @@ function ViewNotas() {
                                     </div>
                                 </div>
                                 <div>
-                                    <Label className="block text-sm font-medium mb-2">Detalle</Label>
+                                    <Label className="block text-sm font-medium mb-2">Detalle
+                                    <span className=' flex float-right text-mic space-x-2'>
+                                                    {/* <CircleStop stroke='#D92626' /><Mic /><Save /> */}
+                                                    {isRecording ? (
+                                                        <Button variant="ghost" ><CircleStop stroke='#D92626' onClick={stopListening} /></Button>
+                                                    ) : (
+                                                        <Button variant="ghost" ><Mic onClick={startListening} /></Button>
+                                                    )}
+                                                    <Button variant="ghost" ><Save onClick={saveTranscription} /></Button>
+                                                </span>
+                                            </Label>
+                                            <p className='text-xs text-circleStop'>{listening ? 'Escuchando...' : ''}</p>
                                     <Textarea
                                         name="description"
-                                        value={newNote.description}
+                                        value={newNote.description || transcript}
                                         onChange={handleInputChange}
                                         placeholder="Información sobre el evento"
                                         className=" p-2 border rounded w-full"
