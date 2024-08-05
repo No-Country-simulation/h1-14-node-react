@@ -46,11 +46,11 @@ Para acceder al mismo, se puede realizar a través del siguiente `ID: 9a4e6eb6-4
 - Maven
 
 #### Pasos:
-    1. Primero debes clonar el proyecto localmente. Abrirlo en tu IDE de preferencia.
-    2. Abre la consola y accede dentro del directorio "testing/Automation" del proyecto.
-    3. Ejecuta el comando 
-    `mvn  test`
-    4. Los test se ejecutarán y verás los resultados obtenidos en pantalla.
-    5. Se creará el archivo "extentReport.html" en el cual podrás abrir en cualquier navegador y observarás los resultados obtenidos de la ejecución, y en el caso de ocurrir alguna falla, se presentarán los detalles y capturas de pantalla relacionadas.
+1. Primero debes clonar el proyecto localmente. Abrirlo en tu IDE de preferencia.
+2. Abre la consola y accede dentro del directorio "testing/Automation" del proyecto.
+3. Ejecuta el comando 
+`mvn  test`
+4. Los test se ejecutarán y verás los resultados obtenidos en pantalla.
+5. Se creará el archivo "extentReport.html" en el cual podrás abrir en cualquier navegador y observarás los resultados obtenidos de la ejecución, y en el caso de ocurrir alguna falla, se presentarán los detalles y capturas de pantalla relacionadas.
 
 
