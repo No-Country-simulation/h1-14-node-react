@@ -9,6 +9,8 @@ import EmailResetPassword from '../resetPassword';
 import LandingPage from "../landing";
 import  Home  from "../home";
 import AuthRoute from "../../Components/authRoute/index.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -33,7 +35,9 @@ function App() {
     <div className="bg-custom-bg bg-cover bg-center">
       <BrowserRouter>
         <AppRoutes />
+        <ToastContainer/ >
       </BrowserRouter>
+
     </div>
   );
 }

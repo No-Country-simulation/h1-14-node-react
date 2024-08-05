@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useAuth } from "../../context/authContext"; // Asegúrate de que la ruta sea correcta
+import { useAuth } from "../../context/authContext"; 
 
 const formSchema = z.object({
   document: z.string().min(1, "Seleccione un tipo de documento"),
@@ -28,7 +28,7 @@ function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth(); // Usa el contexto para el inicio de sesión
+  const { login } = useAuth(); 
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
