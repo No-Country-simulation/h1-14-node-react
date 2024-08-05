@@ -1,7 +1,7 @@
 "use client"
 
 import { BookMarked } from 'lucide-react';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect  } from 'react';
 import CardNotas from "../cardNotas"
 import { Button } from "@/Components/ui/button"
 import { PenLine, Plus, PlusCircle, Mic, Save, CircleStop } from "lucide-react";
@@ -21,38 +21,58 @@ import { Textarea } from '@/Components/ui/textarea';
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// import { useToast } from "@/Components/ui/toast";
+
 const notas = [
     {
         noteType: "Preguntas",
-        date: "2024-07-19 04:50:00",
+        date: "2024-07-19T04:50:00Z",
         description: "¿Cuáles son los efectos secundarios a la larga de mi medicación?",
         mark: "Marcada"
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-20 05:50:00",
+        date: "2024-07-20T05:50:00Z",
         description: "¿Qué puedo hacer para reducir la hinchazón en las piernas? ¿Es normal tener mareos ocasionales después de tomar mis medicamentos?",
         mark: "Marcada"
 
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-19 02:00:00",
+        date: "2024-07-21T02:00:00Z",
         description: "¿Qué alternativas tengo si los efectos secundarios del medicamento son muy molestos? ¿Es seguro hacer ejercicio intenso en mi estado actual? ¿Debería preocuparme por la pérdida de cabello desde que comencé el nuevo tratamiento? ¿Hay alguna vacuna que necesite evitar debido a mi trasplante? ¿Cómo puedo mejorar mi sistema inmunológico de manera segura? ¿Qué debo hacer si olvido una dosis de mi medicamento?",
         mark: "Marcada"
 
     },
     {
         noteType: "Emociones",
-        date: "2024-07-21 03:00:00",
+        date: "2024-07-21T03:00:00Z",
         description: "¿Me sentí un poco deprimido hoy. Tal vez debería considerar ajustar mi rutina para incluir más actividades agradables.",
         mark: "Marcada"
 
     },
     {
         noteType: "Emociones",
-        date: "2024-07-20 02:00:00",
+        date: "2024-08-05T16:58:00Z",
         description: "Experimenté un episodio de ansiedad ayer. Utilicé técnicas de respiración profunda para calmarme y funcionaron bien.",
+        mark: "Marcada"
+
+    },
+    {
+        noteType: "Emociones",
+        date: "2024-08-05T20:32:00Z",
+        description: "Experimenté un episodio de ansiedad ayer.",
+        mark: "Marcada"
+
+    },
+    
+    {
+        noteType: "Emociones",
+        date: "2024-08-05T20:32:29Z",
+        description: "Experimenté un episodio de ansiedad a la tarde tambien",
         mark: "Marcada"
 
     },
@@ -61,35 +81,50 @@ const notas = [
 const initialNotas = [
     {
         noteType: "Preguntas",
-        date: "2024-07-19 04:50:00",
+        date: "2024-07-19T04:50:00Z",
         description: "¿Cuáles son los efectos secundarios a la larga de mi medicación?",
         mark: "Marcada"
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-20 05:50:00",
+        date: "2024-07-20T05:50:00Z",
         description: "¿Qué puedo hacer para reducir la hinchazón en las piernas? ¿Es normal tener mareos ocasionales después de tomar mis medicamentos?",
         mark: "Marcada"
 
     },
     {
         noteType: "Preguntas",
-        date: "2024-07-21 02:00:00",
+        date: "2024-07-21T02:00:00Z",
         description: "¿Qué alternativas tengo si los efectos secundarios del medicamento son muy molestos? ¿Es seguro hacer ejercicio intenso en mi estado actual? ¿Debería preocuparme por la pérdida de cabello desde que comencé el nuevo tratamiento? ¿Hay alguna vacuna que necesite evitar debido a mi trasplante? ¿Cómo puedo mejorar mi sistema inmunológico de manera segura? ¿Qué debo hacer si olvido una dosis de mi medicamento?",
         mark: "Marcada"
 
     },
     {
         noteType: "Emociones",
-        date: "2024-07-21 03:00:00",
+        date: "2024-07-21T03:00:00Z",
         description: "¿Me sentí un poco deprimido hoy. Tal vez debería considerar ajustar mi rutina para incluir más actividades agradables.",
         mark: "Marcada"
 
     },
     {
         noteType: "Emociones",
-        date: "2024-07-20 02:00:00",
+        date: "2024-08-05T16:58:00Z",
         description: "Experimenté un episodio de ansiedad ayer. Utilicé técnicas de respiración profunda para calmarme y funcionaron bien.",
+        mark: "Marcada"
+
+    },
+    {
+        noteType: "Emociones",
+        date: "2024-08-05T20:49:00Z",
+        description: "Experimenté un episodio de ansiedad ayer.",
+        mark: "Marcada"
+
+    },
+    
+    {
+        noteType: "Emociones",
+        date: "2024-08-05T20:48:15Z",
+        description: "Experimenté un episodio de ansiedad a la tarde tambien",
         mark: "Marcada"
 
     },
@@ -101,6 +136,7 @@ function ViewNotas() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [newNote, setNewNote] = useState({ noteType: "", date: "", description: "", mark: "Marcada" });
 
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewNote({
@@ -108,6 +144,9 @@ function ViewNotas() {
             [name]: value
         });
     };
+
+
+
 
     const handleAddNote = () => {
         setNotas([...notas, { ...newNote, date: new Date().toISOString() }]);
@@ -152,6 +191,48 @@ function ViewNotas() {
     };
 
 
+    // UseEffect for showing toast
+    useEffect(() => {
+        const interval = setInterval(() => {
+            notas.forEach(nota => {
+                const noteDate = new Date(nota.date);
+                const currentDate = new Date();
+                const timeDifference = (noteDate - currentDate) / 1000 / 60; // difference in minutes
+
+                if (timeDifference <= 1 && timeDifference > 0) {
+                    toast.info(
+                        <div>
+                            {nota.description}
+                            <div>
+                                <button onClick={() => toast.dismiss()}>Confirm</button>
+                                <button onClick={() => delayAlert(nota)}>Delay</button>
+                            </div>
+                        </div>,
+                        {
+                            autoClose: 30000, // 30 seconds
+                        }
+                    );
+                }
+            });
+        }, 60000); // Check every minute
+
+        return () => clearInterval(interval);
+    }, [notas]);
+
+    const confirmAlert = (nota) => {
+        // handle confirmation
+    };
+
+    const delayAlert = (nota) => {
+        const updatedNotas = notas.map(n => {
+            if (n === nota) {
+                const newDate = new Date(new Date(n.date).getTime() + 60000); // delay by 1 minute
+                return { ...n, date: newDate.toISOString() };
+            }
+            return n;
+        });
+        setNotas(updatedNotas);
+    };
 
     return (
         <div className='flex bg-white'>

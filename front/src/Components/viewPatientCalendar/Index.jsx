@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Calendar } from "@/Components/ui/calendar"
 import mascota from "../../assets/mascota.svg";
 import rectangle_78 from "../../assets/rectangle_78.svg";
@@ -73,6 +73,10 @@ import {
 } from "@/Components/ui/pagination"
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const events = [
     {
@@ -213,13 +217,13 @@ const initialEvents = [
     {
         event: "Tacrolimus 1mg",
         status: "Done",
-        dateTime: "2024-07-19T05:50:00Z",
+        dateTime: "2024-08-05T21:21:48Z",
         eventType: "Medicacion",
     },
     {
         event: "Prednisona 10mg",
         status: "Pending",
-        dateTime: "2024-07-19T04:50:00Z",
+        dateTime: "2024-08-05T21:21:55Z",
         eventType: "Actividad Fisica",
     },
     {
@@ -612,6 +616,38 @@ function ViewPatientCalendar() {
             resetTranscript();
         };
 
+    // UseEffect for showing toast
+    useEffect(() => {
+        const interval = setInterval(() => {
+            events.forEach(event => {
+                const eventDateTime = new Date(event.dateTime);
+                const currentDateTime = new Date();
+                const timeDifference = (eventDateTime - currentDateTime) / 1000 / 60; // difference in minutes
+
+                if (timeDifference <= 1 && timeDifference > 0) {
+                    toast.info(
+                        <div>
+                            <h1>{event.event}</h1>
+                            <div className='flex'>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={() => toast.dismiss()}>Confirmar</Button>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-pink600 space-x-4 w-full"onClick={() => delayAlert(event)}>Mas tarde</Button>
+                            </div>
+                        </div>,
+                        {
+                            autoClose: 30000, // 30 seconds
+                        }
+                    );
+                }
+            });
+        }, 60000); // Check every minute
+
+        return () => clearInterval(interval);
+    }, [events]);
+
+    const confirmAlert = (event) => {
+        // handle confirmation
+    };
+
 
     return (
         <div className='lg:flex '>
@@ -809,7 +845,7 @@ function ViewPatientCalendar() {
                                         <DialogHeader>
                                             <DialogTitle>Nuevo evento</DialogTitle>
                                             <DialogDescription>
-                                                Selecciona la fecha y el horario del evento
+                                                Selecciona la fecha y el horário del evento
                                             </DialogDescription>
                                         </DialogHeader>
 

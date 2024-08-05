@@ -74,6 +74,8 @@ import {
 } from "@/Components/ui/pagination"
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const events = [
     {
@@ -214,18 +216,18 @@ const initialEvents = [
     {
         event: "Juan Pérez",
         status: "Done",
-        dateTime: "2024-07-19T05:50:00Z",
-        eventType: "Consulta",
-    },
-    {
-        event: "Cristina López",
-        status: "Pending",
-        dateTime: "2024-07-19T04:50:00Z",
+        dateTime: "2024-08-05T21:42:10Z",
         eventType: "Consulta",
     },
     {
         event: "Lic. Maristella González",
         status: "Undone",
+        dateTime: "2024-08-05T21:42:30Z",
+        eventType: "Sobreturno",
+    },
+    {
+        event: "Cristina López",
+        status: "Pending",
         dateTime: "2024-07-19T06:50:00Z",
         eventType: "Sobreturno",
     },
@@ -610,6 +612,38 @@ const [currentPage, setCurrentPage] = useState(1);
             resetTranscript();
         };
 
+    // UseEffect for showing toast
+    useEffect(() => {
+        const interval = setInterval(() => {
+            events.forEach(event => {
+                const eventDateTime = new Date(event.dateTime);
+                const currentDateTime = new Date();
+                const timeDifference = (eventDateTime - currentDateTime) / 1000 / 60; // difference in minutes
+
+                if (timeDifference <= 1 && timeDifference > 0) {
+                    toast.info(
+                        <div>
+                            <h1>{event.event}</h1>
+                            <div className='flex'>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={() => toast.dismiss()}>Confirmar</Button>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-pink600 space-x-4 w-full"onClick={() => delayAlert(event)}>Mas tarde</Button>
+                            </div>
+                        </div>,
+                        {
+                            autoClose: 30000, // 30 seconds
+                        }
+                    );
+                }
+            });
+        }, 60000); // Check every minute
+
+        return () => clearInterval(interval);
+    }, [events]);
+
+    const confirmAlert = (event) => {
+        // handle confirmation
+    };
+
     return (
         <div className='lg:flex '>
             <div className='flex-grow bg-secondary p-4 '>
@@ -660,7 +694,7 @@ const [currentPage, setCurrentPage] = useState(1);
                         <TableHeader className="bg-greenTableTittle">
                             <TableRow>
                                 <TableHead className="w-auto text-white"><Square /></TableHead>
-                                <TableHead className="w-auto text-white">Horario</TableHead>
+                                <TableHead className="w-auto text-white">Horário</TableHead>
                                 <TableHead className="w-auto text-white" >Categoria</TableHead>
                                 <TableHead className="w-auto text-white">Paciente</TableHead>
                                 <TableHead className="w-auto text-white"></TableHead>
@@ -806,7 +840,7 @@ const [currentPage, setCurrentPage] = useState(1);
                                         <DialogHeader>
                                             <DialogTitle>Nuevo evento</DialogTitle>
                                             <DialogDescription>
-                                                Selecciona la fecha y el horario del evento
+                                                Selecciona la fecha y el horário del evento
                                             </DialogDescription>
                                         </DialogHeader>
 

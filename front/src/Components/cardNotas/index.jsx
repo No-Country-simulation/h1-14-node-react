@@ -64,6 +64,16 @@ const CardNotas = ({ noteType, date, description, mark }) => {
     }
 };
 
+const formatDate = (date) => {
+  const date2 = new Date(date);
+  return new Intl.DateTimeFormat('es-ES', {
+    hour: '2-digit',
+    minute: '2-digit',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(date2);
+};
 
   return (
     <div className='flex justify-center items-center'>
@@ -146,7 +156,7 @@ const CardNotas = ({ noteType, date, description, mark }) => {
 
         </div>
         <div className='flex flex-col  mt-4'>
-          <h1 className='text-sm py-2'>{date}</h1>
+          <h1 className='text-sm py-2'>{(formatDate(date))}</h1>
           <p className='text-sm font'>
             {description}
           </p>
