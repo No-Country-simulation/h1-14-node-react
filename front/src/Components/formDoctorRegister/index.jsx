@@ -469,7 +469,7 @@ function FormDoctorRegistry() {
                 Numero de teléfono
               </Label>
               <Input type="text" className="py-0.1 border border-colorInputBorder"
-                placeholder="Tteléfono" {...register("phone")} />
+                placeholder="Teléfono" {...register("phone")} />
             </div>
             <div>
             {errors.phone && (

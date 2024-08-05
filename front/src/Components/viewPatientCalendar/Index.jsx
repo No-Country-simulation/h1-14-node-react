@@ -17,7 +17,7 @@ import {
     ArrowUpDown,
     ChevronDown,
     MoreHorizontal,
-    Badge
+    Badge, PlusCircle, Mic, Save, CircleStop
 } from "lucide-react"
 
 import { Button } from "@/Components/ui/button"
@@ -72,6 +72,8 @@ import {
     PaginationPrevious,
 } from "@/Components/ui/pagination"
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 const events = [
     {
         event: "Tacrolimus 1mg",
@@ -104,15 +106,15 @@ const events = [
         eventType: "Actividad Fisica",
     },
     {
-        event: "INV006",
+        event: "Proteinas",
         status: "Pending",
-        dateTime: "2024-07-19T05:00:00Z",
+        dateTime: "2024-07-24T05:00:00Z",
         eventType: "Alimentacion",
     },
     {
-        event: "INV007",
+        event: "Aspirina",
         status: "Undone",
-        dateTime: "2024-07-19T06:00:00Z",
+        dateTime: "2024-07-26T06:00:00Z",
         eventType: "Medicacion",
     },
     {
@@ -122,22 +124,88 @@ const events = [
         eventType: "Medico general",
     },
     {
-        event: "INV009",
+        event: "Aspirina",
         status: "Undone",
-        dateTime: "2024-07-19T06:00:00Z",
-        eventType: "Psicoterapia",
+        dateTime: "2024-07-23T06:00:00Z",
+        eventType: "Medicacion",
     },
     {
-        event: "INV010",
+        event: "Aspirina",
         status: "Pending",
-        dateTime: "2024-07-20T05:00:00Z",
-        eventType: "Alimentacion",
+        dateTime: "2024-07-21T05:00:00Z",
+        eventType: "Medicacion",
     },
     {
-        event: "INV011",
+        event: "Aspirina",
         status: "Undone",
         dateTime: "2024-07-20T06:00:00Z",
         eventType: "Medicacion",
+    },
+    {
+        event: "Tacrolimus 1mg",
+        status: "Done",
+        dateTime: "2024-07-21T05:50:00Z",
+        eventType: "Medicacion",
+    },
+    {
+        event: "Prednisona 10mg",
+        status: "Pending",
+        dateTime: "2024-07-23T04:50:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Proteínas y verduras",
+        status: "Undone",
+        dateTime: "2024-07-22T06:50:00Z",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "Valganciclovir 450mg",
+        status: "Done",
+        dateTime: "2024-07-24T07:50:00Z",
+        eventType: "Medicacion",
+    },
+    {
+        event: "Natación",
+        status: "Done",
+        dateTime: "2024-07-19T08:50:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Natación",
+        status: "Pending",
+        dateTime: "2024-07-21T05:00:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Natación",
+        status: "Undone",
+        dateTime: "2024-07-23T06:00:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Dr. Alberto García",
+        status: "Pending",
+        dateTime: "2024-07-19T05:00:00Z",
+        eventType: "Medico general",
+    },
+    {
+        event: "Terapia",
+        status: "Undone",
+        dateTime: "2024-07-21T06:00:00Z",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "Terapia",
+        status: "Pending",
+        dateTime: "2024-07-23T05:00:00Z",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "Terapia",
+        status: "Undone",
+        dateTime: "2024-07-24T06:00:00Z",
+        eventType: "Psicoterapia",
     },
 ];
 
@@ -173,15 +241,15 @@ const initialEvents = [
         eventType: "Actividad Fisica",
     },
     {
-        event: "INV006",
+        event: "Proteinas",
         status: "Pending",
-        dateTime: "2024-07-19T05:00:00Z",
+        dateTime: "2024-07-24T05:00:00Z",
         eventType: "Alimentacion",
     },
     {
-        event: "INV007",
+        event: "Aspirina",
         status: "Undone",
-        dateTime: "2024-07-19T06:00:00Z",
+        dateTime: "2024-07-26T06:00:00Z",
         eventType: "Medicacion",
     },
     {
@@ -191,23 +259,89 @@ const initialEvents = [
         eventType: "Medico general",
     },
     {
-        event: "INV009",
+        event: "Aspirina",
         status: "Undone",
-        dateTime: "2024-07-19T06:00:00Z",
-        eventType: "Psicoterapia",
+        dateTime: "2024-07-23T06:00:00Z",
+        eventType: "Medicacion",
     },
     {
-        event: "INV010",
+        event: "Aspirina",
         status: "Pending",
-        dateTime: "2024-07-20T05:00:00Z",
-        eventType: "Alimentacion",
+        dateTime: "2024-07-21T05:00:00Z",
+        eventType: "Medicacion",
     },
     {
-        event: "INV011",
+        event: "Aspirina",
         status: "Undone",
         dateTime: "2024-07-20T06:00:00Z",
         eventType: "Medicacion",
     },
+    {
+        event: "Tacrolimus 1mg",
+        status: "Done",
+        dateTime: "2024-07-21T05:50:00Z",
+        eventType: "Medicacion",
+    },
+    {
+        event: "Prednisona 10mg",
+        status: "Pending",
+        dateTime: "2024-07-23T04:50:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Proteínas y verduras",
+        status: "Undone",
+        dateTime: "2024-07-22T06:50:00Z",
+        eventType: "Alimentacion",
+    },
+    {
+        event: "Valganciclovir 450mg",
+        status: "Done",
+        dateTime: "2024-07-24T07:50:00Z",
+        eventType: "Medicacion",
+    },
+    {
+        event: "Natación",
+        status: "Done",
+        dateTime: "2024-07-19T08:50:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Natación",
+        status: "Pending",
+        dateTime: "2024-07-21T05:00:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Natación",
+        status: "Undone",
+        dateTime: "2024-07-23T06:00:00Z",
+        eventType: "Actividad Fisica",
+    },
+    {
+        event: "Dr. Alberto García",
+        status: "Pending",
+        dateTime: "2024-07-19T05:00:00Z",
+        eventType: "Medico general",
+    },
+    {
+        event: "Terapia",
+        status: "Undone",
+        dateTime: "2024-07-21T06:00:00Z",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "Terapia",
+        status: "Pending",
+        dateTime: "2024-07-23T05:00:00Z",
+        eventType: "Psicoterapia",
+    },
+    {
+        event: "Terapia",
+        status: "Undone",
+        dateTime: "2024-07-24T06:00:00Z",
+        eventType: "Psicoterapia",
+    },    
 ];
 
 
@@ -458,11 +592,30 @@ function ViewPatientCalendar() {
 
     const paginatedEvents = filteredEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+        //record
+        const { transcript, listening, resetTranscript } = useSpeechRecognition();
+        const [isRecording, setIsRecording] = useState(false);
+    
+        const startListening = () => {
+            setIsRecording(true);
+            // SpeechRecognition.startListening({ continuous: true });
+            SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+        };
+    
+        const stopListening = () => {
+            setIsRecording(false);
+            SpeechRecognition.stopListening();
+        };
+    
+        const saveTranscription = () => {
+            handleInputChange({ target: { name: 'event', value: transcript } });
+            resetTranscript();
+        };
 
 
     return (
-        <div className=' flex flex-col  w-11/12'>
-            <div className='flex-grow bg-secondary p-4 w-full md:2/3'>
+        <div className='lg:flex '>
+            <div className='flex-grow bg-secondary p-4 '>
                 <h4 className="text-3xl sm:text-2xl font-normal">Dia: {formatDateToES(date1)}</h4>
                 <p>Esta es tu agenda de eventos del día.</p>
                 <div className="flex pt-4 space-x-20 ">
@@ -510,8 +663,8 @@ function ViewPatientCalendar() {
                         <TableHeader className="bg-pink-600">
                             <TableRow>
                                 <TableHead className="w-auto text-white"><Square /></TableHead>
-                                <TableHead className="w-auto text-white">Horario</TableHead>
-                                <TableHead className="w-auto text-white" >Categoria</TableHead>
+                                <TableHead className="w-auto text-white">Horário</TableHead>
+                                <TableHead className="w-auto text-white" >Categoría</TableHead>
                                 <TableHead className="w-auto text-white">Detalle</TableHead>
                                 <TableHead className="w-auto text-white"></TableHead>
                                 <TableHead className="w-auto text-white"></TableHead>
@@ -593,7 +746,7 @@ function ViewPatientCalendar() {
                 </div>
             </div>
 
-            <div className='flex-grow md:max-w-min w-full p-4  bg-white'>
+            <div className=' flex-grow max-w-min p-4  bg-white'>
 
                 <h4 className="text-3xl sm:text-2xl font-normal">Selecciona una fecha para ver los eventos del día.</h4>
 
@@ -728,7 +881,7 @@ function ViewPatientCalendar() {
                                             />
                                         </div>
                                         <div className='py-2'>
-                                            <Label className="block text-sm font-medium mb-2">Veces por dia</Label>
+                                            <Label className="block text-sm font-medium mb-2">Veces por día</Label>
                                             <input
                                                 type="number"
                                                 name="repetition"
@@ -783,10 +936,22 @@ function ViewPatientCalendar() {
                                             </div>
                                         </div>
                                         <div>
-                                            <Label className="block text-sm font-medium mb-2">Detalle</Label>
+                                            <Label className="block text-sm font-medium mb-2">Detalle
+                                            <span className=' flex float-right text-mic space-x-2'>
+                                                    {/* <CircleStop stroke='#D92626' /><Mic /><Save /> */}
+                                                    {isRecording ? (
+                                                        <Button variant="ghost" ><CircleStop stroke='#D92626' onClick={stopListening} /></Button>
+                                                    ) : (
+                                                        <Button variant="ghost" ><Mic onClick={startListening} /></Button>
+                                                    )}
+                                                    <Button variant="ghost" ><Save onClick={saveTranscription} /></Button>
+                                                </span>
+                                            </Label>
+                                            <p className='text-xs text-circleStop'>{listening ? 'Escuchando...' : ''}</p>
+                                        
                                             <Textarea
                                                 name="event"
-                                                value={newEvent.event}
+                                                value={newEvent.event || transcript}
                                                 onChange={handleInputChange}
                                                 placeholder="Información sobre el evento"
                                                 className=" p-2 border rounded w-full"

@@ -11,8 +11,8 @@ import logoNotas from "../../assets/iconosSidebar/notas.svg";
 import logoTratamiento from "../../assets/iconosSidebar/tratamiento.svg";
 import logoHistorial from "../../assets/iconosSidebar/historial.svg";
 
-function SideBar({setView, rol}) {
-  
+function SideBar({ setView, rol }) {
+
   const [active, setActive] = useState("inicio")
   const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -38,9 +38,9 @@ function SideBar({setView, rol}) {
           </div>
         </Link>
         <div className="space-y-4">
-          <button 
-          className={`${active === "inicio" ? 'bg-inputPrimary' : 'bg-bgNavBar'} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-          onClick={() => handleSelect("inicio")}
+          <button
+            className={`${active === "inicio" ? 'bg-inputPrimary' : 'bg-bgNavBar'} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+            onClick={() => handleSelect("inicio")}
           >
             <img className="w-6 h-6" src={logoHome} alt="Inicio" />
             <p className="text-white text-sm ml-2">Inicio</p>
@@ -51,59 +51,60 @@ function SideBar({setView, rol}) {
             <p className="text-white text-sm ml-2">Calendario</p>
           </button>
           {rol === "medico" || rol === "MEDICO" ? (
-            <button 
-            className={`${active === "patient" ? "bg-inputPrimary" : 'bg-bgNavBar'} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-            onClick={() => handleSelect("patient")}
-            >
-              <img className="w-6 h-6" src={logoPatient} alt="Mis pacientes" />
-              <p className="text-white text-sm ml-2">Mis pacientes</p>
-            </button>
+            <>
+              <button
+                className={`${active === "patient" ? "bg-inputPrimary" : 'bg-bgNavBar'} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("patient")}
+              >
+                <img className="w-6 h-6" src={logoPatient} alt="Mis pacientes" />
+                <p className="text-white text-sm ml-2">Mis pacientes</p>
+              </button>
+
+              <button
+                className={`${active === "treatment" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("treatmentDoctor")}
+              >
+                <img className="w-6 h-6" src={logoTratamiento} alt="Tratamientos" />
+                <p className="text-white text-sm ml-2">Tratamientos</p>
+              </button>
+              <button
+                className={`${active === "speechText" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("speechText")}
+              >
+                <img className="w-6 h-6" src={logoTratamiento} alt="speechTExt" />
+                <p className="text-white text-sm ml-2">Transcripción de voz</p>
+              </button>
+            </>
+
           ) : rol === "paciente" || rol === "PACIENTE" ? (
             <>
-              <button 
-              className={`${active === "history" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-              onClick={() => handleSelect("history")}
+              <button
+                className={`${active === "history" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("history")}
               >
                 <img className="w-6 h-6" src={logoHistorial} alt="Historial clínico" />
                 <p className="text-white text-sm ml-2">Historial clínico</p>
               </button>
-              <button 
-              className={`${active === "treatment" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-              onClick={() => handleSelect("treatment")}
+              <button
+                className={`${active === "treatment" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("treatment")}
               >
                 <img className="w-6 h-6" src={logoTratamiento} alt="Tratamientos" />
                 <p className="text-white text-sm ml-2">Tratamientos</p>
               </button>
 
-              <button 
-              className={`${active === "treatment" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-              onClick={() => handleSelect("treatmentDoctor")}
-              >
-                <img className="w-6 h-6" src={logoTratamiento} alt="Tratamientos" />
-                <p className="text-white text-sm ml-2">Tratamientos Doctor</p>
-              </button>
-              <button 
-              className={`${active === "speechText" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-              onClick={() => handleSelect("speechText")}
-              >
-                <img className="w-6 h-6" src={logoTratamiento} alt="speechTExt" />
-                <p className="text-white text-sm ml-2">SpeechText</p>
-              </button>
-
-
-
-              <button 
-              className={`${active === "not" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-              onClick={() => handleSelect("not")}
+              <button
+                className={`${active === "not" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+                onClick={() => handleSelect("not")}
               >
                 <img className="w-6 h-6" src={logoNotas} alt="Mis notas" />
                 <p className="text-white text-sm ml-2">Mis notas</p>
               </button>
             </>
-          ) : null }
-          <button 
-          className={`${active === "config" ? "bg-inputPrimary": "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
-          onClick={() => handleSelect("config")}
+          ) : null}
+          <button
+            className={`${active === "config" ? "bg-inputPrimary" : "bg-bgNavBar"} w-full flex justify-start items-center rounded-lg px-4 py-2`}
+            onClick={() => handleSelect("config")}
           >
             <img className="w-6 h-6" src={logoConfig} alt="Configuración" />
             <p className="text-white text-sm ml-2">Configuración</p>
