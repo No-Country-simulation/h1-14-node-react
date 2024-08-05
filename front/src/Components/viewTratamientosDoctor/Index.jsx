@@ -1,7 +1,7 @@
 "use client"
 
 import { BookMarked } from 'lucide-react';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import CardTratamientos from "../cardTratamientos"
 import CardSintomas from "../cardSintomas"
 import { Button } from "@/Components/ui/button"
@@ -30,7 +30,8 @@ import { Label } from "@/Components/ui/label"
 import { Textarea } from '@/Components/ui/textarea';
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const sintomas = [
     {
@@ -64,7 +65,7 @@ const tratamientos = [
         noteType: "Medicacion Esencial",
         status: "2 mg dos veces al dia",
         instructions: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
-        date: "2024-07-19T05:50:00Z",
+        date: "2024-08-05T21:54:00Z",
         dose: "60 mg",
         via: "oral",
         frequency: "8",
@@ -75,7 +76,7 @@ const tratamientos = [
         noteType: "Medicacion Esencial",
         status: "5 mg una vez al dia",
         instructions: "Tomar con alimentos para evitar molestias estomacales",
-        date: "2024-07-20T06:00:00Z",
+        date: "2024-08-05T21:53:00Z",
         dose: "60 mg",
         via: "oral",
         frequency: "12",
@@ -155,7 +156,7 @@ const initialTratamientos = [
         noteType: "Medicacion Esencial",
         status: "2 mg dos veces al dia",
         instructions: "Tomar con el estomago vacio, 1 hora antes o 2 horas despues de las comidas",
-        date: "2024-07-19T05:50:00Z",
+        date: "2024-08-05T22:02:00Z",
         dose: "60 mg",
         via: "oral",
         frequency: "8",
@@ -166,7 +167,7 @@ const initialTratamientos = [
         noteType: "Medicacion Esencial",
         status: "5 mg una vez al dia",
         instructions: "Tomar con alimentos para evitar molestias estomacales",
-        date: "2024-07-20T06:00:00Z",
+        date: "2024-08-05T22:01:00Z",
         dose: "60 mg",
         via: "oral",
         frequency: "12",
@@ -318,6 +319,49 @@ function ViewTratamientosDoctor() {
     const saveTranscription = () => {
         handleInputChange({ target: { name: 'instructions', value: transcript } });
         resetTranscript();
+    };
+
+    // UseEffect for showing toast
+    useEffect(() => {
+        const interval = setInterval(() => {
+            tratamientos.forEach(tratamiento => {
+                const tratamientoDate = new Date(tratamiento.date);
+                const currentDate = new Date();
+                const timeDifference = (tratamientoDate - currentDate) / 1000 / 60; // difference in minutes
+
+                if (timeDifference <= 1 && timeDifference > 0) {
+                    toast.info(
+                        <div>
+                            <h1>{tratamiento.instructions}</h1>
+                            <div className='flex'>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-inputPrimary space-x-4 w-full" onClick={() => toast.dismiss()}>Confirmar</Button>
+                                <Button variant='ghost' className="text-black rounded-3xl bg-pink600 space-x-4 w-full"onClick={() => delayAlert(event)}>Mas tarde</Button>
+                            </div>
+                        </div>,
+                        {
+                            autoClose: 30000, // 30 seconds
+                        }
+                    );
+                }
+            });
+        }, 60000); // Check every minute
+
+        return () => clearInterval(interval);
+    }, [tratamientos]);
+
+    const confirmAlert = (tratamiento) => {
+        // handle confirmation
+    };
+
+    const delayAlert = (tratamiento) => {
+        const updatedTratamientos = tratamientos.map(n => {
+            if (n === tratamiento) {
+                const newDate = new Date(new Date(n.date).getTime() + 60000); // delay by 1 minute
+                return { ...n, date: newDate.toISOString() };
+            }
+            return n;
+        });
+        setTratamientos(updatedTratamientos);
     };
 
 

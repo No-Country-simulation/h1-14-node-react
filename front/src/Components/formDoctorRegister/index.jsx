@@ -114,7 +114,7 @@ function FormDoctorRegistry() {
   };
 
   return (
-    <div className="flex items-start md:h-screen justify-center">
+    <div className="flex items-start md:h-auto justify-center">
       <div className="w-4/5 md:w-7/12 bg-white rounded-lg border h-auto md:h-full flex flex-col justify-center shadow-sm px-8 md:px-14">
         <div className="text-center mt-6 w-full">
           <h1 className="text-3xl sm:text-5xl font-bold">Registro</h1>
