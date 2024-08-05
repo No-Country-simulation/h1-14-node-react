@@ -22,3 +22,11 @@ El Proyecto UX/UI de Justina.io tiene como objetivo crear una interfaz de usuari
 ### Proceso de Diseño
 
 El proceso de diseño y la documentación se encuentran en la carpeta Documentación en el PDF titulado "Design_Process.pdf". Para una vista detallada de los componentes de diseño, maquetas y prototipos, visita nuestro proyecto en [Figma](https://www.figma.com/design/uOajIYvCK8yvZjqjNbE3h1/Justina.io?node-id=2151-2049&t=XO0DuWgbkKK5KJbF-1).
+
+### Muestra
+
+![WhatsApp Image 2024-08-05 at 15 57 19](https://github.com/user-attachments/assets/51e553ec-83d2-4958-83f4-596c5f90b0c4)
+
+
+![WhatsApp Image 2024-08-05 at 15 57 20](https://github.com/user-attachments/assets/efe1ef03-4451-4b8e-ad9d-a97f981f81c2)
+
