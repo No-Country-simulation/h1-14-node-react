@@ -23,7 +23,7 @@ A partir de allí, se han creado los criterios de aceptación para cada una de e
 
 En el proceso de desarrollo, se han realizado cambios en las historias de usuario en reiteradas ocaciones, para poder ir cumpliendo con los requerimientos del cliente y de los staskgolders. Lo que ha llevado a rehacer los diseños de los casos de prueba en varias oportunidades. Llevando a no poder implementarlos para la totalidad de las funcionalidades y requiriendo implementar pruebas exploratorias, más que la ejecución de los casos creados.
 
-Así mismo, se puede observar la documentación general explicada y desarrollada en el archivo "Documentación QA". Y las implementaciones en los archivos:
+Así mismo, se puede observar la documentación general explicada y desarrollada en el archivo "_Documentación QA_". Y las implementaciones en los archivos:
 - Plan de pruebas.
 - Historias de usuario y criterios de aceptación.
 - Validaciones.
@@ -47,10 +47,10 @@ Para acceder al mismo, se puede realizar a través del siguiente `ID: 9a4e6eb6-4
 
 #### Pasos:
 1. Primero debes clonar el proyecto localmente. Abrirlo en tu IDE de preferencia.
-2. Abre la consola y accede dentro del directorio "testing/Automation" del proyecto.
+2. Abre la consola y accede dentro del directorio "_testing/Automation_" del proyecto.
 3. Ejecuta el comando 
 `mvn  test`
 4. Los test se ejecutarán y verás los resultados obtenidos en pantalla.
-5. Se creará el archivo "extentReport.html" en el cual podrás abrir en cualquier navegador y observarás los resultados obtenidos de la ejecución, y en el caso de ocurrir alguna falla, se presentarán los detalles y capturas de pantalla relacionadas.
+5. Se creará el archivo "_extentReport.html_" en el cual podrás abrir en cualquier navegador y observarás los resultados obtenidos de la ejecución, y en el caso de ocurrir alguna falla, se presentarán los detalles y capturas de pantalla relacionadas.
 
 
