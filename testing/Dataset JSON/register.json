@@ -1,0 +1,14 @@
+[
+  {
+  "dniType": "DNI",
+  "dni": "36202154",
+  "password": "Hola123+",
+  "firstName": "Melisa",
+  "lastName": "Yunis",
+  "birthday": "2024-10-20",
+  "role": "PACIENTE",
+  "gender": "F",
+  "email": "yunismelisa@gmail.com",
+  "phone": "3515057267"
+}
+]
