@@ -2,6 +2,8 @@
 
 # Testeando Justina.io
 
+> ### Equipo h1-14-node-react
+
 ## ¿Qué encontraremos en la sección de testing?
 
 - Testing manual:
