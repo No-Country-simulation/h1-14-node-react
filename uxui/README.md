@@ -2,6 +2,8 @@
 
 # ¡Bienvenido al Proyecto UX/UI de Justina.io!
 
+> ### Equipo h1-14-node-react
+
 ## Este repositorio contiene:
 
 - Resumen del Proyecto
